@@ -85,9 +85,10 @@ export default  {
           .then(response => {
             if (response.status===200){
               response.json().then(json=> {
-                console.info('get token' + json.accesstoken)
+                console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
+                document.cookie = "token="+decoder(json.accesstoken);
               })
-              router.get('/home')
+              router.push('/home')
             }
             else if (response.status===401){
               response.text().then(錯誤訊息=>alert(錯誤訊息))
@@ -95,6 +96,10 @@ export default  {
 
           })
           .catch(error => console.log('error', error));
+
+          function decoder(encode_token) {
+            return encode_token.slice(0,-7)
+          }
     },
 },
 }
