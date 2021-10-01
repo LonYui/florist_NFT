@@ -76,7 +76,7 @@ export default  {
       formdata.append("password", OTP);
 
       const requestOptions = {
-        method: 'POST',
+        method: 'PUT',
         body: formdata,
         redirect: 'follow'
       };
