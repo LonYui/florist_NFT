@@ -88,7 +88,7 @@ export default  {
                 console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
                 document.cookie = "token="+decoder(json.accesstoken);
               })
-              router.push('/home')
+              router.push('/tabs/')
             }
             else if (response.status===401){
               response.text().then(錯誤訊息=>alert(錯誤訊息))

@@ -4,7 +4,7 @@ import Tabs from '../views/Tabs.vue'
 const routes = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/tabs/'
   },
   {
     path: '/tabs/',
