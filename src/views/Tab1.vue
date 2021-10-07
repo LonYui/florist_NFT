@@ -2,14 +2,13 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>餐廳搜尋</ion-title>
         <ion-searchbar show-cancel-button="focus"></ion-searchbar>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">餐廳搜尋</ion-title>
+        <ion-title size="large">餐廳搜尋</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-list>
@@ -46,7 +45,6 @@ export default  {
           "https://lh5.googleusercontent.com/p/AF1QipN8J5BUCV7vbAHvlMCuzkS4vuEkZcAF-ibhZXjb=w1920-h1080-k-no",
           "https://lh5.googleusercontent.com/p/AF1QipMZA9P-1aWTk3MCfnwEiFl4lgZ_4zXkT6TPKG4G=w1920-h1080-k-no",
           "https://lh5.googleusercontent.com/p/AF1QipPsb8jCnmxW2VOT-gE9YRIut_ELnLtv_DvFs2yH=w1920-h1080-k-no",
-          "https://lh5.googleusercontent.com/p/AF1QipM_XDAWcSaUhT5fjXVME17qDsYIGJgS_IISNKQZ=w1920-h1080-k-no"
         ],
         餐廳名稱:'北平烤鴨莊',
         星數目:4.0,

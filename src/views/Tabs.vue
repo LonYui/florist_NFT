@@ -8,12 +8,12 @@
           <ion-label>餐廳搜尋</ion-label>
         </ion-tab-button>
           
-        <ion-tab-button tab="tab2" href="/tabs/tab2">
+        <ion-tab-button tab="tab2" href="/tabs/tab2" disabled="true">
           <ion-icon :icon="ellipse" />
           <ion-label>Tab 2</ion-label>
         </ion-tab-button>
         
-        <ion-tab-button tab="tab3" href="/tabs/tab3">
+        <ion-tab-button tab="tab3" href="/tabs/tab3" disabled="true">
           <ion-icon :icon="square" />
           <ion-label>Tab 3</ion-label>
         </ion-tab-button>
@@ -38,8 +38,10 @@ export default {
     }
   },
   mounted() {
+    console.log('trigger moounted')
     if (!get_cookie('token')){
       router.push('/login');
+      console.log('no token find in cookie')
       return
     }
     verify_token(get_cookie('token'),this)
@@ -58,6 +60,7 @@ export default {
       };
       fetch("https://ccb-auth-test-cors.herokuapp.com/verify-token?token="+encoder(token), requestOptions)
           .then(response => {
+            console.log('verify-token get response')
             if (response.status===401){
               response.json().then(json => {
                 alert(json.message)
