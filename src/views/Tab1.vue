@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-searchbar show-cancel-button="focus"></ion-searchbar>
+        <ion-searchbar show-cancel-button="focus" debounce="1000" v-on:ionChange="searchRestaurant()"></ion-searchbar>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
@@ -32,29 +32,56 @@
 <script lang="js">
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonList } from '@ionic/vue';
 import restaurantItem from '@/components/restaurantItem.vue'
-
+const deafaultRestaurants = [{
+  placeId:'ChIJr6Q-A42sQjQRnF0-UERYNto',
+  imageUrls:[
+    "https://lh5.googleusercontent.com/p/AF1QipOH7mxD8RBtWKhNmDamgQyE9qq2F7ptpVhzHMyo=w1920-h1080-k-no",
+    "https://lh5.googleusercontent.com/p/AF1QipN8J5BUCV7vbAHvlMCuzkS4vuEkZcAF-ibhZXjb=w1920-h1080-k-no",
+    "https://lh5.googleusercontent.com/p/AF1QipMZA9P-1aWTk3MCfnwEiFl4lgZ_4zXkT6TPKG4G=w1920-h1080-k-no",
+    "https://lh5.googleusercontent.com/p/AF1QipPsb8jCnmxW2VOT-gE9YRIut_ELnLtv_DvFs2yH=w1920-h1080-k-no",
+  ],
+  餐廳名稱:'北平烤鴨莊',
+  星數目:4.0,
+  星星圖案:'★★★★☆',
+  評論數量:64,
+  價位:'', //$$$
+  餐廳類型:'中餐館',
+  地址:'114台灣台北市內湖區成功路四段20巷7號',
+}]
 export default  {
   name: 'Tab1',
   components: {  IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonSearchbar, IonList, restaurantItem},
   data(){
     return {
-      restaurants:[{
-        placeId:'ChIJr6Q-A42sQjQRnF0-UERYNto',
-        imageUrls:[
-          "https://lh5.googleusercontent.com/p/AF1QipOH7mxD8RBtWKhNmDamgQyE9qq2F7ptpVhzHMyo=w1920-h1080-k-no",
-          "https://lh5.googleusercontent.com/p/AF1QipN8J5BUCV7vbAHvlMCuzkS4vuEkZcAF-ibhZXjb=w1920-h1080-k-no",
-          "https://lh5.googleusercontent.com/p/AF1QipMZA9P-1aWTk3MCfnwEiFl4lgZ_4zXkT6TPKG4G=w1920-h1080-k-no",
-          "https://lh5.googleusercontent.com/p/AF1QipPsb8jCnmxW2VOT-gE9YRIut_ELnLtv_DvFs2yH=w1920-h1080-k-no",
-        ],
-        餐廳名稱:'北平烤鴨莊',
-        星數目:4.0,
-        星星圖案:'★★★★☆',
-        評論數量:64,
-        價位:'', //$$$
-        餐廳類型:'中餐館',
-        地址:'114台灣台北市內湖區成功路四段20巷7號',
-      }],
+      restaurants:deafaultRestaurants,
     }
+  },
+  methods: {
+    searchRestaurant: function () {
+      const tag = document.getElementsByTagName('ion-searchbar')[0].value
+      if (!(tag in {'中餐館': 0})) {
+        console.log('not in {中餐館,}')
+        this.restaurants = deafaultRestaurants
+        return
+      }
+      getByTags(tag, this)
+
+      function getByTags(tag, component) {
+        var requestOptions = {
+          method: 'GET',
+          redirect: 'follow'
+        };
+
+        fetch('https://ccb-auth-test-cors.herokuapp.com/restaurant/tags?tag=' + tag, requestOptions)
+            .then(response => {
+                  response.json().then(json => {
+                    component.restaurants = json
+                    console.log('dataupdate to' + component.restaurants[0])
+                  })
+                }
+            ).catch(error => console.log('error', error));
+      }
+    },
   },
 
 }
