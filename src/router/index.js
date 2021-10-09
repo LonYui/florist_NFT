@@ -15,6 +15,10 @@ const routes = [
         redirect: '/tabs/tab1'
       },
       {
+        path: 'tab0',
+        component: () => import('@/views/Tab0.vue')
+      },
+      {
         path: 'tab1',
         component: () => import('@/views/Tab1.vue')
       },
@@ -33,10 +37,6 @@ const routes = [
     path: '/login',
     component: () => import('@/views/login.vue')
   },
-  {
-    path: '/home',
-    component: () => import('@/views/Home.vue')
-  }
 ]
 
 const router = createRouter({

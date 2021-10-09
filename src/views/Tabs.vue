@@ -3,8 +3,13 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="tab0" href="/tabs/tab0" disabled="true">
+          <ion-icon :icon="homeOutline"></ion-icon>
+          <ion-label>Tab 0</ion-label>
+        </ion-tab-button>
+
         <ion-tab-button tab="tab1" href="/tabs/tab1">
-          <ion-icon :icon="triangle" />
+          <ion-icon :icon="restaurantOutline"></ion-icon>
           <ion-label>餐廳搜尋</ion-label>
         </ion-tab-button>
           
@@ -22,9 +27,9 @@
   </ion-page>
 </template>
 
-<script lang="js">
+<script>
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import {ellipse, homeOutline, restaurantOutline, square} from 'ionicons/icons';
 import router from "../router";
 
 export default {
@@ -33,8 +38,9 @@ export default {
   setup() {
     return {
       ellipse, 
-      square, 
-      triangle,
+      square,
+      restaurantOutline,
+      homeOutline,
     }
   },
   mounted() {

@@ -4,7 +4,7 @@
   </ion-app>
 </template>
 
-<script lang="js">
+<script>
 import { IonApp, IonRouterOutlet } from '@ionic/vue';
 import { defineComponent } from 'vue';
 

@@ -29,7 +29,7 @@
   </ion-page>
 </template>
 
-<script lang="js">
+<script>
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonList } from '@ionic/vue';
 import restaurantItem from '@/components/restaurantItem.vue'
 const deafaultRestaurants = [{

@@ -27,7 +27,7 @@
   </ion-page>
 </template>
 
-<script lang="js">
+<script >
 import { 
   IonTextarea,IonButton,
   IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
