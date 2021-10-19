@@ -41,7 +41,7 @@
       提出修改建議
     </ion-item>
   </ion-list>
-  <p>評論摘要 avg:{{totalScore}}
+  <p>評論摘要 avg:{{星數目}}
     1:{{reviewsDistribution.oneStar}}
     2:{{reviewsDistribution.twoStar}}
     3:{{reviewsDistribution.threeStar}}
@@ -71,10 +71,10 @@ import {
   timeOutline,
   callOutline
 } from "ionicons/icons";
-import {IonItem, IonList} from "@ionic/vue";
+import {IonItem, IonList, IonIcon} from "@ionic/vue";
 export default  {
   name: 'TabOverview',
-  components: {IonList, IonItem},
+  components: {IonList, IonItem, IonIcon},
   setup(){
     return {
       locationOutline, timeOutline,calendarOutline,chatboxEllipsesOutline,earthOutline,createOutline,callOutline,
@@ -85,13 +85,13 @@ export default  {
   props:[
     '地址',
     '營業時間',
-    '外送url',
-    '定位url',
-    '即時通訊url',
     '電話',
-    '官方網站',
     'reviewsDistribution',
-    'totalScore',
+    '星數目',
+    '官方網站',
+      '即時通訊url',
+      '外送url',
+      '定位url',
   ]
 }
 </script>

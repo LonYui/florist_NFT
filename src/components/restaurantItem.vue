@@ -1,5 +1,5 @@
 <template>
-  <ion-item href="/home">
+  <ion-item v-bind:href='"/restaurant/"+ placeId'>
     <ion-avatar slot="end">
       <img v-bind:src="imageUrls[0]" alt="抓不到圖片">
     </ion-avatar>
@@ -30,6 +30,7 @@ export default {
   name: "restaurantItem",
   props:[
     'imageUrls',
+    'placeId',
     '餐廳名稱',
     '星數目',
     '星星圖案',

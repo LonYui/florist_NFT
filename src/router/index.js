@@ -38,7 +38,7 @@ const routes = [
     component: () => import('@/views/login.vue')
   },
   {
-    path: '/restaurant',
+    path: '/restaurant/:placeId',
     component: () => import('@/views/Restaurant.vue')
   },
 ]

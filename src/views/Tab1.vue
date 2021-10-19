@@ -15,6 +15,7 @@
         <restaurantItem
             v-for="restaurant in restaurants"
             :key="restaurant.placeId"
+            :placeId="restaurant.placeId"
             :imageUrls="restaurant.imageUrls"
             :餐廳名稱="restaurant.餐廳名稱"
             :星數目="restaurant.星數目"
@@ -23,7 +24,7 @@
             :價位="restaurant.價位"
             :餐廳類型="restaurant.餐廳類型"
             :地址="restaurant.地址"
-        ></restaurantItem>
+        />
       </ion-list>
     </ion-content>
   </ion-page>
@@ -59,8 +60,25 @@ export default  {
   methods: {
     searchRestaurant: function () {
       const tag = document.getElementsByTagName('ion-searchbar')[0].value
-      if (!(tag in {'中餐館': 0})) {
-        console.log('not in {中餐館,}')
+
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      var tag_set =[]
+
+      fetch("https://ccb-auth-test-cors.herokuapp.com/restaurant/tags-set", requestOptions)
+          .then(response => {
+            response.json().then(json =>{
+              tag_set = json
+            })
+          })
+          .catch(error => console.log('error', error));
+
+
+      if (tag_set.indexOf(tag) >= 0) {
+        console.log('not in tag_set')
+        console.log(tag_set)
         this.restaurants = deafaultRestaurants
         return
       }
