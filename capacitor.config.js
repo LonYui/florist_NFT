@@ -1,8 +1,7 @@
-import { CapacitorConfig } from '@capacitor/cli';
 
-const config: CapacitorConfig = {
+const config = {
   appId: 'io.ionic.starter',
-  appName: 'myApp',
+  appName: 'ccb-rock-pwa',
   webDir: 'dist',
   bundledWebRuntime: false
 };

@@ -33,6 +33,7 @@
 <script>
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonList } from '@ionic/vue';
 import restaurantItem from '@/components/restaurantItem.vue'
+import {version} from '@/../package.json';
 const deafaultRestaurants = [{
   placeId:'ChIJr6Q-A42sQjQRnF0-UERYNto',
   imageUrls:[
@@ -41,13 +42,13 @@ const deafaultRestaurants = [{
     "https://lh5.googleusercontent.com/p/AF1QipMZA9P-1aWTk3MCfnwEiFl4lgZ_4zXkT6TPKG4G=w1920-h1080-k-no",
     "https://lh5.googleusercontent.com/p/AF1QipPsb8jCnmxW2VOT-gE9YRIut_ELnLtv_DvFs2yH=w1920-h1080-k-no",
   ],
-  餐廳名稱:'北平烤鴨莊',
+  餐廳名稱:"Don't click",//'北平烤鴨莊',
   星數目:4.0,
   星星圖案:'★★★★☆',
   評論數量:64,
   價位:'', //$$$
-  餐廳類型:'中餐館',
-  地址:'114台灣台北市內湖區成功路四段20巷7號',
+  餐廳類型:'software version',
+  地址:version ,//'114台灣台北市內湖區成功路四段20巷7號',
 }]
 export default  {
   name: 'Tab1',

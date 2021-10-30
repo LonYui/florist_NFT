@@ -102,6 +102,7 @@ export default  {
           }
     },
 },
+  // mounted(){} //TODO check login status if loging redirect to main page
 }
 // eslint-disable-next-line no-unused-vars
 </script>

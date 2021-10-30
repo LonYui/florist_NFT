@@ -1,6 +1,6 @@
 {
-  "name": "myApp",
-  "version": "0.0.1",
+  "name": "ccb-rock-pwa",
+  "version": "0.1.0-alpha",
   "private": true,
   "description": "An Ionic project",
   "scripts": {

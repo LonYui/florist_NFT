@@ -28,13 +28,23 @@
 </template>
 
 <script>
-import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
+import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet, toastController } from '@ionic/vue';
 import {ellipse, homeOutline, restaurantOutline, square} from 'ionicons/icons';
 import router from "../router";
 
 export default {
   name: 'Tabs',
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet },
+  methods: {
+    async openToast() {
+      const toast = await toastController
+          .create({
+            message: '點選分享，加入主畫面，新增ccb.app',
+            duration: 8000
+          })
+      return toast.present();
+    },
+  },
   setup() {
     return {
       ellipse, 
@@ -42,6 +52,32 @@ export default {
       restaurantOutline,
       homeOutline,
     }
+  },
+  created() {
+    // from article https://www.netguru.com/blog/pwa-ios
+    // and debug isIos()
+    // Detects if device is on iOS
+    const isIos = () => {
+      return [
+            'iPad Simulator',
+            'iPhone Simulator',
+            'iPod Simulator',
+            'iPad',
+            'iPhone',
+            'iPod'
+          ].includes(navigator.platform)
+          // iPad on iOS 13 detection
+          || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+    }
+    // Detects if device is in standalone mode
+    const isInStandaloneMode = () => window.navigator.standalone && window.clientInformation.standalone
+
+    // Checks if should display install popup notification:
+    if (isIos() && !isInStandaloneMode()) {
+      this.openToast()
+    }
+
+
   },
   mounted() {
     console.log('trigger moounted')
@@ -66,7 +102,6 @@ export default {
       };
       fetch("https://ccb-auth-test-cors.herokuapp.com/verify-token?token="+encoder(token), requestOptions)
           .then(response => {
-            console.log('verify-token get response')
             if (response.status===401){
               response.json().then(json => {
                 alert(json.message)
