@@ -87,8 +87,9 @@ export default  {
               response.json().then(json=> {
                 console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
                 document.cookie = "token="+decoder(json.accesstoken);
+                updateStartUrl('.?token='+decoder(json.accesstoken))
+                router.push('/tabs/?token='+decoder(json.accesstoken))
               })
-              router.push('/tabs/')
             }
             else if (response.status===401){
               response.text().then(錯誤訊息=>alert(錯誤訊息))
@@ -99,6 +100,45 @@ export default  {
 
           function decoder(encode_token) {
             return encode_token.slice(0,-7)
+          }
+
+          function updateStartUrl(url){
+            var myDynamicManifest = {
+              "name": "ccb-rock-pwa",
+              "theme_color": "#4DBA87",
+              "icons": [
+                {
+                  "src": "./img/icons/android-chrome-192x192.png",
+                  "sizes": "192x192",
+                  "type": "image/png"
+                },
+                {
+                  "src": "./img/icons/android-chrome-512x512.png",
+                  "sizes": "512x512",
+                  "type": "image/png"
+                },
+                {
+                  "src": "./img/icons/android-chrome-maskable-192x192.png",
+                  "sizes": "192x192",
+                  "type": "image/png",
+                  "purpose": "maskable"
+                },
+                {
+                  "src": "./img/icons/android-chrome-maskable-512x512.png",
+                  "sizes": "512x512",
+                  "type": "image/png",
+                  "purpose": "maskable"
+                }
+              ],
+              "start_url": ".",
+              "display": "standalone",
+              "background_color": "#000000"
+            }
+            myDynamicManifest.start_url = url
+            const stringManifest = JSON.stringify(myDynamicManifest);
+            const blob = new Blob([stringManifest], {type: 'application/json'});
+            const manifestURL = URL.createObjectURL(blob);
+            document.querySelector('#my-manifest-placeholder').setAttribute('href', manifestURL);
           }
     },
 },

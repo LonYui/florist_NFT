@@ -81,10 +81,14 @@ export default {
   },
   mounted() {
     console.log('trigger moounted')
-    if (!get_cookie('token')){
+    if (!get_cookie('token') && !this.$route.query.token){
       router.push('/login');
-      console.log('no token find in cookie')
+      console.log('no token find in cookie and url')
       return
+    }
+    else if(!get_cookie('token') && this.$route.query.token){
+      console.log('update cookie')
+      document.cookie = "token="+this.$route.query.token;
     }
     verify_token(get_cookie('token'),this)
 
