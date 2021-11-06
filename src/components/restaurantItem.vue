@@ -9,9 +9,6 @@
     <ion-avatar slot="end">
       <img v-bind:src="imageUrls[2]" alt="抓不到圖片">
     </ion-avatar>
-    <ion-avatar slot="end">
-      <img v-bind:src="imageUrls[3]" alt="抓不到圖片">
-    </ion-avatar>
     <ion-label>
       <h3>{{ 餐廳名稱 }}</h3>
       <p> {{ 星數目 }}{{ 星星圖案 }}({{ 評論數量 }})</p>

@@ -47,9 +47,59 @@ const deafaultRestaurants = [{
   星星圖案:'★★★★☆',
   評論數量:64,
   價位:'', //$$$
-  餐廳類型:'software version',
+  餐廳類型:'version',
   地址:version ,//'114台灣台北市內湖區成功路四段20巷7號',
-}]
+},
+  {
+    placeId:'ChIJr6Q-A42sQjQRnF0-UERYNtt',
+    imageUrls:[
+      "https://lh5.googleusercontent.com/p/AF1QipOH7mxD8RBtWKhNmDamgQyE9qq2F7ptpVhzHMyo=w1920-h1080-k-no",
+      "https://lh5.googleusercontent.com/p/AF1QipN8J5BUCV7vbAHvlMCuzkS4vuEkZcAF-ibhZXjb=w1920-h1080-k-no",
+      "https://lh5.googleusercontent.com/p/AF1QipMZA9P-1aWTk3MCfnwEiFl4lgZ_4zXkT6TPKG4G=w1920-h1080-k-no",
+      "https://lh5.googleusercontent.com/p/AF1QipPsb8jCnmxW2VOT-gE9YRIut_ELnLtv_DvFs2yH=w1920-h1080-k-no",
+    ],
+    餐廳名稱:"可以查詢關鍵字",//'北平烤鴨莊',
+    星數目:4.0,
+    星星圖案:'"",\n' +
+        '"停車場",\n' +
+        '"巴士站",\n' +
+        '"正宗日式料理餐廳",\n' +
+        '"烏冬專門店",\n' +
+        '"中式麵食店",\n' +
+        '"中餐館",\n' +
+        '"健康食品餐廳",\n' +
+        '"台灣餐廳",\n' +
+        '"咖啡廳",\n' +
+        '"壽司店",\n' +
+        '"外賣自取餐廳",\n' +
+        '"外送速遞餐廳",\n' +
+        '"居酒屋",\n' +
+        '"快餐店",\n' +
+        '"意大利餐廳",\n' +
+        '"日式咖哩餐廳",\n' +
+        '"日式烤雞串餐廳",\n' +
+        '"日式燒肉餐廳",\n' +
+        '"日式牛扒餐廳",\n' +
+        '"日本餐廳",\n' +
+        '"歐陸餐廳",\n' +
+        '"法國餐廳",\n' +
+        '"海鮮丼餐廳",\n' +
+        '"燒烤餐廳",\n' +
+        '"現代居酒屋",\n' +
+        '"素食餐廳",\n' +
+        '"美式扒房",\n' +
+        '"美式牛扒屋",\n' +
+        '"西餐廳",\n' +
+        '"酒吧",\n' +
+        '"鐵板燒餐廳",\n' +
+        '"食堂與定食餐廳",\n' +
+        '"餐廳",\n' +
+        '"鰻魚料理餐廳"',
+    評論數量:64,
+    價位:'', //$$$
+    餐廳類型:'',
+    地址:"日本餐廳,意大利餐廳,快餐店" ,//'114台灣台北市內湖區成功路四段20巷7號',
+  }]
 export default  {
   name: 'Tab1',
   components: {  IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonSearchbar, IonList, restaurantItem},
