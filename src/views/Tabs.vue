@@ -108,19 +108,18 @@ export default {
 
 
   },
-  mounted() {
-    var get_cookie = (name) => this.get_cookie(name)// alias functoin naem form this.getcooke -> gecookein
+  async mounted() {
     console.log('trigger moounted')
-    if (!get_cookie('token') && !this.$route.query.token){
+    if (!this.get_cookie('token') && !this.$route.query.token){
       router.push('/login');
       console.log('no token find in cookie and url')
       return
     }
-    else if(!get_cookie('token') && this.$route.query.token){
+    else if(!this.get_cookie('token') && this.$route.query.token){
       console.log('update cookie')
       document.cookie = "token="+this.$route.query.token;
     }
-    const response = this.fetch_verify_token(get_cookie('token'))
+    const response = await this.fetch_verify_token(this.get_cookie('token'))
     if (response.status===401){
       response.json().then(json => {
         alert(json.message)
