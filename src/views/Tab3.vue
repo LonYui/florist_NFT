@@ -14,17 +14,18 @@
           <ion-title size="large">Tab 3</ion-title>
         </ion-toolbar>
       </ion-header>
-      Hi!,{{ username }}
-      <img style="pointer-events:none"
-           v-bind:src="image_url" alt="抓不到圖片">
+      <div @click="openModal('username',username)">Hi! {{ username }}</div>
+      <div @click="openModal('image_url',image_url)"><img style="pointer-events:none"
+                v-bind:src="image_url" alt="抓不到圖片" ></div>
 
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon} from '@ionic/vue';
+import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, modalController} from '@ionic/vue';
 import {settingsOutline} from 'ionicons/icons';
+import member_update_modal from '../components/member_update_modal';
 
 const default_data = {
   mob: null,
@@ -68,6 +69,19 @@ export default {
             return response
           })
           .catch(error => console.log('error', error));
+    },
+    async openModal(key,val) {
+      const modal = await modalController
+          .create({
+            component: member_update_modal,
+            cssClass: 'my-custom-class',
+            componentProps: {
+              mob: this.mob,
+              column_name:key,
+              current_value:val,
+            },
+          })
+      return modal.present();
     },
   },
   data() {
