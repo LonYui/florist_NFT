@@ -44,10 +44,39 @@ export default {
           })
       return toast.present();
     },
+    get_cookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    },
+    eraseCookie(name) {
+      document.cookie = name + '=; Max-Age=-99999999;';
+    },
+    fetch_verify_token(token) {
+      const requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      return fetch("https://ccb-auth-test-cors.herokuapp.com/verify-token?token=" + encoder(token), requestOptions)
+          .then(response => {
+            return response
+          })
+          .catch(error => console.log('error', error));
+
+      function encoder(token) {
+        return token + Math.random().toString(36).slice(-7)
+      }
+
+    },
+},
+  data(){
+    return {
+      mob:null,
+    }
   },
   setup() {
     return {
-      ellipse, 
+      ellipse,
       square,
       restaurantOutline,
       homeOutline,
@@ -80,6 +109,7 @@ export default {
 
   },
   mounted() {
+    var get_cookie = (name) => this.get_cookie(name)// alias functoin naem form this.getcooke -> gecookein
     console.log('trigger moounted')
     if (!get_cookie('token') && !this.$route.query.token){
       router.push('/login');
@@ -90,42 +120,18 @@ export default {
       console.log('update cookie')
       document.cookie = "token="+this.$route.query.token;
     }
-    verify_token(get_cookie('token'),this)
-
-
-    function get_cookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
+    const response = this.fetch_verify_token(get_cookie('token'))
+    if (response.status===401){
+      response.json().then(json => {
+        alert(json.message)
+        this.eraseCookie('token')
+        router.push('/login')
+      })
+    }
+    else if(response.status===200){
+      null
     }
 
-    function verify_token(token){
-      const requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-      fetch("https://ccb-auth-test-cors.herokuapp.com/verify-token?token="+encoder(token), requestOptions)
-          .then(response => {
-            if (response.status===401){
-              response.json().then(json => {
-                alert(json.message)
-                eraseCookie('token')
-                router.push('/login')
-              })
-            }
-          })
-          .catch(error => console.log('error', error));
-
-      function encoder(token) {
-        return token + Math.random().toString(36).slice(-7)
-      }
-
-      function eraseCookie(name) {
-        document.cookie = name+'=; Max-Age=-99999999;';
-      }
-
-
-    }
   }
 
 }
