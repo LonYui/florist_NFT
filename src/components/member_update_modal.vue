@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { IonContent, IonHeader, IonTitle, IonToolbar,  IonButton ,IonInput } from '@ionic/vue';
+import { IonContent, IonHeader, IonTitle, IonToolbar,  IonButton ,IonInput, modalController } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -49,7 +49,7 @@ export default defineComponent({
     async submit(){
       const response = await this.fetch_post_member(this.mob,this.column_name,this.update_value)
       if(response.status === 200){
-        alert('success')
+        modalController.dismiss()
       }else{
         alert('fail')
       }

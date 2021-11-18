@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        Tab 3
+        Profile
         <ion-button>
           <ion-icon slot="end" :icon="settingsOutline"></ion-icon>
         </ion-button>
@@ -11,7 +11,7 @@
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Tab 3</ion-title>
+          <ion-title size="large">Profile</ion-title>
         </ion-toolbar>
       </ion-header>
       <div @click="openModal('username',username)">Hi! {{ username }}</div>

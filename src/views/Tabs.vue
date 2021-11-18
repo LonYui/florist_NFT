@@ -18,8 +18,8 @@
           <ion-label>Tab 2</ion-label>
         </ion-tab-button>
         
-        <ion-tab-button tab="tab3" href="/tabs/tab3" disabled="true">
-          <ion-icon :icon="square" />
+        <ion-tab-button tab="tab3" href="/tabs/tab3" >
+          <ion-icon :icon="personCircleOutline" />
           <ion-label>Tab 3</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
@@ -29,7 +29,7 @@
 
 <script>
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet, toastController } from '@ionic/vue';
-import {ellipse, homeOutline, restaurantOutline, square} from 'ionicons/icons';
+import {ellipse, homeOutline, restaurantOutline, personCircleOutline} from 'ionicons/icons';
 import router from "../router";
 
 export default {
@@ -77,7 +77,7 @@ export default {
   setup() {
     return {
       ellipse,
-      square,
+      personCircleOutline,
       restaurantOutline,
       homeOutline,
     }
