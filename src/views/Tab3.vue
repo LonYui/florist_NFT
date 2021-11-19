@@ -42,7 +42,7 @@ export default {
         method: 'GET',
         redirect: 'follow'
       };
-      return fetch("https://ccb-auth-test-cors.herokuapp.com/verify-token?token=" + encoder(token), requestOptions)
+      return fetch(`https://${process.env.ccb_rock_backed_domain}/verify-token?token=${encoder(token)}`, requestOptions)
           .then(response => {
             return response
           })
@@ -64,7 +64,7 @@ export default {
         redirect: 'follow'
       };
 
-      return fetch("https://ccb-auth-test-cors.herokuapp.com/member?mob=" + mob, requestOptions)
+      return fetch(`https://${process.env.ccb_rock_backed_domain}/member?mob=${mob}`, requestOptions)
           .then(response => {
             return response
           })

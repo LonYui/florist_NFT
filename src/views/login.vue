@@ -81,7 +81,7 @@ export default  {
         redirect: 'follow'
       };
 
-      fetch("https://ccb-auth-test-cors.herokuapp.com/verify-OTP", requestOptions)
+      fetch(`https://${process.env.ccb_rock_backed_domain}/verify-OTP`, requestOptions)
           .then(response => {
             if (response.status===200){
               response.json().then(json=> {

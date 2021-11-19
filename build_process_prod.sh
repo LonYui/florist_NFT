@@ -1,4 +1,4 @@
-ionic build
+vue-cli-service build --mode production
 rpl '<link rel="manifest" href="/manifest.json">' '<link rel="manifest" id="my-manifest-placeholder">' dist/index.html
 rpl '<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon-152x152.png">' '    <link rel="apple-touch-icon" sizes="57x57" href="/img/icons/apple-icon-57x57.png">
                                                                                          <link rel="apple-touch-icon" sizes="60x60" href="/img/icons/apple-icon-60x60.png">

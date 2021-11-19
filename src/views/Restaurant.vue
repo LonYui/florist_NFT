@@ -192,7 +192,7 @@ export default {
         redirect: 'follow'
       };
 
-      fetch("https://ccb-auth-test-cors.herokuapp.com/restaurant?placeId=" + placeId, requestOptions)
+      fetch(`https://${process.env.ccb_rock_backed_domain}/restaurant?placeId=${placeId}`, requestOptions)
           .then(response => {
             response.json().then(json => {
               for (var key in json) {
