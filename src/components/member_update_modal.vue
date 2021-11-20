@@ -40,7 +40,7 @@ export default defineComponent({
         redirect: 'follow'
       };
 
-      return fetch(`https://${process.env.ccb_rock_backed_domain}/member`, requestOptions)
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member`, requestOptions)
           .then(response => {
             return response
           })

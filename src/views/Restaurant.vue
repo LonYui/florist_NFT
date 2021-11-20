@@ -115,7 +115,7 @@
 <script>
 import {
   IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSlides, IonSlide,IonSegmentButton, IonSegment
-  , IonCol, IonIcon
+  , IonCol, IonIcon, IonLabel, IonChip
 } from '@ionic/vue';
 import {
   arrowRedoOutline,
@@ -132,7 +132,7 @@ export default {
   components: {
     TabOverview,
     IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonSlides, IonSlide, IonSegmentButton, IonSegment,
-    IonCol, IonIcon
+    IonCol, IonIcon, IonLabel, IonChip
   },
   data() {
     return {
@@ -192,7 +192,7 @@ export default {
         redirect: 'follow'
       };
 
-      fetch(`https://${process.env.ccb_rock_backed_domain}/restaurant?placeId=${placeId}`, requestOptions)
+      fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/restaurant?placeId=${placeId}`, requestOptions)
           .then(response => {
             response.json().then(json => {
               for (var key in json) {

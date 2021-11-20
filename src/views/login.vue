@@ -81,7 +81,7 @@ export default  {
         redirect: 'follow'
       };
 
-      fetch(`https://${process.env.ccb_rock_backed_domain}/verify-OTP`, requestOptions)
+      fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/verify-OTP`, requestOptions)
           .then(response => {
             if (response.status===200){
               response.json().then(json=> {
@@ -111,6 +111,7 @@ export default  {
               "display": "standalone",
               "background_color": "#000000"
             }
+            // TODO can't read the start url, now start url = current url .
             myDynamicManifest.start_url = url
             const stringManifest = JSON.stringify(myDynamicManifest);
             const blob = new Blob([stringManifest], {type: 'application/json'});

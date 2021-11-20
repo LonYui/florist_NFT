@@ -118,7 +118,7 @@ export default  {
       };
       var tag_set =[]
 
-      fetch(`https://${process.env.ccb_rock_backed_domain}/restaurant/tags-set`, requestOptions)
+      fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/restaurant/tags-set`, requestOptions)
           .then(response => {
             response.json().then(json =>{
               tag_set = json
@@ -141,7 +141,7 @@ export default  {
           redirect: 'follow'
         };
 
-        fetch(`https://${process.env.ccb_rock_backed_domain}/restaurant/tags?tag=${tag}`, requestOptions)
+        fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/restaurant/tags?tag=${tag}`, requestOptions)
             .then(response => {
                   response.json().then(json => {
                     component.restaurants = json

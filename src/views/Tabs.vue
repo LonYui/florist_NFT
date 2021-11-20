@@ -57,7 +57,7 @@ export default {
         method: 'GET',
         redirect: 'follow'
       };
-      return fetch(`https://${process.env.ccb_rock_backed_domain}/verify-token?token=${encoder(token)}`, requestOptions)
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/verify-token?token=${encoder(token)}`, requestOptions)
           .then(response => {
             return response
           })
