@@ -51,7 +51,7 @@ export default  {
         redirect: 'follow'
       };
 
-      fetch("https://419neo2er9.execute-api.us-east-2.amazonaws.com/default/send-OTP", requestOptions)
+      fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/send-OTP`, requestOptions)
           .then(response => {
             if (response.status === 200) {
               alert('sended to ' + mob)
