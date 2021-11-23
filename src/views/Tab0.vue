@@ -1,26 +1,45 @@
 <template>
-  <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Tab 0</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tab 0</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      Null
-    </ion-content>
-  </ion-page>
+  <IonPage>
+    <IonContent fullscreen className='home-page'>
+      <div className="home">
+        <div className="home-title">
+          活動頁面分頁1
+        </div>
+        <IonSlides pager={true} options={slideOpts} className='home-slides'>
+          <IonSlide className='home-slide'>
+            <IonImg className='home-img' v-bind:src="kabi" />
+            <div className='home-slide-title' >拍賣大明星</div>
+          </IonSlide>
+          <IonSlide className='home-slide'>
+            <IonImg className='home-img' v-bind:src="kabi" />
+            <div className='home-slide-title' >BACK TO SCHOOL</div>
+          </IonSlide>
+          <IonSlide className='home-slide'>
+            <IonImg className='home-img' v-bind:src="kabi" />
+            <div className='home-slide-title' >金秋獎</div>
+          </IonSlide>
+        </IonSlides>
+      </div>
+    </IonContent>
+  </IonPage>
 </template>
 
 <script>
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+import { IonContent, IonPage, IonSlides, IonSlide, IonImg } from '@ionic/vue';
+import kabi from './imgs/kabi.jpg';
+import './Tab0.css';
+
 
 export default  {
   name: 'Tab0',
-  components: {  IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+  components: { IonContent, IonPage, IonSlides, IonSlide, IonImg },
+  setup() {
+    const slideOpts = {
+      initialSlide: 0,
+      speed: 1000,
+      autoplay:true,
+    };
+    return {slideOpts,kabi}
+  },
 }
 </script>

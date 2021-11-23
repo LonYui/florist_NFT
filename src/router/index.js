@@ -38,6 +38,10 @@ const routes = [
     component: () => import('@/views/login.vue')
   },
   {
+    path: '/login_select_way',
+    component: () => import('@/views/login_proecss/login_select_way.vue')
+  },  
+  {
     path: '/restaurant/:placeId',
     component: () => import('@/views/Restaurant.vue')
   },

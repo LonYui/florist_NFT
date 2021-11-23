@@ -2,23 +2,23 @@
   <ion-page>
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="tab0" href="/tabs/tab0" disabled="true">
+      <ion-tab-bar slot="bottom" className="tab-bar">
+        <ion-tab-button tab="tab0" href="/tabs/tab0" className="tab-button">
           <ion-icon :icon="homeOutline"></ion-icon>
           <ion-label>Tab 0</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab1" href="/tabs/tab1">
+        <ion-tab-button tab="tab1" href="/tabs/tab1" className="tab-button">
           <ion-icon :icon="restaurantOutline"></ion-icon>
           <ion-label>餐廳搜尋</ion-label>
         </ion-tab-button>
           
-        <ion-tab-button tab="tab2" href="/tabs/tab2" disabled="true">
+        <ion-tab-button tab="tab2" href="/tabs/tab2" disabled="true" className="tab-button">
           <ion-icon :icon="ellipse" />
           <ion-label>Tab 2</ion-label>
         </ion-tab-button>
         
-        <ion-tab-button tab="tab3" href="/tabs/tab3" >
+        <ion-tab-button tab="tab3" href="/tabs/tab3" className="tab-button">
           <ion-icon :icon="personCircleOutline" />
           <ion-label>Tab 3</ion-label>
         </ion-tab-button>
@@ -31,7 +31,7 @@
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet, toastController } from '@ionic/vue';
 import {ellipse, homeOutline, restaurantOutline, personCircleOutline} from 'ionicons/icons';
 import router from "../router";
-
+import './Tabs.css';
 export default {
   name: 'Tabs',
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet },
