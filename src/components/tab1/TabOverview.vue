@@ -71,10 +71,10 @@ import {
   timeOutline,
   callOutline
 } from "ionicons/icons";
-import {IonItem, IonList, IonIcon} from "@ionic/vue";
+import {IonItem, IonList, IonIcon,IonButton} from "@ionic/vue";
 export default  {
   name: 'TabOverview',
-  components: {IonList, IonItem, IonIcon},
+  components: {IonList, IonItem, IonIcon,IonButton},
   setup(){
     return {
       locationOutline, timeOutline,calendarOutline,chatboxEllipsesOutline,earthOutline,createOutline,callOutline,

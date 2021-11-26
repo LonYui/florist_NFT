@@ -31,7 +31,7 @@
 import { 
   IonTextarea,IonButton,
   IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import router from "../router";
+import router from "../../router";
 
 export default  {
   name: 'Login',

@@ -35,11 +35,11 @@ const routes = [
   },
   {
     path: '/login',
-    component: () => import('@/views/login.vue')
+    component: () => import('@/views/login_process/login.vue')
   },
   {
     path: '/login_select_way',
-    component: () => import('@/views/login_proecss/login_select_way.vue')
+    component: () => import('@/views/login_process/login_select_way.vue')
   },  
   {
     path: '/restaurant/:placeId',

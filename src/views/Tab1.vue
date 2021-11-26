@@ -32,7 +32,7 @@
 
 <script>
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonList } from '@ionic/vue';
-import restaurantItem from '@/components/restaurantItem.vue'
+import restaurantItem from '@/components/tab1/restaurantItem.vue'
 import {version} from '@/../package.json';
 const deafaultRestaurants = [{
   placeId:'ChIJr6Q-A42sQjQRnF0-UERYNto',

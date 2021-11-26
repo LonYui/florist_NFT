@@ -25,7 +25,7 @@
 <script>
 import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, modalController} from '@ionic/vue';
 import {settingsOutline} from 'ionicons/icons';
-import member_update_modal from '../components/member_update_modal';
+import member_update_modal from '../components/tab3/member_update_modal';
 
 const default_data = {
   mob: null,

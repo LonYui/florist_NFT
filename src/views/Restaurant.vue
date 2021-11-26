@@ -125,7 +125,7 @@ import {
   saveOutline,
   shareOutline
 } from "ionicons/icons";
-import TabOverview from "../components/Restaurant/TabOverview";
+import TabOverview from "../components/tab1/TabOverview";
 
 export default {
   name: 'Restaurant',
