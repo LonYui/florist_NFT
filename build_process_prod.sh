@@ -11,4 +11,7 @@ rpl '<link rel="apple-touch-icon" href="/img/icons/apple-touch-icon-152x152.png"
                                                                                          <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-icon-180x180.png">
 ' dist/index.html
 rpl '<meta name="msapplication-TileImage" content="/img/icons/msapplication-icon-144x144.png">' '<meta name="msapplication-TileImage" content="/img/icons/ms-icon-144x144.png">' dist/index.html
+ccb_rock_pwa_version=$(jq -r '.version' package.json)
+heroku config:set ccb-rock-pwa-version=$ccb_rock_pwa_version --app ccb-rock-backed-prod
+firebase use prod
 firebase deploy

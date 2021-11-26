@@ -32,6 +32,7 @@ import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouter
 import {ellipse, homeOutline, restaurantOutline, personCircleOutline} from 'ionicons/icons';
 import router from "../router";
 import './Tabs.css';
+import {version} from '@/../package.json';
 export default {
   name: 'Tabs',
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet },
@@ -68,6 +69,18 @@ export default {
       }
 
     },
+    fetch_is_pwa_version_eq(){
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+
+      return fetch(`http://${process.env.VUE_APP_ccb_rock_backed_domain}/is_pwa_version_eq?ccb_rock_pwa_version=${version}`, requestOptions)
+          .then(response => {
+            return response
+          })
+          .catch(error => console.log('error', error));
+    }
 },
   data(){
     return {
@@ -110,6 +123,7 @@ export default {
   },
   async mounted() {
     console.log('trigger moounted')
+    // check login status
     if (!this.get_cookie('token') && !this.$route.query.token){
       router.push('/login');
       console.log('no token find in cookie and url')
@@ -130,7 +144,9 @@ export default {
     else if(response.status===200){
       null
     }
-
+    // check version
+    const response2 = await this.fetch_verify_token(this.get_cookie('token'))
+    if(response2.status===400){window.location.reload(true);}
   }
 
 }

@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "test-ccb-rock-pwa",
-    "y": "ccb-rocks-pwa-production"
+    "dev": "ccb-pwa-dev",
+    "prod": "ccb-pwa-prod"
   },
   "targets": {}
 }
