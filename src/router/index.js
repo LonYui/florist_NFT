@@ -45,6 +45,27 @@ const routes = [
     path: '/restaurant/:placeId',
     component: () => import('@/views/Restaurant.vue')
   },
+  {
+    path: '/page1',
+    component: () => import('@/views/login_process/login_select_way.vue')
+  },
+  {
+    path: '/page23',
+    component: () => import('@/views/login_process/login.vue')
+  },
+  {
+    path: '/page4',
+    component: () => import('@/views/event/page4.vue')
+  },
+  {
+    path: '/page5',
+    component: () => import('@/views/event/page5.vue')
+  },
+  {
+    path: '/page6',
+    component: () => import('@/views/event/page6.vue')
+  },
+
 ]
 
 const router = createRouter({
