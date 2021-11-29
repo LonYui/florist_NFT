@@ -17,7 +17,7 @@
       <ion-button @click="sendOTP()">
         寄送登入密碼到手機
       </ion-button>
-      <ion-textarea id="OTP">
+      <ion-textarea id="OTP" autocomplete="one-time-code">
         密碼
       </ion-textarea>
       <ion-button @click="verifyOTP()">
