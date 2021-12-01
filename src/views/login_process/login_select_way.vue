@@ -3,8 +3,8 @@
 
     <IonContent fullscreen >
         <IonImg v-bind:src="null" />
-        <IonButton  >
-          <ion-icon :icon="logoFacebook" @click="logInWithFacebook"></ion-icon>
+        <IonButton  @click="log_in_with_facebook()">
+          <ion-icon :icon="logoFacebook"></ion-icon>
           使用facebook登入
         </IonButton>
 
@@ -19,61 +19,32 @@ import {
    callOutline,logoFacebook
 } from "ionicons/icons";
 import router from "../../router";
-
+import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
 
 export default {
   name: "login_select_way",
-  components:{ IonContent,  IonPage, IonButton, IonImg, IonIcon},
+  components: {IonContent, IonPage, IonButton, IonImg, IonIcon},
+  mixins:[facebookSDK,],
   setup() {
-    return {chowLogo,callOutline,logoFacebook}
+    return {callOutline, logoFacebook}
   },
-  methods:{
-    async logInWithFacebook(){
-      FB.login(function(response) {
-        this.statusChangeCallback(response)
+  methods: {
+    log_in_with_facebook(){
+      //TODO what:why not _this work?
+      let _statusChangeCallback=this.statusChangeCallback
+      this.FB.login(function(response) {
+        _statusChangeCallback(response)
+      }, {scope: 'public_profile,email'});
 
-      }, {scope: ''});
     },
-    // from https://medium.com/@mrjohnkilonzi/a-simple-facebook-login-component-in-vue-js-5ee71997bb97 25 clap 2020,Jan 13
-    async initFacebook() {
-      window.fbAsyncInit = function() {
-        window.FB.init({
-          appId: "722300725407829", //You will need to change this
-          cookie: true, // This is important, it's not enabled by default
-          version: process.env.facebook-javascript-version
-        });
-      };
-    },
-    async loadFacebookSDK(d, s, id) {
-      var js,
-          fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {
-        return;
-      }
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    },
-    statusChangeCallback(response) {
+    statusChangeCallback(response){
       if (response.status === 'connected') {
+        // Logged into your webpage and Facebook.
         router.push('/')
       } else {
-        null
+        // The person is not logged into your webpage or we are unable to tell.
       }
     }
-
-},
-  created() {
-    this.initFacebook()
-    const statusChangeCallback = this.statusChangeCallback
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
+  },
 }
 </script>
-
-<style scoped>
-
-</style>
