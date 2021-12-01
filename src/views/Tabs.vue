@@ -80,8 +80,31 @@ export default {
             return response
           })
           .catch(error => console.log('error', error));
-    }
-},
+    },
+
+    // from https://medium.com/@mrjohnkilonzi/a-simple-facebook-login-component-in-vue-js-5ee71997bb97 25 clap 2020,Jan 13
+    async initFacebook() {
+      window.fbAsyncInit = function() {
+        window.FB.init({
+          appId: "722300725407829", //You will need to change this
+          cookie: true, // This is important, it's not enabled by default
+          version: process.env.facebook-javascript-version
+        });
+      };
+    },
+    async loadFacebookSDK(d, s, id) {
+      var js,
+          fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    },
+
+  },
   data(){
     return {
       mob:null,
@@ -122,27 +145,16 @@ export default {
 
   },
   async mounted() {
-    console.log('trigger moounted')
-    // check login status
-    if (!this.get_cookie('token') && !this.$route.query.token){
-      router.push('/login');
-      console.log('no token find in cookie and url')
-      return
-    }
-    else if(!this.get_cookie('token') && this.$route.query.token){
-      console.log('update cookie')
-      document.cookie = "token="+this.$route.query.token;
-    }
-    const response = await this.fetch_verify_token(this.get_cookie('token'))
-    if (response.status===401){
-      response.json().then(json => {
-        alert(json.message)
-        this.eraseCookie('token')
-        router.push('/login')
-      })
-    }
-    else if(response.status===200){
-      null
+    this.initFacebook()
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    })
+    function statusChangeCallback(response) {
+      if (response.status === 'connected') {
+        null
+      } else {
+        router.push('/login_select_way')
+      }
     }
     // check version
     const response2 = await this.fetch_verify_token(this.get_cookie('token'))
