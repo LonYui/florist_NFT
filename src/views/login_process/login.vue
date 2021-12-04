@@ -11,16 +11,16 @@
           <ion-title size="large">Login</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-textarea id="手機號碼">
+      <ion-textarea id="手機號碼" v-model="mob">
         手機號碼
       </ion-textarea>
       <ion-button @click="sendOTP()">
         寄送登入密碼到手機
       </ion-button>
-      <ion-textarea id="OTP" autocomplete="one-time-code">
+      <ion-textarea id="OTP" autocomplete="one-time-code" v-model="otp">
         密碼
       </ion-textarea>
-      <ion-button @click="verifyOTP()">
+      <ion-button @click="verify_password()">
         登入
       </ion-button>
     </ion-content>
@@ -33,14 +33,20 @@ import {
   IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import router from "../../router";
 
-export default  {
+export default {
   name: 'Login',
   components: {
-    IonTextarea,IonButton,
+    IonTextarea, IonButton,
     IonHeader, IonToolbar, IonTitle, IonContent, IonPage
   },
-  methods:{
-    sendOTP: function(){
+  data(){
+    return {
+      otp:"",
+      mob:""
+    }
+  },
+  methods: {
+    sendOTP: function () {
       const mob = document.getElementById('手機號碼').value
       var formdata = new FormData();
       formdata.append("mob", mob);
@@ -65,62 +71,59 @@ export default  {
 
     },
 
-    verifyOTP: function(){
-      const mob = document.getElementById('手機號碼').value
-      const OTP = document.getElementById('OTP').value
-      if (!OTP || !mob) {
-        alert('手機號碼或簡訊密碼尚未填寫')
-      }
-      const formdata = new FormData();
-      formdata.append("mob", mob);
-      formdata.append("password", OTP);
+    async fetch_verifyOTP() {
+      var formdata = new FormData();
+      formdata.append("mob", this.mob);
+      formdata.append("password", this.otp);
 
-      const requestOptions = {
+      var requestOptions = {
         method: 'PUT',
         body: formdata,
         redirect: 'follow'
       };
 
-      fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/verify-OTP`, requestOptions)
+      return fetch("https://ccb-rock-backed-dev.herokuapp.com/verify-OTP", requestOptions)
           .then(response => {
-            if (response.status===200){
-              response.json().then(json=> {
-                console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
-                document.cookie = "token="+decoder(json.accesstoken);
-                updateStartUrl('.?token='+decoder(json.accesstoken))
-                // TODO remove the token here
-                router.push('/tabs/?token='+decoder(json.accesstoken))
-              })
-            }
-            else if (response.status===401){
-              response.text().then(錯誤訊息=>alert(錯誤訊息))
-            }
-
+            return response
           })
-          .catch(error => console.log('error', error));
-
-          function decoder(encode_token) {
-            return encode_token.slice(0,-7)
-          }
-
-          function updateStartUrl(url){
-            var myDynamicManifest = {
-              "name": "ccb-rocks-prod",
-              "theme_color": "#4DBA87",
-              "start_url": ".",
-              "display": "standalone",
-              "background_color": "#000000"
-            }
-            // TODO can't read the start url, now start url = current url .
-            myDynamicManifest.start_url = url
-            const stringManifest = JSON.stringify(myDynamicManifest);
-            const blob = new Blob([stringManifest], {type: 'application/json'});
-            const manifestURL = URL.createObjectURL(blob);
-            document.querySelector('#my-manifest-placeholder').setAttribute('href', manifestURL);
-          }
     },
-},
-  // mounted(){} //TODO check login status if loging redirect to main page
+
+    async verify_password() {
+      const response = await this.fetch_verifyOTP()
+      if (response.status === 200) {
+        response.json().then(json => {
+          console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
+          updateStartUrl('.?token='+decoder(json.accesstoken))
+          document.cookie = "token=" + decoder(json.accesstoken);
+          router.push('/')
+        })
+      } else if (response.status === 401) {
+        response.text().then(錯誤訊息 => alert(錯誤訊息))
+      }
+
+      function decoder(encode_token) {
+        return encode_token.slice(0, -7)
+      }
+
+      function updateStartUrl(url) {
+        var myDynamicManifest = {
+          "name": "ccb-rocks-prod",
+          "theme_color": "#4DBA87",
+          "start_url": ".",
+          "display": "standalone",
+          "background_color": "#000000"
+        }
+        // TODO can't read the start url, now start url = current url .
+        myDynamicManifest.start_url = url
+        const stringManifest = JSON.stringify(myDynamicManifest);
+        const blob = new Blob([stringManifest], {type: 'application/json'});
+        const manifestURL = URL.createObjectURL(blob);
+        document.querySelector('#my-manifest-placeholder').setAttribute('href', manifestURL);
+      }
+
+
+    }
+    // mounted(){} //TODO check login status if loging redirect to main page
+  }
 }
-// eslint-disable-next-line no-unused-vars
 </script>
