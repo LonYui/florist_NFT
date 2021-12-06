@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { IonContent,  IonPage, IonButton, IonImg, IonIcon } from '@ionic/vue';
+// import { IonContent,  IonPage, IonButton, IonImg, IonIcon } from '@ionic/vue';
 import {
    callOutline,logoFacebook
 } from "ionicons/icons";
@@ -20,7 +20,7 @@ import "./login_select_way.css";
 
 export default {
   name: "login_select_way",
-  components: {IonContent, IonPage, IonButton, IonImg, IonIcon},
+  // components: {IonContent, IonPage, IonButton, IonImg, IonIcon},
   mixins:[facebookSDK,],
   setup() {
     return {callOutline, logoFacebook}
