@@ -6,13 +6,14 @@
 		<h2 class="sign-up-str">註冊帳號</h2>
 		<div class="input-num">
 <!--      todo listen on type changed cheeck format and send every 5 sec, constraint 2 max:2 times for calling api . -->
-			<input id="手機號碼" class="input-text-num" placeholder="手機號碼" v-model="mob" />
+			<input id="手機號碼" class="input-text-num" placeholder="手機號碼" v-model="mob" v-on:change="changeHandler()"  />
 		</div>
 		<!-- <ion-button @click="sendOTP()">
         寄送登入密碼到手機
       </ion-button> -->
 		<div class="input-ver-code">
-			<input id="OTP" placeholder="驗證碼" class="input-text-num" v-model="otp"/>
+<!--      TODO otp not work-->
+			<input id="OTP" placeholder="驗證碼" class="input-text-num"  v-model="otp" autocomplete="one-time-code"/>
 		</div>
 		<div class="login-btn-item">
 			<button type="button" class="login-btn" @click="verify_password()">登入</button>
@@ -36,10 +37,18 @@ export default {
   data(){
     return {
       otp:"",
-      mob:""
+      mob:"",
+      fetch_send_otp_count:0,
     }
   },
+
   methods: {
+    changeHandler(){
+      if(this.mob.length==10 & this.fetch_send_otp_count<2){
+        this.sendOTP()
+        this.fetch_send_otp_count++
+      }
+    },
     sendOTP: function () {
       const mob = document.getElementById('手機號碼').value
       var formdata = new FormData();
@@ -89,7 +98,7 @@ export default {
           console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
           updateStartUrl('.?token='+decoder(json.accesstoken))
           document.cookie = "token=" + decoder(json.accesstoken);
-          router.push('/page4').then(()=>{window.location.reload()})
+          router.replace('/page4').then(()=>{window.location.reload()})
 
         })
       } else if (response.status === 401) {

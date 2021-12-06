@@ -1,17 +1,17 @@
 <template>
 	<div class="banner-img">
 		<i>
-			<img src="../imgs/return-icon.svg" alt="" class="return-icon" />
+			<img src="../imgs/return-icon.svg" alt="" class="return-icon" @click="push_to_page4()"/>
 		</i>
 		<section class="container">
 			<button type="button" class="btn-text" @click="push_to_page6">
-				<p>競標大明星 <span>2016/12/06</span></p>
+				<p>競標大明星 <span>2021/12/16</span></p>
 				<p>SUPERSTAR <span>AUCTION GALA</span></p>
 			</button>
 
-			<button type="button" class="btn-text">
-				<p>競標大明星 <span>2016/12/06</span></p>
-				<p>SUPERSTAR <span>AUCTION GALA</span></p>
+			<button type="button" class="btn-text" @click="open_back_school_page()">
+				<p>back to school<span>2022/01/02</span></p>
+				<p>返校派對  <span>美式大學派對</span></p>
 			</button>
 		</section>
 	</div>
@@ -27,8 +27,15 @@
 		name: "page5",
     methods:{
       push_to_page6(){
-        router.push('/page6').then(()=>{window.location.reload()})
+        router.replace('/page6').then(()=>{window.location.reload()})
+      },
+      push_to_page4(){
+        router.replace('/page4').then(()=>{window.location.reload()})
+      },
+      open_back_school_page(){
+        window.open('https://www.accupass.com/event/2111020651351616384553?utm_source=other&utm_medium=Direct&utm_campaign=accu_211116b75daacg')
       }
+
     },
 	};
 </script>

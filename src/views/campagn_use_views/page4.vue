@@ -19,10 +19,10 @@
 		name: "page4",
     methods:{
       redirect_to_landing_page(){
-        window.location.replace('https://ccb.rocks/zhongwen_index.html')
+        window.open("https://ccb.rocks/zhongwen_index.html");
       },
       push_to_page5(){
-        router.push('/page5').then(()=>{window.location.reload()})
+        router.replace('/page5').then(()=>{window.location.reload()})
       }
     },
 	};

@@ -37,7 +37,7 @@ export default {
     statusChangeCallback(response){
       if (response.status === 'connected') {
         // Logged into your webpage and Facebook.
-        router.push('/login').then(()=>{window.location.reload()})
+        router.replace('/login').then(()=>{window.location.reload()})
       } else {
         // The person is not logged into your webpage or we are unable to tell.
       }
