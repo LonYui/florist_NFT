@@ -30,7 +30,7 @@
 <script>
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet, toastController } from '@ionic/vue';
 import {ellipse, homeOutline, restaurantOutline, personCircleOutline} from 'ionicons/icons';
-import router from "../router";
+// import router from "../router";
 import './Tabs.css';
 import {version} from '@/../package.json';
 export default {
@@ -75,13 +75,14 @@ export default {
         redirect: 'follow'
       };
 
-      return fetch(`http://${process.env.VUE_APP_ccb_rock_backed_domain}/is_pwa_version_eq?ccb_rock_pwa_version=${version}`, requestOptions)
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/is_pwa_version_eq?ccb_rock_pwa_version=${version}`, requestOptions)
           .then(response => {
             return response
           })
           .catch(error => console.log('error', error));
-    }
-},
+    },
+
+  },
   data(){
     return {
       mob:null,
@@ -122,31 +123,13 @@ export default {
 
   },
   async mounted() {
-    console.log('trigger moounted')
-    // check login status
-    if (!this.get_cookie('token') && !this.$route.query.token){
-      router.push('/login');
-      console.log('no token find in cookie and url')
-      return
-    }
-    else if(!this.get_cookie('token') && this.$route.query.token){
-      console.log('update cookie')
-      document.cookie = "token="+this.$route.query.token;
-    }
-    const response = await this.fetch_verify_token(this.get_cookie('token'))
-    if (response.status===401){
-      response.json().then(json => {
-        alert(json.message)
-        this.eraseCookie('token')
-        router.push('/login')
-      })
-    }
-    else if(response.status===200){
-      null
-    }
+    //check login
     // check version
     const response2 = await this.fetch_verify_token(this.get_cookie('token'))
-    if(response2.status===400){window.location.reload(true);}
+    if(response2.status===400){
+      // TODO not work depreciae 2018
+      window.location.reload(true);
+    }
   }
 
 }

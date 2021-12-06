@@ -4,7 +4,7 @@ import Tabs from '../views/Tabs.vue'
 const routes = [
   {
     path: '/',
-    redirect: '/tabs/'
+    redirect: '/login_select_way'
   },
   {
     path: '/tabs/',
@@ -34,16 +34,12 @@ const routes = [
     ]
   },
   {
-    path: '/login',
-    component: () => import('@/views/login_process/login.vue')
-  },
-  {
     path: '/login_select_way',
     component: () => import('@/views/login_process/login_select_way.vue')
-  },  
+  },
   {
-    path: '/restaurant/:placeId',
-    component: () => import('@/views/Restaurant.vue')
+    path: '/login',
+    component: () => import('@/views/login_process/login.vue')
   },
   {
     path: '/page1',
@@ -55,15 +51,19 @@ const routes = [
   },
   {
     path: '/page4',
-    component: () => import('@/views/event/page4.vue')
+    component: () => import('@/views/campagn_use_views/page4.vue')
   },
   {
     path: '/page5',
-    component: () => import('@/views/event/page5.vue')
+    component: () => import('@/views/campagn_use_views/page5.vue')
   },
   {
     path: '/page6',
-    component: () => import('@/views/event/page6.vue')
+    component: () => import('@/views/campagn_use_views/page6.vue')
+  },
+  {
+    path: '/restaurant/:placeId',
+    component: () => import('@/views/Restaurant.vue')
   },
 
 ]
