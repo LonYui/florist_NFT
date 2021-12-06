@@ -5,33 +5,34 @@
 		</i>
 		<h2 class="sign-up-str">註冊帳號</h2>
 		<div class="input-num">
-			<input id="手機號碼" class="input-text-num" placeholder="手機號碼" />
+<!--      todo listen on type changed cheeck format and send every 5 sec, constraint 2 max:2 times for calling api . -->
+			<input id="手機號碼" class="input-text-num" placeholder="手機號碼" v-model="mob" />
 		</div>
 		<!-- <ion-button @click="sendOTP()">
         寄送登入密碼到手機
       </ion-button> -->
 		<div class="input-ver-code">
-			<input id="OTP" placeholder="驗證碼" class="input-text-num" />
+			<input id="OTP" placeholder="驗證碼" class="input-text-num" v-model="otp"/>
 		</div>
 		<div class="login-btn-item">
-			<button type="button" class="login-btn" @click="verifyOTP()">登入</button>
+			<button type="button" class="login-btn" @click="verify_password()">登入</button>
 		</div>
 	</div>
 </template>
 
 <script >
-import {
-  IonTextarea,IonButton,
-  IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+// import {
+//   IonTextarea,IonButton,
+//   IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import router from "../../router";
 import "./login.css";
 
 export default {
   name: 'Login',
-  components: {
-    IonTextarea, IonButton,
-    IonHeader, IonToolbar, IonTitle, IonContent, IonPage
-  },
+  // components: {
+  //   IonTextarea, IonButton,
+  //   IonHeader, IonToolbar, IonTitle, IonContent, IonPage
+  // },
   data(){
     return {
       otp:"",
@@ -88,10 +89,12 @@ export default {
           console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
           updateStartUrl('.?token='+decoder(json.accesstoken))
           document.cookie = "token=" + decoder(json.accesstoken);
-          router.push('/')
+          router.push('/page4')
         })
       } else if (response.status === 401) {
-        response.text().then(錯誤訊息 => alert(錯誤訊息))
+        response.json().then(json=>{
+          alert(json.message)
+        })
       }
 
       function decoder(encode_token) {

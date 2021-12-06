@@ -1,8 +1,8 @@
 <template>
 	<div class="banner-img">
 
-			<button class="fb-btn">
-				<img src="../imgs/fb-icon.svg" class="fb-icon" />
+			<button class="fb-btn" @click="log_in_with_facebook()">
+				<img src="../imgs/fb-icon.svg" class="fb-icon" alt=""/>
 				使用Facebook登入
 			</button>
 
@@ -16,6 +16,7 @@ import {
 } from "ionicons/icons";
 import router from "../../router";
 import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
+import "./login_select_way.css";
 
 export default {
   name: "login_select_way",
@@ -36,7 +37,7 @@ export default {
     statusChangeCallback(response){
       if (response.status === 'connected') {
         // Logged into your webpage and Facebook.
-        router.push('/')
+        router.push('/login')
       } else {
         // The person is not logged into your webpage or we are unable to tell.
       }
