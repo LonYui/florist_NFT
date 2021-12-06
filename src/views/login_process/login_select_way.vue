@@ -1,62 +1,18 @@
 <template>
-<<<<<<< HEAD
 		<div class="banner-img">
 			<div class=""></div>  <!-- 這行排版用區塊 不要刪除!! -->
 			<button class="fb-btn">
 				<img src="../imgs/fb-icon.svg" class="fb-icon" />
-=======
-	<div class="banner-img">
-
-			<button class="fb-btn" @click="log_in_with_facebook()">
-				<img src="../imgs/fb-icon.svg" class="fb-icon" alt=""/>
->>>>>>> ff53403bf547b653d4beff5a0ff0a2c5f132bb76
 				使用Facebook登入
 			</button>
 		</div>
 </template>
 
 <script>
-import { IonContent,  IonPage, IonButton, IonImg, IonIcon } from '@ionic/vue';
-import {
-   callOutline,logoFacebook
-} from "ionicons/icons";
-import router from "../../router";
-import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
 import "./login_select_way.css";
-
-<<<<<<< HEAD
 	export default {
 		name: "login_select_way",
 	};
 </script>
 	<style scoped>
 </style>
-=======
-export default {
-  name: "login_select_way",
-  components: {IonContent, IonPage, IonButton, IonImg, IonIcon},
-  mixins:[facebookSDK,],
-  setup() {
-    return {callOutline, logoFacebook}
-  },
-  methods: {
-    log_in_with_facebook(){
-      //TODO what:why not _this work?
-      let _statusChangeCallback=this.statusChangeCallback
-      this.FB.login(function(response) {
-        _statusChangeCallback(response)
-      }, {scope: 'public_profile,email'});
-
-    },
-    statusChangeCallback(response){
-      if (response.status === 'connected') {
-        // Logged into your webpage and Facebook.
-        router.push('/login')
-      } else {
-        // The person is not logged into your webpage or we are unable to tell.
-      }
-    }
-  },
-}
-</script>
->>>>>>> ff53403bf547b653d4beff5a0ff0a2c5f132bb76
