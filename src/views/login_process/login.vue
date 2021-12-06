@@ -89,7 +89,8 @@ export default {
           console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
           updateStartUrl('.?token='+decoder(json.accesstoken))
           document.cookie = "token=" + decoder(json.accesstoken);
-          router.push('/page4')
+          router.push('/page4').then(()=>{window.location.reload()})
+
         })
       } else if (response.status === 401) {
         response.json().then(json=>{

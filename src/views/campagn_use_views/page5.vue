@@ -27,7 +27,7 @@
 		name: "page5",
     methods:{
       push_to_page6(){
-        router.push('/page6')
+        router.push('/page6').then(()=>{window.location.reload()})
       }
     },
 	};

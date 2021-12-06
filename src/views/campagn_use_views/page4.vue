@@ -22,7 +22,7 @@
         window.location.replace('https://ccb.rocks/zhongwen_index.html')
       },
       push_to_page5(){
-        router.push('/page5')
+        router.push('/page5').then(()=>{window.location.reload()})
       }
     },
 	};
