@@ -27,9 +27,10 @@
 //   IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import router from "../../router";
 import "./login.css";
-
+import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
 export default {
   name: 'Login',
+  mixins:[facebookSDK,],
   // components: {
   //   IonTextarea, IonButton,
   //   IonHeader, IonToolbar, IonTitle, IonContent, IonPage
@@ -78,6 +79,9 @@ export default {
       var formdata = new FormData();
       formdata.append("mob", this.mob);
       formdata.append("password", this.otp);
+      await this.FB.getLoginStatus(function(response) {
+        formdata.append("facebook_user_id", response.authResponse.userID);
+      });
 
       var requestOptions = {
         method: 'PUT',
