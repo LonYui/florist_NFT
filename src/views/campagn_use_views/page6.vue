@@ -65,23 +65,26 @@
               return response
             })
       },
-      async click_page(){
-        var facebook_user_id
-        await this.FB.getLoginStatus(function(response) {
-          facebook_user_id = response.authResponse.userID
-        });
-
-        const response_1 = await this.fetch_member_mob_by_facebook_user_id(facebook_user_id)
-        var mob
-        await response_1.json().then(json=>{
-          mob = json.mob
-        })
-        const response_2 = await this.fetch_member_join_order(mob)
-        response_2.json().then(json=>{
-          this.拍賣數字 = json.order
-        })
-      }
     },
+  async mounted(){
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    await delay(1000);
+
+    var facebook_user_id
+    await this.FB.getLoginStatus(function(response) {
+      facebook_user_id = response.authResponse.userID
+    });
+
+    const response_1 = await this.fetch_member_mob_by_facebook_user_id(facebook_user_id)
+    var mob
+    await response_1.json().then(json=>{
+      mob = json.mob
+    })
+    const response_2 = await this.fetch_member_join_order(mob)
+    response_2.json().then(json=>{
+      this.拍賣數字 = json.order
+    })
+  },
   };
 </script>
 
