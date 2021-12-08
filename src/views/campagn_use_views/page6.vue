@@ -29,7 +29,6 @@
     },
     watch: {
       '拍賣數字': function (val, oldVal) {
-        console.log('new: %s, old: %s', val, oldVal)
         if (val.toString().length===1){
           this.拍賣數字= '00'+val.toString()
         }
@@ -49,7 +48,7 @@
           redirect: 'follow'
         };
 
-        return fetch(`https://ccb-rock-backed-dev.herokuapp.com/member/created_order?mob=${mob}`, requestOptions)
+        return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member/created_order?mob=${mob}`, requestOptions)
             .then(response => {
               return response
             })
@@ -60,7 +59,7 @@
           redirect: 'follow'
         };
 
-        return fetch(`https://ccb-rock-backed-dev.herokuapp.com/member_mob_by_facebook_user_id?facebook_user_id=${facebook_user_id}`, requestOptions)
+        return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member_mob_by_facebook_user_id?facebook_user_id=${facebook_user_id}`, requestOptions)
             .then(response => {
               return response
             })

@@ -137,7 +137,7 @@ export default {
         redirect: 'follow'
       };
 
-      return fetch(`https://ccb-rock-backed-dev.herokuapp.com/member_mob_by_facebook_user_id?facebook_user_id=${facebook_user_id}`, requestOptions)
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member_mob_by_facebook_user_id?facebook_user_id=${facebook_user_id}`, requestOptions)
           .then(response => {
             return response
           })
