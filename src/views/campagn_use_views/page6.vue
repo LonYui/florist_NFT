@@ -27,6 +27,17 @@
         拍賣數字:'non',
       }
     },
+    watch: {
+      '拍賣數字': function (val, oldVal) {
+        console.log('new: %s, old: %s', val, oldVal)
+        if (val.toString().length===1){
+          this.拍賣數字= '00'+val.toString()
+        }
+        else if (val.toString().length===2){
+          this.拍賣數字 ='0'+val.toString()
+        }
+      }
+    },
     methods:{
       push_to_page5(){
         router.replace('/page5').then(()=>{window.location.reload()})
