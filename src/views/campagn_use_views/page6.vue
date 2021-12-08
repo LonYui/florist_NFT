@@ -28,7 +28,7 @@
       }
     },
     watch: {
-      '拍賣數字': function (val, oldVal) {
+      '拍賣數字': function (val) {
         if (val.toString().length===1){
           this.拍賣數字= '00'+val.toString()
         }

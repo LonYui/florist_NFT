@@ -10,8 +10,8 @@
 			</button>
 
 			<button type="button" class="btn-text" @click="open_back_school_page()">
-				<p>返校派對<span>2022/01/02</span></p>
-				<p>HOMECOMING  <span>PARTY</span></p>
+				<p>返校派對 <span>2022/01/02</span></p>
+				<p>HOMECOMING <span>PARTY</span></p>
 			</button>
 		</section>
 	</div>
