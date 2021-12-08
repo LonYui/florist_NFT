@@ -1,18 +1,49 @@
-.container {
-  padding: 20px 0;
-}
-
 .border-serial {
   border: 7px solid #F5EC7A;
   border-radius: 10px;
+ 
 }
 
 .serial-num {
+  width: 100%;
+  height: auto;
   writing-mode: vertical-lr;
   font-size: 350px;
-  letter-spacing: 48px;
-  line-height: 414px;
+  letter-spacing: 50px;
+  line-height: 100%;
   color: #F5EC7A;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-height: 650px) {
+  .serial-num {
+    font-size: 260px;
+  }
+}
+
+@media (min-height: 700px) {
+  .serial-num {
+    font-size: 290px;
+  }
+}
+
+@media (min-height: 750px) {
+  .serial-num {
+      font-size: 330px;
+  }
+}
+
+@media (min-height: 844px) {
+  .serial-num {
+    font-size: 350px;
+  }
+}
+@media (min-height: 900px) {
+  .serial-num {
+    font-size: 400px;
+  }
 }
 
 .return-icon-white {
@@ -20,6 +51,9 @@
   margin-left: 15px;
 }
 
-.balck-background{
+.black-background{
   background-color:black;
+   width: 100%;
+  height: 100%;
+  padding: 0 15px;
 }

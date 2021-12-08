@@ -2,25 +2,19 @@
   color: #534B37;
   font-size: 22px;
   line-height: 25px;
-  display: flex;
-  justify-content: center;
-  padding-top: 85px;
-  padding-bottom: 71px;
   letter-spacing: 0.2em;
   font-weight: bolder;
+  text-align: center;
+  margin-top: 90px;
 }
 
 .banner-img {
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
   background-image: url('../imgs/banner-theme-1.png');
-}
-
-::placeholder {
-  color: #534B37;
 }
 
 .input-text-num {
@@ -42,13 +36,15 @@
   /*background: #FFFFFF;*/
   border-radius: 10px;
   font-size: 22px;
-  padding: 15px;
+  padding: 15px 0;
+  width: 25%;
   letter-spacing: 0.2em;
   font-weight: bold;
+
 }
 
 .login-btn-item {
-   display: flex;
+  display: flex;
   justify-content: center;
 }
 
@@ -71,4 +67,12 @@ input:focus::placeholder {
 .return-icon {
   margin-left: 24px;
   margin-top: 64px;
+}
+
+.sign-up-layout {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-15%);
+  top: 15%;
+  position: relative;
 }

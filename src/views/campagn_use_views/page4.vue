@@ -2,7 +2,6 @@
 	<div class="banner-img">
 		<section class="container">
 			<button type="button" class="btn-text" @click="push_to_page5">參加活動</button>
-
 			<button type="button" class="btn-text" @click="redirect_to_landing_page()">關於我們</button>
 		</section>
 	</div>

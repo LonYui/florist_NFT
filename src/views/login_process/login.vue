@@ -3,19 +3,21 @@
 		<i>
 			<img src="../imgs/return-icon.svg" alt="" class="return-icon" />
 		</i>
-		<h2 class="sign-up-str">註冊帳號</h2>
-		<div class="input-num">
-			<input id="手機號碼" class="input-text-num" placeholder="手機號碼" v-model="mob" v-on:change="changeHandler()" autocomplete="tel"  />
-		</div>
-		<!-- <ion-button @click="sendOTP()">
-        寄送登入密碼到手機
-      </ion-button> -->
-		<div class="input-ver-code">
-			<input id="OTP" placeholder="驗證碼" class="input-text-num"  v-model="otp" autocomplete="one-time-code"/>
-		</div>
-		<div class="login-btn-item">
-			<button type="button" class="login-btn" @click="verify_password()">登入</button>
-		</div>
+     <h2 class="sign-up-str">註冊帳號</h2>
+    <div class="sign-up-layout">
+      <div class="input-num">
+        <input id="手機號碼" class="input-text-num" placeholder="手機號碼" v-model="mob" v-on:change="changeHandler()" autocomplete="tel"  />
+      </div>
+      <!-- <ion-button @click="sendOTP()">
+          寄送登入密碼到手機
+        </ion-button> -->
+      <div class="input-ver-code">
+        <input id="OTP" placeholder="驗證碼" class="input-text-num"  v-model="otp" autocomplete="one-time-code"/>
+      </div>
+      <div class="login-btn-item">
+        <button type="button" class="login-btn" @click="verify_password()">登入</button>
+      </div>
+    </div>
 	</div>
 </template>
 

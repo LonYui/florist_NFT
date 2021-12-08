@@ -1,6 +1,5 @@
 <template>
-  <div class="balck-background" @click="click_page()">
-	<section class="container">
+ <div class="black-background" @click="click_page()">
 		<div class="border-serial">
     <i>
       <img
@@ -12,8 +11,7 @@
     </i>
 			<span class="serial-num">{{ 拍賣數字 }}</span>
 		</div>
-	</section>
-  </div>
+ </div>
 </template>
 <script>
 	import "./page6.css";
