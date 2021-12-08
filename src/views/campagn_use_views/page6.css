@@ -17,6 +17,25 @@
   align-items: center;
 }
 
+/* RWD斷點 */
+@media (min-height: 590px) {
+  .serial-num {
+    font-size: 190px;
+  }
+}
+
+@media (min-height: 610px) {
+  .serial-num {
+    font-size: 220px;
+  }
+}
+
+@media (min-height: 630px) {
+  .serial-num {
+    font-size: 240px;
+  }
+}
+
 @media (min-height: 650px) {
   .serial-num {
     font-size: 260px;
@@ -40,11 +59,31 @@
     font-size: 350px;
   }
 }
+
+@media (min-height: 870px) {
+  .serial-num {
+    font-size: 370px;
+  }
+}
+
 @media (min-height: 900px) {
   .serial-num {
     font-size: 400px;
   }
 }
+
+@media (min-height: 930px) {
+  .serial-num {
+    font-size: 430px;
+  }
+}
+
+@media (min-height: 950px) {
+  .serial-num {
+    font-size: 450px;
+  }
+}
+/* RWD斷點 */
 
 .return-icon-white {
   margin-top: 15px;
