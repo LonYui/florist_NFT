@@ -17,21 +17,33 @@
 }
 
 /* RWD斷點 */
-@media (min-height: 590px) {
+@media (min-height: 550px) {
   .serial-num {
-    font-size: 190px;
+    font-size: 180px;
   }
 }
 
-@media (min-height: 610px) {
+@media (min-height: 570px) {
+  .serial-num {
+    font-size: 200px;
+  }
+}
+
+@media (min-height: 590px) {
   .serial-num {
     font-size: 220px;
   }
 }
 
+@media (min-height: 610px) {
+  .serial-num {
+    font-size: 230px;
+  }
+}
+
 @media (min-height: 630px) {
   .serial-num {
-    font-size: 240px;
+    font-size: 250px;
   }
 }
 
