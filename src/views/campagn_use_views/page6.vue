@@ -17,6 +17,7 @@
 	import "./page6.css";
   import router from "../../router";
   import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
+  import {toastController} from '@ionic/vue';
 	export default {
 		name: "page6",
     mixins:[facebookSDK,],
@@ -62,6 +63,15 @@
               return response
             })
       },
+      async openToast() {
+        const toast = await toastController
+            .create({
+              message: '提示：轉向前記得由下往上拉出設定，開啟鎖定銀幕旋轉。',
+              duration: 3500
+            })
+        return toast.present();
+      },
+
     },
   async mounted(){
     const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -81,6 +91,9 @@
     response_2.json().then(json=>{
       this.拍賣數字 = json.order
     })
+
+    // render toast
+    this.openToast()
   },
   };
 </script>
