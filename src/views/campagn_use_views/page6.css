@@ -1,7 +1,6 @@
 .border-serial {
   border: 7px solid #F5EC7A;
   border-radius: 10px;
- 
 }
 
 .serial-num {
@@ -44,19 +43,37 @@
 
 @media (min-height: 700px) {
   .serial-num {
-    font-size: 290px;
+    font-size: 280px;
+  }
+}
+
+@media (min-height: 720px) {
+  .serial-num {
+    font-size: 300px;
   }
 }
 
 @media (min-height: 750px) {
   .serial-num {
+      font-size: 320px;
+  }
+}
+
+@media (min-height: 770px) {
+  .serial-num {
       font-size: 330px;
   }
 }
 
-@media (min-height: 844px) {
+@media (min-height: 800px) {
   .serial-num {
-    font-size: 350px;
+    font-size: 340px;
+  }
+}
+
+@media (min-height: 840px) {
+  .serial-num {
+    font-size: 360px;
   }
 }
 
@@ -74,13 +91,13 @@
 
 @media (min-height: 930px) {
   .serial-num {
-    font-size: 430px;
+    font-size: 420px;
   }
 }
 
 @media (min-height: 950px) {
   .serial-num {
-    font-size: 450px;
+    font-size: 440px;
   }
 }
 /* RWD斷點 */
