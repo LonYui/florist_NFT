@@ -1,8 +1,5 @@
 <template>
 	<div class="banner-img">
-		<i>
-			<img src="../imgs/return-icon.svg" alt="" class="return-icon" />
-		</i>
 		<section class="container">
 			<button type="button" class="btn-text" @click="push_to_page5">參加活動</button>
 
