@@ -5,14 +5,12 @@
 		</i>
 		<h2 class="sign-up-str">註冊帳號</h2>
 		<div class="input-num">
-<!--      todo listen on type changed cheeck format and send every 5 sec, constraint 2 max:2 times for calling api . -->
-			<input id="手機號碼" class="input-text-num" placeholder="手機號碼" v-model="mob" v-on:change="changeHandler()"  />
+			<input id="手機號碼" class="input-text-num" placeholder="手機號碼" v-model="mob" v-on:change="changeHandler()" autocomplete="tel"  />
 		</div>
 		<!-- <ion-button @click="sendOTP()">
         寄送登入密碼到手機
       </ion-button> -->
 		<div class="input-ver-code">
-<!--      TODO otp not work-->
 			<input id="OTP" placeholder="驗證碼" class="input-text-num"  v-model="otp" autocomplete="one-time-code"/>
 		</div>
 		<div class="login-btn-item">
@@ -132,8 +130,31 @@ export default {
       }
 
 
-    }
-    // mounted(){} //TODO check login status if loging redirect to main page
-  }
+    },
+    fetch_member_mob_by_facebook_user_id(facebook_user_id){
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+
+      return fetch(`https://ccb-rock-backed-dev.herokuapp.com/member_mob_by_facebook_user_id?facebook_user_id=${facebook_user_id}`, requestOptions)
+          .then(response => {
+            return response
+          })
+    },
+  },
+    async mounted(){
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(1000);
+      var facebook_user_id
+      await this.FB.getLoginStatus(function(response) {
+        facebook_user_id = response.authResponse.userID
+      });
+
+      const response_1 = await this.fetch_member_mob_by_facebook_user_id(facebook_user_id)
+      if(response_1.status===200){
+        router.replace('/page4').then(()=>{window.location.reload()})
+      }
+    }, //TODO check login status if loging redirect to main page
 }
 </script>
