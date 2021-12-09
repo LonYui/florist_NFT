@@ -74,50 +74,43 @@ export default {
           .catch(error => console.log('error', error));
 
     },
-    verify_password() {
+    fetch_verify_OTP({mob, otp, facebook_user_id, fb_name}={}){
       var formdata = new FormData();
-      formdata.append("mob", this.mob);
-      formdata.append("password", this.otp);
-      var facebook_user_id
-      const _this = this
-      this.FB.getLoginStatus(function(response) {
-        facebook_user_id = response.authResponse.userID
-        formdata.append("facebook_user_id", facebook_user_id);
-        _this.FB.api(
-            `/${facebook_user_id}/`,
-            function (response) {
-              if (response && !response.error) {
-                // formdata.append('gender',response.gender)
-                // formdata.append('birthday',response.birthday)
-                formdata.append('fb_name', response.name)
-                // formdata.append('email',response.email)
-              }
-              var requestOptions = {
-                method: 'PUT',
-                body: formdata,
-                redirect: 'follow'
-              };
-              fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/verify-OTP`, requestOptions)
-                  .then(response => {
-                    if (response.status === 200) {
-                      response.json().then(json => {
-                        console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
-                        updateStartUrl('.?token=' + decoder(json.accesstoken))
-                        document.cookie = "token=" + decoder(json.accesstoken);
-                        router.replace('/page4').then(() => {
-                          window.location.reload()
-                        })
+      formdata.append("mob", mob);
+      formdata.append("password", otp);
+      formdata.append("facebook_user_id", facebook_user_id);
+      // formdata.append('gender',response.gender)
+      // formdata.append('birthday',response.birthday)
+      formdata.append('fb_name', fb_name)
+      // formdata.append('email',response.email)
 
-                      })
-                    } else if (response.status === 401) {
-                      response.json().then(json => {
-                        alert(json.message)
-                      })
-                    }
-                  })
-            }
-        )
-      });
+
+      var requestOptions = {
+        method: 'PUT',
+        body: formdata,
+        redirect: 'follow'
+      };
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/verify-OTP`, requestOptions)
+          .then(response => {
+            return response
+          })
+      },
+    callback_of_verify_password_api3_doing_saveCookie_and_updateMainfest(response){
+      if (response.status === 200) {
+        response.json().then(json => {
+          console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
+          updateStartUrl('.?token=' + decoder(json.accesstoken))
+          document.cookie = "token=" + decoder(json.accesstoken);
+          router.replace('/page4').then(() => {
+            window.location.reload()
+          })
+        })
+      }
+      else if (response.status === 401) {
+        response.json().then(json => {
+          alert(json.message)
+        })
+      }
 
       function decoder(encode_token) {
         return encode_token.slice(0, -7)
@@ -139,7 +132,34 @@ export default {
         document.querySelector('#my-manifest-placeholder').setAttribute('href', manifestURL);
       }
 
-
+    },
+    verify_password() {
+      var facebook_user_id
+      const _this = this
+      // api a
+      this.FB.getLoginStatus(function (response_a) {
+        facebook_user_id = response_a.authResponse.userID
+        // api b
+        _this.FB.api(
+            `/${facebook_user_id}/`,
+            function (response_b) {
+              var fb_name
+              if (response_b && !response_b.error) {
+                // gender = response_b.gender
+                // birthday = response_b.birthday
+                fb_name = response_b.name
+                // email = response_b.email
+              }
+              // api c
+              _this.fetch_verify_OTP({
+                mob: _this.mob, otp: _this.otp,
+                facebook_user_id: facebook_user_id, fb_name: fb_name,
+              }).then(response_c => {
+                _this.callback_of_verify_password_api3_doing_saveCookie_and_updateMainfest(response_c)
+              })
+            }
+        )
+      });
     },
     fetch_member_mob_by_facebook_user_id(facebook_user_id){
       var requestOptions = {
