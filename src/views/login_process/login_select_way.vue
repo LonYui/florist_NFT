@@ -30,7 +30,8 @@ export default {
       let _statusChangeCallback=this.statusChangeCallback
       this.FB.login(function(response) {
         _statusChangeCallback(response)
-      }, {scope: 'public_profile,email'});
+      }, {scope: 'public_profile'});
+      //TODO  wait fb pass permision add email, birthday, gender
 
     },
     statusChangeCallback(response){

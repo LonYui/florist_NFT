@@ -79,9 +79,22 @@ export default {
       var formdata = new FormData();
       formdata.append("mob", this.mob);
       formdata.append("password", this.otp);
+      var facebook_user_id
       await this.FB.getLoginStatus(function(response) {
-        formdata.append("facebook_user_id", response.authResponse.userID);
+        facebook_user_id = response.authResponse.userID
       });
+      formdata.append("facebook_user_id", facebook_user_id);
+      await this.FB.api(
+          `/${facebook_user_id}/`,
+          function (response) {
+            if (response && !response.error) {
+              // formdata.append('gender',response.gender)
+              // formdata.append('birthday',response.birthday)
+              formdata.append('fb_name',response.name)
+              // formdata.append('email',response.email)
+            }
+          }
+      );
 
       var requestOptions = {
         method: 'PUT',
