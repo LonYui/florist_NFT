@@ -74,55 +74,50 @@ export default {
           .catch(error => console.log('error', error));
 
     },
-
-    async fetch_verifyOTP() {
+    verify_password() {
       var formdata = new FormData();
       formdata.append("mob", this.mob);
       formdata.append("password", this.otp);
       var facebook_user_id
-      await this.FB.getLoginStatus(function(response) {
+      const _this = this
+      this.FB.getLoginStatus(function(response) {
         facebook_user_id = response.authResponse.userID
-      });
-      formdata.append("facebook_user_id", facebook_user_id);
-      await this.FB.api(
-          `/${facebook_user_id}/`,
-          function (response) {
-            if (response && !response.error) {
-              // formdata.append('gender',response.gender)
-              // formdata.append('birthday',response.birthday)
-              formdata.append('fb_name',response.name)
-              // formdata.append('email',response.email)
+        formdata.append("facebook_user_id", facebook_user_id);
+        _this.FB.api(
+            `/${facebook_user_id}/`,
+            function (response) {
+              if (response && !response.error) {
+                // formdata.append('gender',response.gender)
+                // formdata.append('birthday',response.birthday)
+                formdata.append('fb_name', response.name)
+                // formdata.append('email',response.email)
+              }
+              var requestOptions = {
+                method: 'PUT',
+                body: formdata,
+                redirect: 'follow'
+              };
+              fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/verify-OTP`, requestOptions)
+                  .then(response => {
+                    if (response.status === 200) {
+                      response.json().then(json => {
+                        console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
+                        updateStartUrl('.?token=' + decoder(json.accesstoken))
+                        document.cookie = "token=" + decoder(json.accesstoken);
+                        router.replace('/page4').then(() => {
+                          window.location.reload()
+                        })
+
+                      })
+                    } else if (response.status === 401) {
+                      response.json().then(json => {
+                        alert(json.message)
+                      })
+                    }
+                  })
             }
-          }
-      );
-
-      var requestOptions = {
-        method: 'PUT',
-        body: formdata,
-        redirect: 'follow'
-      };
-
-      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/verify-OTP`, requestOptions)
-          .then(response => {
-            return response
-          })
-    },
-
-    async verify_password() {
-      const response = await this.fetch_verifyOTP()
-      if (response.status === 200) {
-        response.json().then(json => {
-          console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
-          updateStartUrl('.?token='+decoder(json.accesstoken))
-          document.cookie = "token=" + decoder(json.accesstoken);
-          router.replace('/page4').then(()=>{window.location.reload()})
-
-        })
-      } else if (response.status === 401) {
-        response.json().then(json=>{
-          alert(json.message)
-        })
-      }
+        )
+      });
 
       function decoder(encode_token) {
         return encode_token.slice(0, -7)
