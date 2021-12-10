@@ -142,7 +142,7 @@ export default {
         facebook_user_id = response_a.authResponse.userID
         // api b
         _this.FB.api(
-            `/${facebook_user_id}/`,
+            `/${facebook_user_id}/`,{  fields: 'name, email' },
             function (response_b) {
               var gender,fb_name,birthday,email
               if (response_b && !response_b.error) {
