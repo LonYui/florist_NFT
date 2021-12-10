@@ -1,10 +1,19 @@
 <template>
 		<div class="banner-img">
 			<div class=""></div>  <!-- 這行排版用區塊 不要刪除!! -->
+			<div class="top-img">
+        <img src="../imgs/page1_topbar.png">
+      </div>
+      <div class="logo-img">
+        <img src="../imgs/ccb_logo.png">
+      </div>
 			<button class="fb-btn" @click="log_in_with_facebook()">
 				<img src="../imgs/fb-icon.svg" class="fb-icon" alt=""/>
 				使用Facebook登入
 			</button>
+      <div class="button-img">
+        <img src="../imgs/page1_buttonbar.png">
+      </div>
 		</div>
 </template>
 
