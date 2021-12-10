@@ -142,14 +142,15 @@ export default {
         facebook_user_id = response_a.authResponse.userID
         // api b
         _this.FB.api(
-            `/${facebook_user_id}/`,{  fields: 'name, email' },
+            `/${facebook_user_id}/`,{  fields: 'name, email, picture' },
             function (response_b) {
-              var gender,fb_name,birthday,email
+              var gender,fb_name,birthday,email,image_url
               if (response_b && !response_b.error) {
                 gender = response_b.gender
                 birthday = response_b.birthday
                 fb_name = response_b.name
                 email = response_b.email
+                image_url = response_b.picture
               }
               // api c
               _this.fetch_verify_OTP({
@@ -157,6 +158,7 @@ export default {
                 facebook_user_id: facebook_user_id,
                 gender:gender,birthday:birthday,
                 fb_name: fb_name,email:email,
+                picture: picture,
               }).then(response_c => {
                 _this.callback_of_verify_password_api3_doing_saveCookie_and_updateMainfest(response_c)
               })
