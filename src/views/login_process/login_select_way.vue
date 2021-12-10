@@ -2,7 +2,7 @@
 		<div class="banner-img">
 			<div class=""></div>  <!-- 這行排版用區塊 不要刪除!! -->
 			<button class="fb-btn" @click="log_in_with_facebook()">
-				<img src="../imgs/fb-icon.svg" class="fb-icon" />
+				<img src="../imgs/fb-icon.svg" class="fb-icon" alt=""/>
 				使用Facebook登入
 			</button>
 		</div>
@@ -30,7 +30,7 @@ export default {
       let _statusChangeCallback=this.statusChangeCallback
       this.FB.login(function(response) {
         _statusChangeCallback(response)
-      }, {scope: 'public_profile'});
+      }, {scope: 'public_profile,email'});
       //TODO  wait fb pass permision add email, birthday, gender
 
     },

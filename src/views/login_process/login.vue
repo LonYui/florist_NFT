@@ -74,15 +74,16 @@ export default {
           .catch(error => console.log('error', error));
 
     },
-    fetch_verify_OTP({mob, otp, facebook_user_id, fb_name}={}){
+    fetch_verify_OTP({mob, otp, facebook_user_id, gender,birthday,fb_name,email}={}){
       var formdata = new FormData();
       formdata.append("mob", mob);
       formdata.append("password", otp);
       formdata.append("facebook_user_id", facebook_user_id);
-      // formdata.append('gender',response.gender)
-      // formdata.append('birthday',response.birthday)
+
+      formdata.append('gender',gender)
+      formdata.append('birthday',birthday)
       formdata.append('fb_name', fb_name)
-      // formdata.append('email',response.email)
+      formdata.append('email',email)
 
 
       var requestOptions = {
@@ -143,17 +144,19 @@ export default {
         _this.FB.api(
             `/${facebook_user_id}/`,
             function (response_b) {
-              var fb_name
+              var gender,fb_name,birthday,email
               if (response_b && !response_b.error) {
-                // gender = response_b.gender
-                // birthday = response_b.birthday
+                gender = response_b.gender
+                birthday = response_b.birthday
                 fb_name = response_b.name
-                // email = response_b.email
+                email = response_b.email
               }
               // api c
               _this.fetch_verify_OTP({
                 mob: _this.mob, otp: _this.otp,
-                facebook_user_id: facebook_user_id, fb_name: fb_name,
+                facebook_user_id: facebook_user_id,
+                gender:gender,birthday:birthday,
+                fb_name: fb_name,email:email,
               }).then(response_c => {
                 _this.callback_of_verify_password_api3_doing_saveCookie_and_updateMainfest(response_c)
               })
