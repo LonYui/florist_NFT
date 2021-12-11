@@ -1,19 +1,12 @@
 <template>
-		<div class="banner-img">
-			<div class=""></div>  <!-- 這行排版用區塊 不要刪除!! -->
-			<div class="top-img">
-        <img src="../imgs/page1_topbar.png">
-      </div>
-      <div class="logo-img">
-        <img src="../imgs/ccb_logo.png">
-      </div>
+  <div style="background:#F5EC7A;width:100%;height:100%;">
+      <img src="../imgs/page1_topbar.png" class="top-img" alt="倒反摩天輪">
+      <img src="../imgs/ccb_logo.png" class="logo-img" alt="mumu！汪汪!!">
 			<button class="fb-btn" @click="log_in_with_facebook()">
-				<img src="../imgs/fb-icon.svg" class="fb-icon" alt=""/>
+				<img src="../imgs/fb-icon.svg" class="fb-icon" alt="FB icon"/>
 				使用Facebook登入
 			</button>
-      <div class="button-img">
-        <img src="../imgs/page1_buttonbar.png">
-      </div>
+      <img src="../imgs/page1_buttonbar.png" class="button-img" alt="摩天輪">
 		</div>
 </template>
 
