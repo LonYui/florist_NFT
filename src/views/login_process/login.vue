@@ -1,18 +1,18 @@
 <template>
 	<div class="banner-img">
 		<i>
-			<img src="../imgs/return-icon.svg" alt="" class="return-icon" />
+			<img src="../imgs/return-icon.svg" alt="" class="return-icon" @click="back_to_page1()"/>
 		</i>
      <h2 class="sign-up-str">註冊帳號</h2>
     <div class="sign-up-layout">
       <div class="input-num">
-        <input id="手機號碼" class="input-text-num" placeholder="手機號碼" v-model="mob" v-on:change="changeHandler()" autocomplete="tel"  />
+        <input id="手機號碼" class="input-text-num" placeholder="手機號碼" type="tel" v-model="mob" v-on:change="changeHandler()" autocomplete="tel" pattern="\+886\d{9}|0\d{9}|886\d{9}"  />
       </div>
       <!-- <ion-button @click="sendOTP()">
           寄送登入密碼到手機
         </ion-button> -->
       <div class="input-ver-code">
-        <input id="OTP" placeholder="驗證碼" class="input-text-num"  v-model="otp" autocomplete="one-time-code"/>
+        <input id="OTP" type="number" placeholder="驗證碼" class="input-text-num"  v-model="otp" autocomplete="one-time-code"/>
       </div>
       <div class="login-btn-item">
         <button type="button" class="login-btn" @click="verify_password()">登入</button>
@@ -45,13 +45,15 @@ export default {
 
   methods: {
     changeHandler(){
-      if(this.mob.length==10 & this.fetch_send_otp_count<2){
-        this.sendOTP()
+      if (this.mob.slice(0,4)==='+886'){this.mob='0'+this.mob.slice(4)}
+      else if (this.mob.slice(0,3)==='886'){this.mob='0'+this.mob.slice(3)}
+
+      if(this.mob.length===10 && this.fetch_send_otp_count<2){
+        this.sendOTP(this.mob)
         this.fetch_send_otp_count++
       }
     },
-    sendOTP: function () {
-      const mob = document.getElementById('手機號碼').value
+    sendOTP: function (mob) {
       var formdata = new FormData();
       formdata.append("mob", mob);
 
@@ -178,6 +180,9 @@ export default {
             return response
           })
     },
+    back_to_page1(){
+      router.replace('/').then(()=>{window.location.reload()})
+    }
   },
     async mounted(){
       const delay = ms => new Promise(res => setTimeout(res, ms));
