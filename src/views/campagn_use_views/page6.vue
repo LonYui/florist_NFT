@@ -17,7 +17,7 @@
 	import "./page6.css";
   import router from "../../router";
   import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
-  import {toastController} from '@ionic/vue';
+  import {toastController,loadingController} from '@ionic/vue';
 	export default {
 		name: "page6",
     mixins:[facebookSDK,],
@@ -74,6 +74,14 @@
 
     },
   async mounted(){
+    const loading = await loadingController
+        .create({
+          cssClass: 'my-custom-class',
+          message: '載入中',
+          duration: 9999*1000,
+        });
+    await loading.present();
+
     const delay = ms => new Promise(res => setTimeout(res, ms));
     await delay(1000);
 
@@ -94,6 +102,7 @@
 
     // render toast
     this.openToast()
+    loading.dismiss()
   },
   };
 </script>

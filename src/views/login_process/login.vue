@@ -22,9 +22,11 @@
 </template>
 
 <script >
-// import {
+import {
+  loadingController,
 //   IonTextarea,IonButton,
-//   IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
+//   IonPage, IonHeader, IonToolbar, IonTitle, IonContent
+  } from '@ionic/vue';
 import router from "../../router";
 import "./login.css";
 import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
@@ -44,12 +46,29 @@ export default {
   },
 
   methods: {
-    changeHandler(){
+    async changeHandler(){
       if (this.mob.slice(0,4)==='+886'){this.mob='0'+this.mob.slice(4)}
       else if (this.mob.slice(0,3)==='886'){this.mob='0'+this.mob.slice(3)}
 
       if(this.mob.length===10 && this.fetch_send_otp_count<2){
-        this.sendOTP(this.mob)
+        const loading = await loadingController
+            .create({
+              cssClass: 'my-custom-class',
+              message: '寄送簡訊到:'+this.mob,
+              duration: 9999*1000,
+            });
+
+        await loading.present();
+
+        const response = await this.sendOTP(this.mob)
+        loading.dismiss()
+          if (response.status === 200) {
+            null
+          } else if (response.status === 422) {
+            response.text().then(result => alert(result))
+          } else if (response.status === 502) {
+            alert('server warm up, so time out. plz resend')
+          }
         this.fetch_send_otp_count++
       }
     },
@@ -63,17 +82,8 @@ export default {
         redirect: 'follow'
       };
 
-      fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/send-OTP`, requestOptions)
-          .then(response => {
-            if (response.status === 200) {
-              alert('sended to ' + mob)
-            } else if (response.status === 422) {
-              response.text().then(result => alert(result))
-            } else if (response.status === 502) {
-              alert('server warm up, so time out. plz resend')
-            }
-          })
-          .catch(error => console.log('error', error));
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/send-OTP`, requestOptions)
+          .then(response => {return response})
 
     },
     fetch_verify_OTP({mob, otp, facebook_user_id, gender,birthday,fb_name,email,image_url}={}){
