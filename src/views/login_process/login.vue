@@ -12,7 +12,7 @@
           寄送登入密碼到手機
         </ion-button> -->
       <div class="input-ver-code">
-        <input id="OTP" type="number" placeholder="驗證碼" class="input-text-num"  v-model="otp" autocomplete="one-time-code"/>
+        <input id="OTP" type="text" placeholder="驗證碼" class="input-text-num"  v-model="otp" autocomplete="one-time-code" pattern="\d*" />
       </div>
       <div class="login-btn-item">
         <button type="button" class="login-btn" @click="verify_password()">登入</button>

@@ -37,6 +37,7 @@ img{
 }
 
 .fb-icon {
+  position: absolute;
   bottom: 0;
   top: 1px;
   right: 0;
