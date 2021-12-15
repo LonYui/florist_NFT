@@ -47,6 +47,7 @@ export default {
 
   methods: {
     async changeHandler(){
+      this.mob = this.mob.trim()
       if (this.mob.slice(0,4)==='+886'){this.mob='0'+this.mob.slice(4)}
       else if (this.mob.slice(0,3)==='886'){this.mob='0'+this.mob.slice(3)}
 
