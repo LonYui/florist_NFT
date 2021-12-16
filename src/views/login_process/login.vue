@@ -148,7 +148,16 @@ export default {
       }
 
     },
-    verify_password() {
+    async verify_password() {
+      const loading = await loadingController
+          .create({
+            cssClass: 'my-custom-class',
+            message: '登入中',
+            duration: 9999*1000,
+          });
+
+      await loading.present();
+
       var facebook_user_id
       const _this = this
       // api a
@@ -175,6 +184,8 @@ export default {
                 image_url: image_url,
               }).then(response_c => {
                 _this.callback_of_verify_password_api3_doing_saveCookie_and_updateMainfest(response_c)
+                //end the loading img
+                loading.dismiss()
               })
             }
         )
