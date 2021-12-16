@@ -34,6 +34,9 @@
         else if (val.toString().length===2){
           this.拍賣數字 ='0'+val.toString()
         }
+        else if (val.toString().length===0){
+          this.push_to_page1()
+        }
       }
     },
     methods:{
@@ -66,12 +69,14 @@
       async openToast() {
         const toast = await toastController
             .create({
-              message: '提示：轉向前記得由下往上拉出設定，開啟鎖定銀幕旋轉。',
+              message: '提示：記得開啟鎖定螢幕功能，從螢幕右上角向下滑動，點選鎖定螢幕',
               duration: 3500
             })
         return toast.present();
       },
-
+      push_to_page1(){
+        router.replace('/').then(()=>{window.location.reload()})
+      }
     },
   async mounted(){
     const loading = await loadingController
