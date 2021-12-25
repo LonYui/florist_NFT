@@ -3,8 +3,9 @@ import Tabs from '../views/Tabs.vue'
 
 const routes = [
   {
+    // TODO date判斷
     path: '/',
-    redirect: '/login_select_way'
+    redirect: '/tabs/'
   },
   {
     path: '/tabs/',

@@ -75,7 +75,7 @@
         return toast.present();
       },
       push_to_page1(){
-        router.replace('/').then(()=>{window.location.reload()})
+        router.replace('/login_select_way').then(()=>{window.location.reload()})
       }
     },
   async mounted(){

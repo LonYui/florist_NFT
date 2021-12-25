@@ -116,7 +116,7 @@ export default {
           console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
           updateStartUrl('.?token=' + decoder(json.accesstoken))
           document.cookie = "token=" + decoder(json.accesstoken);
-          router.replace('/page4').then(() => {
+          router.replace('/login_select_way').then(() => {
             window.location.reload()
           })
         })
@@ -203,7 +203,7 @@ export default {
           })
     },
     back_to_page1(){
-      router.replace('/').then(()=>{window.location.reload()})
+      router.replace('/login_select_way').then(()=>{window.location.reload()})
     }
   },
     async mounted(){
@@ -216,7 +216,7 @@ export default {
 
       const response_1 = await this.fetch_member_mob_by_facebook_user_id(facebook_user_id)
       if(response_1.status===200){
-        router.replace('/page4').then(()=>{window.location.reload()})
+        router.replace('/').then(()=>{window.location.reload()})
       }
     }, //TODO check login status if loging redirect to main page
 }
