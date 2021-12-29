@@ -69,6 +69,10 @@ const routes = [
   {
     path:'/receipt',
     component: () => import('@/views/comment_process/Receipt.vue')
+  },
+  {
+    path:'/web_camera',
+    component: () => import('@/views/comment_process/web_camera.vue')
   }
 
 ]
