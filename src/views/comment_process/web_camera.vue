@@ -10,12 +10,15 @@
       <div class="output" v-show="is_show_picture">
         <img id="photo" alt="The screen capture will appear in this box." src="">
       </div>
+      <button @click="scanner()">Scan photo</button>
+      <div id="result"></div>
     </IonContent>
   </IonPage>
 </template>
 
 <script>
 import {IonPage,  IonContent} from '@ionic/vue';
+import { BrowserQRCodeReader  } from '@zxing/library';
 
 export default {
   name: "web_camera",
@@ -60,7 +63,18 @@ export default {
 
       var data = this.dom_canvas.toDataURL('image/png');
       this.dom_photo.setAttribute('src', data);
-    }
+    },
+    scanner(){
+      const reader = new BrowserQRCodeReader();
+
+      reader.decodeFromImage(this.dom_photo).then((result) => {
+        console.log(result)
+        document.getElementById('result').textContent = result.text
+      }).catch((err) => {
+        console.error(err)
+        document.getElementById('result').textContent = err
+      })
+    },
   },
   watch:{
     'toggle_camera_output': function (val){
@@ -75,9 +89,7 @@ export default {
     }
   },
   mounted(){
-    // var width = 320;    // We will scale the photo width to this
-    // var height = 0;     // This will be computed based on the input stream
-
+// init camera
     var streaming = false;
 
     this.dom_video = document.getElementById('video');
@@ -85,7 +97,7 @@ export default {
     this.dom_photo = document.getElementById('photo');
     this.dom_startbutton = document.getElementById('startbutton');
     const _this = this
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'}, audio: false })
         .then(function(stream) {
           _this.dom_video.srcObject = stream;
           _this.dom_video.play();
