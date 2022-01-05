@@ -3,26 +3,28 @@
     <IonContent>
       <div class="camera" v-show="is_show_camera">
         <video id="video">Video stream not available.</video>
-        <button id="startbutton">Take photo</button>
-        <button @click="clearphoto()">Clear photo</button>
+        <IonButton id="startbutton">Take photo</IonButton>
+        <IonButton @click="clearphoto()">Clear photo</IonButton>
       </div>
       <canvas id="canvas"></canvas>
       <div class="output" v-show="is_show_picture">
         <img id="photo" alt="The screen capture will appear in this box." src="">
       </div>
-      <button @click="scanner()">Scan photo</button>
-      <div id="result"></div>
+      <IonButton @click="scanner()">Scan photo</IonButton>
+      <div >{{qr_code_str}}</div>
+      <IonButton @click="verify_restaurant()">verify restaruant</IonButton>
     </IonContent>
   </IonPage>
 </template>
 
 <script>
-import {IonPage,  IonContent} from '@ionic/vue';
+import {IonPage,  IonContent, IonButton} from '@ionic/vue';
 import { BrowserQRCodeReader  } from '@zxing/library';
+import router from "@/router";
 
 export default {
   name: "web_camera",
-  components:{IonPage,  IonContent},
+  components:{IonPage,  IonContent, IonButton},
   data() {
     return {
       is_show_camera:true,
@@ -37,6 +39,7 @@ export default {
       height:0,
 
       toggle_camera_picture:'camera_mode',
+      qr_code_str : ''
     }
   },
   methods: {
@@ -66,15 +69,39 @@ export default {
     },
     scanner(){
       const reader = new BrowserQRCodeReader();
-
+      const _this = this
       reader.decodeFromImage(this.dom_photo).then((result) => {
         console.log(result)
-        document.getElementById('result').textContent = result.text
+        _this.qr_code_str = result.text
       }).catch((err) => {
         console.error(err)
-        document.getElementById('result').textContent = err
+        _this.qr_code_str = err
       })
     },
+    verify_restaurant(){
+      // 1Get 發票開立日期,賣方名稱,賣方營業人統編 By request Taiwan GOV receipt API- 查詢發票明細
+
+
+
+      // 2Get 餐廳名稱 by call CCB api GET restaurant/<restaurant_id>
+
+      // 3比對資料1：賣方名稱&餐廳名稱
+      //   賣方名稱 和 餐廳名稱 符合則通過#end
+      //   不符合 -> 進行比對2
+
+      //4 Get 公司名稱 by call CCB api GET company/<賣方營業人統編>
+
+      //5 比對資料2：公司名稱&餐廳名稱
+      // 公司名稱&餐廳名稱 符合則通過驗證#end
+      // 不符合 -> 不通過驗證#end
+
+        this.push_to_comment_page()
+      return true
+    },
+    push_to_comment_page(){
+      router.push('/create_comment'+'?qr_code_str='+this.qr_code_str).then(()=>{window.location.reload()})
+    },
+
   },
   watch:{
     'toggle_camera_output': function (val){

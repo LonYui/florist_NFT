@@ -73,7 +73,16 @@ const routes = [
   {
     path:'/web_camera',
     component: () => import('@/views/comment_process/web_camera.vue')
-  }
+  },
+  {
+    path:'/create_comment',
+    component: () => import('@/views/comment_process/create_comment.vue'),
+    props: route => ({ qr_code_str: route.query.qr_code_str })
+  },
+  {
+    path:'/scan_receipt',
+    component: () => import('@/views/comment_process/web_camera.vue')
+  },
 
 ]
 

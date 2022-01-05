@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>{{ 餐廳名稱 }}</ion-title>
+        <ion-title>{{ 餐廳名稱 }}</ion-title> <IonButton @click="push_to_scan_receipt()">評論</IonButton>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
@@ -115,7 +115,7 @@
 <script>
 import {
   IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSlides, IonSlide,IonSegmentButton, IonSegment
-  , IonCol, IonIcon, IonLabel, IonChip
+  , IonCol, IonIcon, IonLabel, IonChip,IonButton
 } from '@ionic/vue';
 import {
   arrowRedoOutline,
@@ -126,13 +126,13 @@ import {
   shareOutline
 } from "ionicons/icons";
 import TabOverview from "../components/tab1/TabOverview";
-
+import router from "../router";
 export default {
   name: 'Restaurant',
   components: {
     TabOverview,
     IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonSlides, IonSlide, IonSegmentButton, IonSegment,
-    IonCol, IonIcon, IonLabel, IonChip
+    IonCol, IonIcon, IonLabel, IonChip,IonButton
   },
   data() {
     return {
@@ -205,6 +205,11 @@ export default {
 
     }
   },
-  methods: {},
+  methods: {
+    push_to_scan_receipt(){
+      router.replace('/scan_receipt').then(()=>{window.location.reload()})
+
+    }
+  },
 }
 </script>
