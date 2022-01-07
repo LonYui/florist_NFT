@@ -17,19 +17,23 @@ const routes = [
       },
       {
         path: 'tab0',
-        component: () => import('@/views/Tab0.vue')
+        component: () => import('@/views/Tab0.vue'),
+        props: route => ({ mob: route.query.mob })
       },
       {
         path: 'tab1',
-        component: () => import('@/views/Tab1.vue')
+        component: () => import('@/views/Tab1.vue'),
+        props: route => ({ mob: route.query.mob })
       },
       {
         path: 'tab2',
-        component: () => import('@/views/Tab2.vue')
+        component: () => import('@/views/Tab2.vue'),
+        props: route => ({ mob: route.query.mob })
       },
       {
         path: 'tab3',
-        component: () => import('@/views/Tab3.vue')
+        component: () => import('@/views/Tab3.vue'),
+        props: route => ({ mob: route.query.mob })
       }
 
     ]
