@@ -13,34 +13,31 @@
     </IonList>
     評論
     <IonTextarea v-model="評論文字"></IonTextarea>
-    <IonButton>創建評論</IonButton>
+    <IonButton @click="create_review()">創建評論</IonButton>
   </IonContent>
 </IonPage>
 </template>
 
 <script>
 import {IonPage,  IonContent, IonButton, IonItem,IonList, IonTextarea} from '@ionic/vue';
-import { useRoute } from 'vue-router'
 
 export default {
   name: "create_comment",
   components:{IonPage,  IonContent, IonButton , IonList, IonItem, IonTextarea},
   data(){
-    const route = useRoute()
     var data_object = {
       評論文字:'',
-      qr_code_str:route.query.qr_code_str
     }
     for (let i = 0; i < 6; i++) {
       data_object[`指標${i+1}星星`] = '☆☆☆☆☆'
     }
     return data_object
   },
+  props:['place_id','mob','qr_code_str'],
   methods:{
     click_star(index_num, star){
       get_x_star_string(star)
       this[`指標${index_num}星星`] = get_x_star_string(star)
-      return
       function get_x_star_string(x){
         if( x === 0)return '☆☆☆☆☆'
         else if( x === 1)return '☆☆☆☆★'
@@ -49,7 +46,28 @@ export default {
         else if( x === 4)return '☆★★★★'
         else if( x === 5)return '★★★★★'
       }
+    },
+    fetch_put_create_reveiw(){
+      var formdata = new FormData();
+      formdata.append("indexs", "[{\"name\": \"testindex1\", \"point\": 1}, {\"name\": \"testindex2\", \"point\": 2}]");
+      formdata.append("reviewer_id", this.mob);
+      formdata.append("restaurant_id", this.place_id);
+      formdata.append("text", this.評論文字);
+      formdata.append("qr_code", this.qr_code_str);
+
+      var requestOptions = {
+        method: 'PUT',
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      return fetch("https://ccb-rock-backed-dev.herokuapp.com/review/create", requestOptions)
+    },
+    create_review(){
+      this.fetch_put_create_reveiw().then( response =>{
+        console.log(response.status)
+          })
     }
-  }
+  },
 }
 </script>

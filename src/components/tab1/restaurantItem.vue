@@ -1,5 +1,5 @@
 <template>
-  <ion-item v-bind:href='"/restaurant/"+ placeId'>
+  <ion-item v-bind:href='`/restaurant/${placeId}?mob=${mob}`'>
     <ion-avatar slot="end">
       <img v-bind:src="imageUrls[0]" alt="抓不到圖片">
     </ion-avatar>
@@ -34,10 +34,8 @@ export default {
     '評論數量',
     // '價位',爬蟲爬不到
     '餐廳類型',
-    '地址'],
+    '地址',
+    'mob',
+  ],
 }
 </script>
-
-<style scoped>
-
-</style>

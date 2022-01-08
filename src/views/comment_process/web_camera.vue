@@ -42,6 +42,7 @@ export default {
       qr_code_str : ''
     }
   },
+  props:['place_id','mob'],
   methods: {
     takepicture() {
       const width = this.width
@@ -99,7 +100,7 @@ export default {
       return true
     },
     push_to_comment_page(){
-      router.push('/create_comment'+'?qr_code_str='+this.qr_code_str).then(()=>{window.location.reload()})
+      router.push(`/create_comment?qr_code_str=${this.qr_code_str}&place_id=${this.place_id}&mob=${this.mob}`).then(()=>{window.location.reload()})
     },
 
   },

@@ -177,6 +177,7 @@ export default {
       },
     }
   },
+  props:['mob'],
   setup() {
     const slideOpts = {slidesPerView: 'auto', zoom: false, grabCursor: true};
     return {
@@ -207,8 +208,7 @@ export default {
   },
   methods: {
     push_to_scan_receipt(){
-      router.replace('/scan_receipt').then(()=>{window.location.reload()})
-
+      router.push(`/scan_receipt?mob=${this.mob}&place_id=${this.placeId}`)
     }
   },
 }

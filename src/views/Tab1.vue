@@ -24,6 +24,7 @@
             :價位="restaurant.價位"
             :餐廳類型="restaurant.餐廳類型"
             :地址="restaurant.地址"
+            :mob="mob"
         />
       </ion-list>
     </ion-content>
@@ -108,6 +109,7 @@ export default  {
       restaurants:deafaultRestaurants,
     }
   },
+  props:['mob'],
   methods: {
     searchRestaurant: function () {
       const tag = document.getElementsByTagName('ion-searchbar')[0].value

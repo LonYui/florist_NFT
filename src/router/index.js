@@ -13,7 +13,7 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: '/tabs/tab1'
+        redirect: '/tabs/tab0'
       },
       {
         path: 'tab0',
@@ -68,7 +68,8 @@ const routes = [
   },
   {
     path: '/restaurant/:placeId',
-    component: () => import('@/views/Restaurant.vue')
+    component: () => import('@/views/Restaurant.vue'),
+    props: route => ({ mob: route.query.mob })
   },
   {
     path:'/receipt',
@@ -81,11 +82,12 @@ const routes = [
   {
     path:'/create_comment',
     component: () => import('@/views/comment_process/create_comment.vue'),
-    props: route => ({ qr_code_str: route.query.qr_code_str })
+    props: route => ({  mob: route.query.mob , place_id:route.query.place_id ,qr_code_str: route.query.qr_code_str })
   },
   {
     path:'/scan_receipt',
-    component: () => import('@/views/comment_process/web_camera.vue')
+    component: () => import('@/views/comment_process/web_camera.vue'),
+    props: route => ({ mob: route.query.mob , place_id:route.query.place_id })
   },
   {
     path:'/chat',
