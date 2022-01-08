@@ -87,6 +87,11 @@ const routes = [
     path:'/scan_receipt',
     component: () => import('@/views/comment_process/web_camera.vue')
   },
+  {
+    path:'/chat',
+    component: () => import('@/views/chat.vue'),
+    props: route => ({ mob: route.query.mob })
+  },
 
 ]
 
