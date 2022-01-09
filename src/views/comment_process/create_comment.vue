@@ -3,7 +3,7 @@
   <IonContent>
     <IonList>
       <indexItem v-for="index in indexs" v-bind:key="index.name"
-                 :name="index.name" :value="index.value"
+                 :name="index.name" :point="index.point"
                  @click_star="click_star"
       ></indexItem>
     </IonList>
@@ -24,12 +24,12 @@ export default {
     return {
       評論文字:'',
       indexs:[
-          {name:'testindex1',value:0},
-          {name:'testindex2',value:0},
-          {name:'testindex3',value:0},
-          {name:'testindex4',value:0},
-          {name:'testindex5',value:0},
-          {name:'testindex6',value:0},
+          {name:'testindex1',point:0},
+          {name:'testindex2',point:0},
+          {name:'testindex3',point:0},
+          {name:'testindex4',point:0},
+          {name:'testindex5',point:0},
+          {name:'testindex6',point:0},
       ]
     }
 
@@ -38,11 +38,11 @@ export default {
   methods:{
     click_star(name, star){
       var result = this.indexs.find(index=>index.name===name)
-      result.value = star
+      result.point = star
     },
     fetch_put_create_reveiw(){
       var formdata = new FormData();
-      formdata.append("indexs", "[{\"name\": \"testindex1\", \"point\": 1}, {\"name\": \"testindex2\", \"point\": 2}]");
+      formdata.append("indexs", JSON.stringify(this.indexs));
       formdata.append("reviewer_id", this.mob);
       formdata.append("restaurant_id", this.place_id);
       formdata.append("text", this.評論文字);
