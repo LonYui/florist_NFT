@@ -2,14 +2,10 @@
 <IonPage>
   <IonContent>
     <IonList>
-      <IonItem v-for="index in [1,2,3,4,5,6]" v-bind:key="index">
-        指標{{index}} -
-        <IonButton @click="click_star(index,5)">{{this[`指標${index}星星`][0]}}</IonButton>
-        <IonButton @click="click_star(index,4)">{{this[`指標${index}星星`][1] }}</IonButton>
-        <IonButton @click="click_star(index,3)">{{this[`指標${index}星星`][2] }}</IonButton>
-        <IonButton @click="click_star(index,2)">{{this[`指標${index}星星`][3] }}</IonButton>
-        <IonButton @click="click_star(index,1)">{{this[`指標${index}星星`][4] }}</IonButton>
-      </IonItem>
+      <indexItem v-for="index in indexs" v-bind:key="index.name"
+                 :name="index.name" :value="index.value"
+                 @click_star="click_star"
+      ></indexItem>
     </IonList>
     評論
     <IonTextarea v-model="評論文字"></IonTextarea>
@@ -19,33 +15,30 @@
 </template>
 
 <script>
-import {IonPage,  IonContent, IonButton, IonItem,IonList, IonTextarea} from '@ionic/vue';
-
+import {IonPage,  IonContent, IonButton, IonList, IonTextarea} from '@ionic/vue';
+import indexItem from '@/components/comment_process/indexItem.vue'
 export default {
   name: "create_comment",
-  components:{IonPage,  IonContent, IonButton , IonList, IonItem, IonTextarea},
+  components:{IonPage,  IonContent, IonButton , IonList,  IonTextarea,indexItem},
   data(){
-    var data_object = {
+    return {
       評論文字:'',
+      indexs:[
+          {name:'testindex1',value:0},
+          {name:'testindex2',value:0},
+          {name:'testindex3',value:0},
+          {name:'testindex4',value:0},
+          {name:'testindex5',value:0},
+          {name:'testindex6',value:0},
+      ]
     }
-    for (let i = 0; i < 6; i++) {
-      data_object[`指標${i+1}星星`] = '☆☆☆☆☆'
-    }
-    return data_object
+
   },
   props:['place_id','mob','qr_code_str'],
   methods:{
-    click_star(index_num, star){
-      get_x_star_string(star)
-      this[`指標${index_num}星星`] = get_x_star_string(star)
-      function get_x_star_string(x){
-        if( x === 0)return '☆☆☆☆☆'
-        else if( x === 1)return '☆☆☆☆★'
-        else if( x === 2)return '☆☆☆★★'
-        else if( x === 3)return '☆☆★★★'
-        else if( x === 4)return '☆★★★★'
-        else if( x === 5)return '★★★★★'
-      }
+    click_star(name, star){
+      var result = this.indexs.find(index=>index.name===name)
+      result.value = star
     },
     fetch_put_create_reveiw(){
       var formdata = new FormData();
