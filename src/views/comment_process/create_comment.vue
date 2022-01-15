@@ -59,6 +59,9 @@ export default {
     create_review(){
       this.fetch_put_create_reveiw().then( response =>{
         console.log(response.status)
+        if(response.status===200){
+          alert('成功新增')
+        }
           })
     }
   },
