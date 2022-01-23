@@ -94,6 +94,11 @@ const routes = [
     component: () => import('@/views/chat.vue'),
     props: route => ({ mob: route.query.mob })
   },
+  {
+    path:'/sale/:contract_address',
+    component: () => import('@/views/Sale_detail.vue'),
+    props: route => ({ token_id: route.query.token_id })
+  }
 
 ]
 
