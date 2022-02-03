@@ -94,9 +94,6 @@ export default {
       };
 
       return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/verify-OTP`, requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
-          .catch(error => console.log('error', error));
     },
     fetch_get_member(uuid){
 
@@ -112,12 +109,12 @@ export default {
       var formdata = new FormData();
       formdata.append("member_id", member_id);
       formdata.append("mob", mob);
-      formdata.append("sexuality", sexuality);
-      formdata.append("username", username);
-      formdata.append("birth_datetime", birth_datetime);
-      formdata.append("mob_country_code", mob_country_code);
-      formdata.append("email", email);
-      formdata.append("image_url", image_url);
+      if(sexuality) formdata.append("sexuality", sexuality);
+      if(username) formdata.append("username", username);
+      if(birth_datetime) formdata.append("birth_datetime", birth_datetime);
+      if(mob_country_code) formdata.append("mob_country_code", mob_country_code);
+      if(email) formdata.append("email", email);
+      if(image_url) formdata.append("image_url", image_url);
 
       var requestOptions = {
         method: 'POST',
@@ -167,7 +164,7 @@ export default {
                         mob_country_code:_this.mob_country_code,email:email,image_url:image_url
                       }).then(response_e=>{
                         if (response_e.status===200){
-                          router.replace('/login_select_way').then(() => {
+                          router.replace('/').then(() => {
                             //end2 the loading img
                             loading.dismiss()
                             window.location.reload()
@@ -184,7 +181,7 @@ export default {
                       })
                     }
                     else if(response_d.status===200) {
-                      router.replace('/login_select_way').then(() => {
+                      router.replace('/').then(() => {
                         //end1 the loading img
                         loading.dismiss()
                         window.location.reload()
@@ -204,17 +201,6 @@ export default {
         )
       });
     },
-    fetch_member_mob_by_facebook_user_id(facebook_user_id){
-      var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-
-      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member_mob_by_facebook_user_id?facebook_user_id=${facebook_user_id}`, requestOptions)
-          .then(response => {
-            return response
-          })
-    },
     back_to_page1(){
       router.replace('/login_select_way').then(()=>{window.location.reload()})
     }
@@ -227,10 +213,13 @@ export default {
         facebook_user_id = response.authResponse.userID
       });
 
-      const response_1 = await this.fetch_member_mob_by_facebook_user_id(facebook_user_id)
-      if(response_1.status===200){
-        router.replace('/').then(()=>{window.location.reload()})
-      }
+      this.fetch_get_member(facebook_user_id).then(response=> {
+        if (response.status === 200) {
+          router.replace('/').then(() => {
+            window.location.reload()
+          })
+        }
+      })
     }, //TODO check login status if loging redirect to main page
 }
 </script>

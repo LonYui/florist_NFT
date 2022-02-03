@@ -67,6 +67,7 @@ export default {
   data(){
     return {
         mob: null,
+        member_id: null,
     }
   },
   setup() {
@@ -104,8 +105,8 @@ export default {
 
   },
   watch: {
-    'mob': function (val) {
-      if (val===undefined){
+    'member_id': function (val) {
+      if (member_id===undefined){
         this.push_to_page1()
       }
     }
@@ -115,15 +116,9 @@ export default {
     const delay = ms => new Promise(res => setTimeout(res, ms));
     await delay(1300);
 
-    var facebook_user_id
     await this.FB.getLoginStatus(function(response) {
-      facebook_user_id = response.authResponse.userID
+      this.member_id = response.authResponse.userID
     });
-
-    const response_1 = await this.fetch_member_mob_by_facebook_user_id(facebook_user_id)
-    await response_1.json().then(json=>{
-      this.mob = json.mob
-    })
   }
 
 }
