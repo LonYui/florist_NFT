@@ -5,17 +5,7 @@
         <IonIcon slot="end" :icon="cameraOutline"></IonIcon>
         掃描發票
       </IonButton>
-      <br/>
-      日期:{{ 日期 }}
-      <br/>
-      金額:{{金額}}
-      <br/>
-      統一編號:{{統一編號}}
-      <ul>
-        <li v-for="item in 消費清單" :key="item.name">
-          {{ item.name }} - {{ item.price }}
-        </li>
-      </ul>
+
 
       <IonButton>
         驗證發票
