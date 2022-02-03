@@ -24,8 +24,6 @@
 <script >
 import {
   loadingController,
-//   IonTextarea,IonButton,
-//   IonPage, IonHeader, IonToolbar, IonTitle, IonContent
   } from '@ionic/vue';
 import router from "../../router";
 import "./login.css";
@@ -33,14 +31,11 @@ import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
 export default {
   name: 'Login',
   mixins:[facebookSDK,],
-  // components: {
-  //   IonTextarea, IonButton,
-  //   IonHeader, IonToolbar, IonTitle, IonContent, IonPage
-  // },
   data(){
     return {
       otp:"",
       mob:"",
+      mob_country_code:'886',
       fetch_send_otp_count:0,
     }
   },
@@ -87,66 +82,50 @@ export default {
           .then(response => {return response})
 
     },
-    fetch_verify_OTP({mob, otp, facebook_user_id, gender,birthday,fb_name,email,image_url}={}){
+    fetch_verify_OTP({mob, otp}={}){
       var formdata = new FormData();
       formdata.append("mob", mob);
       formdata.append("password", otp);
-      formdata.append("facebook_user_id", facebook_user_id);
-
-      formdata.append('gender',gender)
-      formdata.append('birthday',birthday)
-      formdata.append('fb_name', fb_name)
-      formdata.append('email',email)
-      formdata.append('image_url',image_url)
-
 
       var requestOptions = {
         method: 'PUT',
         body: formdata,
         redirect: 'follow'
       };
+
       return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/verify-OTP`, requestOptions)
-          .then(response => {
-            return response
-          })
-      },
-    callback_of_verify_password_api3_doing_saveCookie_and_updateMainfest(response){
-      if (response.status === 200) {
-        response.json().then(json => {
-          console.info('get token and set to cookie[token]' + decoder(json.accesstoken))
-          updateStartUrl('.?token=' + decoder(json.accesstoken))
-          document.cookie = "token=" + decoder(json.accesstoken);
-          router.replace('/login_select_way').then(() => {
-            window.location.reload()
-          })
-        })
-      }
-      else if (response.status === 401) {
-        response.json().then(json => {
-          alert(json.message)
-        })
-      }
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
+    },
+    fetch_get_member(uuid){
 
-      function decoder(encode_token) {
-        return encode_token.slice(0, -7)
-      }
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
 
-      function updateStartUrl(url) {
-        var myDynamicManifest = {
-          "name": "ccb-rocks-prod",
-          "theme_color": "#4DBA87",
-          "start_url": ".",
-          "display": "standalone",
-          "background_color": "#000000"
-        }
-        // TODO can't read the start url, now start url = current url .
-        myDynamicManifest.start_url = url
-        const stringManifest = JSON.stringify(myDynamicManifest);
-        const blob = new Blob([stringManifest], {type: 'application/json'});
-        const manifestURL = URL.createObjectURL(blob);
-        document.querySelector('#my-manifest-placeholder').setAttribute('href', manifestURL);
-      }
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member/read?member_id=${uuid}`, requestOptions)
+    },
+    fetch_post_member({member_id,mob,sexuality,username,birth_datetime,mob_country_code,email,image_url}={}){
 
+      var formdata = new FormData();
+      formdata.append("member_id", member_id);
+      formdata.append("mob", mob);
+      formdata.append("sexuality", sexuality);
+      formdata.append("username", username);
+      formdata.append("birth_datetime", birth_datetime);
+      formdata.append("mob_country_code", mob_country_code);
+      formdata.append("email", email);
+      formdata.append("image_url", image_url);
+
+      var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member/create`, requestOptions)
     },
     async verify_password() {
       const loading = await loadingController
@@ -167,25 +146,59 @@ export default {
         _this.FB.api(
             `/${facebook_user_id}/`,{  fields: 'name, email, picture' },
             function (response_b) {
-              var gender,fb_name,birthday,email,image_url
+              var sexuality,username,birth_datetime,email,image_url
               if (response_b && !response_b.error) {
-                gender = response_b.gender
-                birthday = response_b.birthday
-                fb_name = response_b.name
+                sexuality = response_b.gender //Note diff naem  in our is sexyality in fb is gender
+                birth_datetime = response_b.birthday
+                username = response_b.name
                 email = response_b.email
                 image_url = response_b.picture.data.url
               }
               // api c
               _this.fetch_verify_OTP({
                 mob: _this.mob, otp: _this.otp,
-                facebook_user_id: facebook_user_id,
-                gender:gender,birthday:birthday,
-                fb_name: fb_name,email:email,
-                image_url: image_url,
               }).then(response_c => {
-                _this.callback_of_verify_password_api3_doing_saveCookie_and_updateMainfest(response_c)
-                //end the loading img
-                loading.dismiss()
+                if (response_c.status === 200) {
+                  //check user exist if not create
+                  _this.fetch_get_member(facebook_user_id).then(response_d=>{
+                    if (response_d.status===404){
+                      _this.fetch_post_member({member_id:facebook_user_id,mob:_this.mob,
+                        sexuality:sexuality,username:username,birth_datetime:birth_datetime,
+                        mob_country_code:_this.mob_country_code,email:email,image_url:image_url
+                      }).then(response_e=>{
+                        if (response_e.status===200){
+                          router.replace('/login_select_way').then(() => {
+                            //end2 the loading img
+                            loading.dismiss()
+                            window.location.reload()
+                          })
+                        }
+                        else {
+                          response_e.json().then(json => {
+                            //end3 the loading img
+                            loading.dismiss()
+                            alert(json.message)
+                          })
+                        }
+
+                      })
+                    }
+                    else if(response_d.status===200) {
+                      router.replace('/login_select_way').then(() => {
+                        //end1 the loading img
+                        loading.dismiss()
+                        window.location.reload()
+                      })
+                    }
+                  })
+                }
+                else if (response_c.status === 401) {
+                  response_c.json().then(json => {
+                    //end4 the loading img
+                    loading.dismiss()
+                    alert(json.message)
+                  })
+                }
               })
             }
         )
