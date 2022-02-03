@@ -13,6 +13,19 @@
       <IonButton @click="scanner()">Scan photo</IonButton>
       <div >{{qr_code_str}}</div>
       <IonButton @click="verify_restaurant()">verify restaruant</IonButton>
+      <IonButton @click="test_fetch()">test fetch receipt</IonButton>
+      <br/>
+      日期:{{ this.receipt.invDate }}
+      <br/>
+      金額:{{total_amount}}
+      <br/>
+      統一編號:{{this.receipt.sellerBan}}
+      <ul>
+        <li v-for="item in this.receipt.details" :key="item.rowNum">
+          {{ item.description }} - {{ item.amount }}
+        </li>
+      </ul>
+
     </IonContent>
   </IonPage>
 </template>
@@ -39,7 +52,36 @@ export default {
       height:0,
 
       toggle_camera_picture:'camera_mode',
-      qr_code_str : ''
+      qr_code_str : 'UP85414770110112840990000008d000000940000000086492052ZIFQ/NIlfVmWWei1V0d0SQ==:**********:1:1:0:test:4.73:31.3',
+      receipt: {
+        "msg": "執行成功",
+        "code": "200",
+        "invNum": "UP85414770",
+        "invoiceTime": "00:39:21",
+        "invStatus": "已確認",
+        "sellerName": "紫陽加油站股份有限公司",
+        "invPeriod": "11012",
+        "sellerAddress": "",
+        "sellerBan": "86492052",
+        "buyerBan": "",
+        "currency": "",
+        "details": [{
+          "unitPrice": "31.3",
+          "amount": "148",
+          "quantity": "4.731",
+          "rowNum": "1",
+          "description": "九五無鉛汽油"
+        }],
+        "invDate": "20211128"
+      }    }
+  },
+  computed:{
+    total_amount(){
+      var amount =  0
+      this.receipt.details.forEach(detail =>{
+        amount = amount + detail['amount']
+      })
+      return amount
     }
   },
   props:['place_id','mob'],
