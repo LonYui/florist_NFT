@@ -18,7 +18,10 @@
       <div @click="openModal('image_url',member['image_url'])"><img style="pointer-events:none"
                 v-bind:src="member['image_url']" alt="抓不到圖片" ></div>
       <IonList>
-        <NFTItem v-for="NFT in NFTs" :key="NFTs.indexOf(NFT)" />
+        <NFTItem v-for="NFT in NFTs" :key="NFTs.indexOf(NFT)"
+                 :address="NFT['contract']['address']"
+                 :token_id="NFT['id']['tokenId']"
+        />
       </IonList>
     </ion-content>
   </ion-page>

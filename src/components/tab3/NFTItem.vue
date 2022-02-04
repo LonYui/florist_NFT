@@ -34,6 +34,14 @@ export default {
         return -1
       }
     }
+  },
+  mounted(){
+    const _this = this
+    this.fetch_NFT_metadata(this.address,this.token_id).then(response => {
+      response.json().then(json => {
+        _this.NFT = json
+      })
+    })
   }
 }
 </script>
