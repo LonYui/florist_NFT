@@ -22,8 +22,13 @@ export let use_member_NFTs = {
         }
     },
     methods:{
-        // fetch_memeber_nft(member_id){
-            
-        // },
+        fetch_memeber_nft(member_id){
+            var requestOptions = {
+                method: 'GET',
+                redirect: 'follow'
+            };
+
+            return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member/nfts?member_id=${member_id}`, requestOptions)
+        },
     }
 }

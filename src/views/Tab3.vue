@@ -80,6 +80,11 @@ export default {
         })
       }
     })
+    this.fetch_memeber_nft(this.member_id).then(response_b=>{
+      response_b.json().then(json=>{
+        _this['NFTs'] = json['NFTs']
+      })
+    })
   }
 }
 </script>
