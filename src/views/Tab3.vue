@@ -19,8 +19,8 @@
                 v-bind:src="member['image_url']" alt="抓不到圖片" ></div>
       <IonList>
         <NFTItem v-for="NFT in NFTs" :key="NFTs.indexOf(NFT)"
-                 :address="NFT['contract']['address']"
-                 :token_id="NFT['id']['tokenId']"
+                 :address="NFT['contract_address']"
+                 :token_id="NFT['token_id']"
         />
       </IonList>
     </ion-content>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, modalController,IonList,IonItem,} from '@ionic/vue';
+import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, modalController,IonList,} from '@ionic/vue';
 import {settingsOutline} from 'ionicons/icons';
 import member_update_modal from '../components/tab3/member_update_modal';
 import NFTItem from '@/components/tab3/NFTItem';
@@ -38,7 +38,7 @@ import router from "@/router";
 
 export default {
   name: 'Tab3',
-  components: {IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButton, IonIcon,IonList,IonItem,NFTItem},
+  components: {IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButton, IonIcon,IonList,NFTItem},
   methods: {
     async openModal(key,val) {
       const modal = await modalController
