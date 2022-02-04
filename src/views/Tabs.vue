@@ -46,17 +46,6 @@ export default {
           })
       return toast.present();
     },
-    fetch_member_mob_by_facebook_user_id(facebook_user_id){
-      var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-
-      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member_mob_by_facebook_user_id?facebook_user_id=${facebook_user_id}`, requestOptions)
-          .then(response => {
-            return response
-          })
-    },
     push_to_page1(){
       router.replace('/login_select_way').then(()=>{window.location.reload()})
     },
@@ -106,7 +95,7 @@ export default {
   },
   watch: {
     'member_id': function (val) {
-      if (member_id===undefined){
+      if (val===undefined || val === null){
         this.push_to_page1()
       }
     }
@@ -116,8 +105,9 @@ export default {
     const delay = ms => new Promise(res => setTimeout(res, ms));
     await delay(1300);
 
+    const _this = this
     await this.FB.getLoginStatus(function(response) {
-      this.member_id = response.authResponse.userID
+      _this.member_id =  response.authResponse ? response.authResponse.userID : undefined
     });
   }
 

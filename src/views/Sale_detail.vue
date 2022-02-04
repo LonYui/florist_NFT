@@ -61,11 +61,6 @@ export default {
           }
         }))
     // TODO fetch the contract from ether scan block by nft api
-    // init TPD js sdk
-    window.TPDirect.setupSDK(123166, 'partner_2ASaDPKoiVGntvKotGblzgrrqolDyNHXCXkuAohWEoLJ1aSmsaa7hlVS', 'sandbox')
-    (function (){
-      this.TPDirect = window.TPDirect
-    })
   },
 }
 </script>
