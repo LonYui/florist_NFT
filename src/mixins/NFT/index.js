@@ -3,104 +3,71 @@ export let use_NFT = {
         return {
             NFT: {
                 "contract": {
-                    "address": "0x3ba8ad37211ad070dca1a5f0a7f1fee6aab3fdc1"
+                    "address": "0xa720a6754b20e1204e77a4f1625410c6e9e8413a"
                 },
                 "id": {
-                    "tokenId": "0x00000000000000000000000000000000000000000000000000000000000000c7",
+                    "tokenId": "222",
                     "tokenMetadata": {
                         "tokenType": "ERC721"
                     }
                 },
-                "title": "#199",
-                "description": "5,555 Stickman X coming to the metaverse",
+                "title": "",
+                "description": "",
                 "tokenUri": {
-                    "raw": "https://nft.aiyah.io/199.json",
-                    "gateway": "https://nft.aiyah.io/199.json"
+                    "raw": "https://metadata.sueibiandao.io/222",
+                    "gateway": "https://metadata.sueibiandao.io/222"
                 },
                 "media": [
                     {
                         "uri": {
-                            "raw": "https://nft.aiyah.io/199.png",
-                            "gateway": "https://nft.aiyah.io/199.png"
+                            "raw": "ipfs://QmYCG7viHB2HXi7yDv12xsudwdHPWWHWghFfdbzb3TdXTN",
+                            "gateway": "https://ipfs.io/ipfs/QmYCG7viHB2HXi7yDv12xsudwdHPWWHWghFfdbzb3TdXTN"
                         }
                     }
                 ],
                 "metadata": {
-                    "name": "#199",
-                    "collection": "Aiyah Verse Stickman X",
-                    "id": "8b2e2fd08974ae30cc1a93303ede504c63beba18",
-                    "description": "5,555 Stickman X coming to the metaverse",
-                    "image": "https://nft.aiyah.io/199.png",
-                    "external_url": "https://nft.aiyah.io/199.png",
-                    "animation_url": "https://nft.aiyah.io/199.png",
+                    "image": "ipfs://QmYCG7viHB2HXi7yDv12xsudwdHPWWHWghFfdbzb3TdXTN",
                     "attributes": [
                         {
-                            "trait_type": "BACKGROUND",
-                            "value": "Wine Red Fluorescent Triangle"
+                            "trait_type": "Background",
+                            "value": "Sueibian Light Purple"
                         },
                         {
-                            "trait_type": "CLOTHES",
-                            "value": "Brown Painted"
+                            "trait_type": "CupBody",
+                            "value": "Sueibian Blue"
                         },
                         {
-                            "trait_type": "HELMET",
-                            "value": "Purple Killzone"
+                            "trait_type": "Texture",
+                            "value": "Sueibian Exclusive Pattern 1"
                         },
                         {
-                            "trait_type": "MASK",
-                            "value": "None"
+                            "trait_type": "CupTop",
+                            "value": "Sueibian Bubble Yellow"
                         },
                         {
-                            "trait_type": "MODELING",
-                            "value": "None"
+                            "trait_type": "Straw",
+                            "value": "Sueibian Yellow"
                         },
                         {
-                            "trait_type": "EYE",
-                            "value": "None"
+                            "trait_type": "Eyes",
+                            "value": "Sueibian Bear Blue"
                         },
                         {
-                            "trait_type": "MOUTH",
-                            "value": "None"
+                            "trait_type": "Head",
+                            "value": "Sueibian Bear White"
                         },
                         {
-                            "trait_type": "HAIR",
-                            "value": "None"
+                            "trait_type": "Face",
+                            "value": "Sueibian Suture 3"
                         },
                         {
-                            "trait_type": "TATTOO",
-                            "value": "None"
-                        },
-                        {
-                            "trait_type": "WEAPON",
-                            "value": "Dagger"
-                        },
-                        {
-                            "trait_type": "VFX",
-                            "value": "None"
+                            "trait_type": "CupBottom",
+                            "value": "Sueibian Planet 4"
                         }
-                    ],
-                    "optionIds": [
-                        "BACKGROUND@Wine Red Fluorescent Triangle",
-                        "BASE@Darkness",
-                        "WEAPON_BACK@Dagger",
-                        "CLOTHES@Brown Painted",
-                        "HELMET@Purple Killzone",
-                        "MASK@None",
-                        "MODELING@None",
-                        "EYE@None",
-                        "MOUTH@None",
-                        "HAIR@None",
-                        "TATTOO@None",
-                        "WEAPON_FRONT@Dagger",
-                        "VFX@None"
-                    ],
-                    "number": 199,
-                    "extension": "png",
-                    "compiler": "AIYAH VERSE"
+                    ]
                 },
-                "timeLastUpdated": "2022-02-04T06:19:45.859Z"
-            }
-        }
+                "timeLastUpdated": "2022-02-04T05:31:50.565Z"
+            }        }
     },
     methods:{
         fetch_NFT_metadata(address,token_id,token_type='erc721'){
