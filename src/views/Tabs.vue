@@ -50,12 +50,11 @@ export default {
       router.replace('/login_select_way').then(()=>{window.location.reload()})
     },
     push_to_tab(tab_num){
-      router.push(`/tabs/tab${tab_num}?mob=${this.mob}`)
+      router.push(`/tabs/tab${tab_num}?member_id=${this.member_id}`)
       },
   },
   data(){
     return {
-        mob: null,
         member_id: null,
     }
   },

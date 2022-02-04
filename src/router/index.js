@@ -33,7 +33,7 @@ const routes = [
       {
         path: 'tab3',
         component: () => import('@/views/Tab3.vue'),
-        props: route => ({ mob: route.query.mob })
+        props: route => ({ member_id: route.query.member_id })
       }
 
     ]

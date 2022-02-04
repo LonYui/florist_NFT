@@ -28,9 +28,10 @@ import {
 import router from "../../router";
 import "./login.css";
 import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
+import {use_member} from "../../mixins/member"
 export default {
   name: 'Login',
-  mixins:[facebookSDK,],
+  mixins:[facebookSDK,use_member],
   data(){
     return {
       otp:"",
@@ -94,35 +95,6 @@ export default {
       };
 
       return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/verify-OTP`, requestOptions)
-    },
-    fetch_get_member(uuid){
-
-      var requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-
-      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member/read?member_id=${uuid}`, requestOptions)
-    },
-    fetch_post_member({member_id,mob,sexuality,username,birth_datetime,mob_country_code,email,image_url}={}){
-
-      var formdata = new FormData();
-      formdata.append("member_id", member_id);
-      formdata.append("mob", mob);
-      if(sexuality) formdata.append("sexuality", sexuality);
-      if(username) formdata.append("username", username);
-      if(birth_datetime) formdata.append("birth_datetime", birth_datetime);
-      if(mob_country_code) formdata.append("mob_country_code", mob_country_code);
-      if(email) formdata.append("email", email);
-      if(image_url) formdata.append("image_url", image_url);
-
-      var requestOptions = {
-        method: 'POST',
-        body: formdata,
-        redirect: 'follow'
-      };
-
-      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member/create`, requestOptions)
     },
     async verify_password() {
       const loading = await loadingController
