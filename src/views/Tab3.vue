@@ -18,21 +18,25 @@
       <div @click="openModal('image_url',member['image_url'])"><img style="pointer-events:none"
                 v-bind:src="member['image_url']" alt="抓不到圖片" ></div>
       <IonList>
+        <IonItem v-for="NFT in NFTs" :key="NFTs.indexOf(NFT)">
+          {{NFT['contract']['address']}} #{{NFT['id']['tokenId']}}
+        </IonItem>
       </IonList>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, modalController,IonList} from '@ionic/vue';
+import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, modalController,IonList,IonItem,} from '@ionic/vue';
 import {settingsOutline} from 'ionicons/icons';
 import member_update_modal from '../components/tab3/member_update_modal';
 import {use_member} from "@/mixins/member"
+import {use_member_NFTs} from "@/mixins/member_NFTs"
 import router from "@/router";
 
 export default {
   name: 'Tab3',
-  components: {IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButton, IonIcon,IonList,},
+  components: {IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButton, IonIcon,IonList,IonItem,},
   methods: {
     async openModal(key,val) {
       const modal = await modalController
@@ -48,7 +52,7 @@ export default {
       return modal.present();
     },
   },
-  mixins:[use_member],
+  mixins:[use_member,use_member_NFTs],
   props: ['member_id'],
   data(){
     return {
