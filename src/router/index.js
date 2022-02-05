@@ -23,7 +23,7 @@ const routes = [
       {
         path: 'tab1',
         component: () => import('@/views/Tab1.vue'),
-        props: route => ({ mob: route.query.mob })
+        props: route => ({ member_id: route.query.member_id })
       },
       {
         path: 'tab2',
@@ -65,11 +65,6 @@ const routes = [
   {
     path: '/page6',
     component: () => import('@/views/campagn_use_views/page6.vue')
-  },
-  {
-    path: '/restaurant/:placeId',
-    component: () => import('@/views/Restaurant.vue'),
-    props: route => ({ mob: route.query.mob })
   },
   {
     path:'/receipt',
