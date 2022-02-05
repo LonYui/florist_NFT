@@ -98,6 +98,10 @@ const routes = [
     path:'/sale/:contract_address',
     component: () => import('@/views/Sale_detail.vue'),
     props: route => ({ token_id: route.query.token_id })
+  },
+  {
+    path: '/spend_how_much',
+    component: () => import('@/views/spend_money/spend_how_much.vue')
   }
 
 ]
