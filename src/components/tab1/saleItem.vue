@@ -3,7 +3,7 @@
     title:{{title}}
     <br/>
     price:{{price}}
-    <IonButton>購買</IonButton>
+    <IonButton @click="openModal()">購買</IonButton>
     <br/>
     discription:{{description}}
     <br/>
@@ -14,11 +14,12 @@
 
 <script>
 import {use_NFT} from "../../mixins/NFT"
-import {IonItem,IonButton} from '@ionic/vue';
+import {IonItem,IonButton,modalController} from '@ionic/vue';
+import ccpoint_spend_modal from '@/components/tab1/ccpoint_spend_modal';
 export default {
   name: "saleItem",
   mixins:[use_NFT],
-  props:['address','token_id','token_type','price','title','description'],
+  props:['address','token_id','token_type','price','title','description','member_id','seller_id'],
   components:{IonItem,IonButton},
   computed:{
     image_url() {
@@ -47,6 +48,21 @@ export default {
         })
       })
     }
+  },
+  methods:{
+    async openModal() {
+      const modal = await modalController.create({
+        component: ccpoint_spend_modal,
+        cssClass: 'my-custom-class',
+        componentProps: {
+          title: this.title,
+          price: this.price,
+          member_id: this.member_id,
+          seller_id: this.seller_id,
+        },
+      });
+      return modal.present();
+    },
   },
   mounted(){
     const _this = this

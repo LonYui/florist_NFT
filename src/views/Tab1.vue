@@ -13,6 +13,7 @@
         <sale-item v-for="sale in sales" :key="sale['sale_id']"
                    :address="sale['address']" :token_id="sale['token_id']"
                    :price="sale['price']" :title="sale['title']" :description="sale['description']"
+                   :seller_id="sale['seller_id']" :member_id="member_id"
         />
       </ion-list>
     </ion-content>
@@ -20,12 +21,12 @@
 </template>
 
 <script>
-import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonList} from '@ionic/vue';
+import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonList} from '@ionic/vue';
 import saleItem from '@/components/tab1/saleItem';
 
 export default {
   name: 'Tab1',
-  components: {IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonSearchbar, IonList,saleItem},
+  components: {IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonList,saleItem},
   data() {
     return {
       sales: [
@@ -34,12 +35,14 @@ export default {
             price:0.05*3000*30,
             address:'0xa720a6754b20e1204e77a4f1625410c6e9e8413a',
             token_id:'0x0000000000000000000000000000000000000000000000000000000000000001',
+            seller_id:'admin'
           },
         {title:'不知道誰送的',
           description:'隨便賣',
           price:0.1*3000*30,
           address:'0x3ba8ad37211ad070dca1a5f0a7f1fee6aab3fdc1',
           token_id:'0x00000000000000000000000000000000000000000000000000000000000000c7',
+          seller_id:'admin'
         },
         ],
     }
