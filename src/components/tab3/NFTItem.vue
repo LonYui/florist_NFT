@@ -35,6 +35,16 @@ export default {
       }
     }
   },
+  watch:{
+    'token_id':function (){
+      const _this = this
+      this.fetch_NFT_metadata(this.address,this.token_id).then(response => {
+        response.json().then(json => {
+          _this.NFT = json
+        })
+      })
+    }
+  },
   mounted(){
     const _this = this
     this.fetch_NFT_metadata(this.address,this.token_id).then(response => {
