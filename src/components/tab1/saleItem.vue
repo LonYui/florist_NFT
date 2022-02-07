@@ -19,7 +19,7 @@ import ccpoint_spend_modal from '@/components/tab1/ccpoint_spend_modal';
 export default {
   name: "saleItem",
   mixins:[use_NFT],
-  props:['address','token_id','token_type','price','title','description','member_id','seller_id'],
+  props:['contract_address','token_id','token_type','price','title','description','member_id','seller_id'],
   components:{IonItem,IonButton},
   computed:{
     image_url() {
@@ -42,7 +42,7 @@ export default {
   watch:{
     'token_id':function (){
       const _this = this
-      this.fetch_NFT_metadata(this.address,this.token_id).then(response => {
+      this.fetch_NFT_metadata(this.contract_address,this.token_id).then(response => {
         response.json().then(json => {
           _this.NFT = json
         })
@@ -66,7 +66,7 @@ export default {
   },
   mounted(){
     const _this = this
-    this.fetch_NFT_metadata(this.address,this.token_id).then(response => {
+    this.fetch_NFT_metadata(this.contract_address,this.token_id).then(response => {
       response.json().then(json => {
         _this.NFT = json
       })
