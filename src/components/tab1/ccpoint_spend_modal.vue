@@ -2,6 +2,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>{{ title }}</ion-title>
+      <IonButton @click="modalController.dismiss()">close</IonButton>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding"> {{ price }} CCpoint
@@ -9,9 +10,9 @@
     sell {{seller_id}}
   <br/>
   buyer {{member_id}}
-  buyer balance : {{buyer_balance}} CCpoint
+  buyer balance : {{member_balance}} CCpoint
     <br/>
-    after purchase balance = {{buyer_balance - price}} CCpoint
+    after purchase balance = {{member_balance - price}} CCpoint
     <br/>
     <IonItem>
       <IonLabel>交易密碼</IonLabel>
@@ -23,7 +24,7 @@
 </template>
 
 <script>
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonInput,IonItem,IonLabel } from '@ionic/vue';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonInput,IonItem,IonLabel ,modalController} from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -81,9 +82,9 @@ export default defineComponent({
   components: { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonInput,IonItem,IonLabel },
   mounted(){
     let _this = this
-    this.fetch_member_ccpoint_balance(this.member_balance).then(response => {
+    this.fetch_member_ccpoint_balance(this.member_id).then(response => {
       response.json().then( json => {
-        _this.member_balance = json['balance']
+        _this['member_balance'] = json['balance']
       })
     })
   },

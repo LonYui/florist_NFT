@@ -54,6 +54,7 @@ export default {
       const modal = await modalController.create({
         component: ccpoint_spend_modal,
         cssClass: 'my-custom-class',
+        swipeToClose: true,
         componentProps: {
           title: this.title,
           price: this.price,
