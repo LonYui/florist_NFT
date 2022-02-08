@@ -59,6 +59,8 @@ export default {
           price: this.price,
           member_id: this.member_id,
           seller_id: this.seller_id,
+          contract_address: this.contract_address,
+          token_id: this.token_id,
         },
       });
       return modal.present();

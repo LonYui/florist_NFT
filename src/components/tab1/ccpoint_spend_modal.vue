@@ -4,19 +4,26 @@
       <ion-title>{{ title }}</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding"> {{ price }}
-  sell {{seller_id}}
+  <ion-content class="ion-padding"> {{ price }} CCpoint
+  <br/>
+    sell {{seller_id}}
   <br/>
   buyer {{member_id}}
-  buyer balance : {{buyerbalance}} CCpoint
+  buyer balance : {{buyer_balance}} CCpoint
     <br/>
-    after purchase balance = {{buyerbalance - price}} CCpoint
-    <IonButton>交易(verify otp)</IonButton>
+    after purchase balance = {{buyer_balance - price}} CCpoint
+    <br/>
+    <IonItem>
+      <IonLabel>交易密碼</IonLabel>
+      <IonInput type="number" v-model="purchase_password" placeholder="輸入交易密碼" />
+    </IonItem>
+    <IonButton @click="purchase()" >交易(verify otp)</IonButton>
+
   </ion-content>
 </template>
 
 <script>
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton } from '@ionic/vue';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonInput,IonItem,IonLabel } from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -25,12 +32,60 @@ export default defineComponent({
       'title',
     'price',
     'member_id',
-    'seller_id',],
+    'seller_id',
+    'contract_address',
+    'token_id',
+  ],
   data() {
     return {
-      buyerbalance: 10000,
+      purchase_password:'',
+      member_balance: 10000,
     };
   },
-  components: { IonContent, IonHeader, IonTitle, IonToolbar,IonButton },
+  methods:{
+    fetch_member_ccpoint_balance(member_id){
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member/${member_id}/ccpoint_balance/`, requestOptions)
+    },
+    fetch_ccpoint_purchase(buyer_id,contract_address,token_id){
+      var formdata = new FormData();
+      formdata.append("buyer_id", buyer_id);
+      formdata.append("contract_address", contract_address);
+      formdata.append("token_id", token_id);
+
+      var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/sale/ccpoint_purchase`, requestOptions)
+    },
+    purchase(){
+      this.fetch_ccpoint_purchase(this.member_id,this.contract_address,this.token_id).then( response => {
+        if(response.status!==200){
+          response.json().then(json => {
+            alert(`error:${json['message']}`)
+          })
+        }else{//200
+          alert(`sucess`)
+          modalController.dismiss()
+        }
+      })
+    }
+  },
+  components: { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonInput,IonItem,IonLabel },
+  mounted(){
+    let _this = this
+    this.fetch_member_ccpoint_balance(this.member_balance).then(response => {
+      response.json().then( json => {
+        _this.member_balance = json['balance']
+      })
+    })
+  },
 });
 </script>
