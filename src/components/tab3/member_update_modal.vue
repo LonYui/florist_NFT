@@ -2,6 +2,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>修改{{column_name}}</ion-title>
+      <IonButton @click="close_modal()">close</IonButton>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
@@ -53,6 +54,9 @@ export default defineComponent({
       }else{
         alert('fail')
       }
+    },
+    close_modal(){
+      modalController.dismiss()
     },
   }
 

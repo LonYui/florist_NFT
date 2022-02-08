@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>{{ title }}</ion-title>
-      <IonButton @click="modalController.dismiss()">close</IonButton>
+      <IonButton @click="close_modal()">close</IonButton>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding"> {{ price }} CCpoint
@@ -77,6 +77,9 @@ export default defineComponent({
           modalController.dismiss()
         }
       })
+    },
+    close_modal(){
+      modalController.dismiss()
     }
   },
   components: { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonInput,IonItem,IonLabel },
