@@ -97,7 +97,12 @@ const routes = [
   {
     path: '/spend_how_much',
     component: () => import('@/views/spend_money/spend_how_much.vue')
+  },
+  {
+    path: '/open_pay_post_form',
+    component: () => import('@/views/spend_money/open_pay_post_form.vue')
   }
+
 
 ]
 
