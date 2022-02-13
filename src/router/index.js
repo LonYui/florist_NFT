@@ -100,7 +100,8 @@ const routes = [
   },
   {
     path: '/open_pay_post_form',
-    component: () => import('@/views/spend_money/open_pay_post_form.vue')
+    component: () => import('@/views/spend_money/open_pay_post_form.vue'),
+    props: route => ({ member_id: route.query.member_id })
   }
 
 
