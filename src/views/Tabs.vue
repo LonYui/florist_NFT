@@ -3,14 +3,14 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom" className="tab-bar">
-        <ion-tab-button tab="tab0" @click="push_to_tab(0)" className="tab-button">
+        <ion-tab-button tab="tab0" @click="push_to_tab(0)" disabled="disabled" className="tab-button">
           <ion-icon :icon="homeOutline"></ion-icon>
           <ion-label>Tab 0</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="tab1" @click="push_to_tab(1)" className="tab-button">
-          <ion-icon :icon="restaurantOutline"></ion-icon>
-          <ion-label>餐廳搜尋</ion-label>
+          <ion-icon :icon="storefrontOutline"></ion-icon>
+          <ion-label>商店</ion-label>
         </ion-tab-button>
           
         <ion-tab-button tab="tab2" @click="push_to_tab(2)" disabled="disabled" className="tab-button">
@@ -20,7 +20,7 @@
         
         <ion-tab-button tab="tab3" @click="push_to_tab(3)" className="tab-button">
           <ion-icon :icon="personCircleOutline" />
-          <ion-label>Tab 3</ion-label>
+          <ion-label>個人</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
@@ -29,7 +29,7 @@
 
 <script>
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet, toastController } from '@ionic/vue';
-import {ellipse, homeOutline, restaurantOutline, personCircleOutline} from 'ionicons/icons';
+import {ellipse, homeOutline, storefrontOutline, personCircleOutline} from 'ionicons/icons';
 import './Tabs.css';
 import {facebookSDK} from "@/mixins/facebook_javascript_sdk"
 import router from "@/router";
@@ -62,7 +62,7 @@ export default {
     return {
       ellipse,
       personCircleOutline,
-      restaurantOutline,
+      storefrontOutline,
       homeOutline,
     }
   },

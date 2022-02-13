@@ -18,13 +18,15 @@
       <IonLabel>交易密碼</IonLabel>
       <IonInput type="number" v-model="purchase_password" placeholder="輸入交易密碼" />
     </IonItem>
+    <a href="http://rules.ccb.rocks/" target="_blank" rel="noopener noreferrer">服務條款</a>
+    <IonCheckbox>我已了解這次購買一但完成後即無法要求退款</IonCheckbox>
     <IonButton @click="purchase()" >交易(verify otp)</IonButton>
 
   </ion-content>
 </template>
 
 <script>
-import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonInput,IonItem,IonLabel ,modalController} from '@ionic/vue';
+import { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonInput,IonItem,IonLabel ,IonCheckbox,modalController} from '@ionic/vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -82,7 +84,7 @@ export default defineComponent({
       modalController.dismiss()
     }
   },
-  components: { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonInput,IonItem,IonLabel },
+  components: { IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonInput,IonItem,IonLabel,IonCheckbox },
   mounted(){
     let _this = this
     this.fetch_member_ccpoint_balance(this.member_id).then(response => {
