@@ -96,12 +96,13 @@ const routes = [
   },
   {
     path: '/spend_how_much',
-    component: () => import('@/views/spend_money/spend_how_much.vue')
+    component: () => import('@/views/spend_money/spend_how_much.vue'),
+    props: route => ({ member_id: route.query.member_id })
   },
   {
     path: '/open_pay_post_form',
     component: () => import('@/views/spend_money/open_pay_post_form.vue'),
-    props: route => ({ member_id: route.query.member_id })
+    props: route => ({ member_id: route.query.member_id, amount:route.query.amount })
   }
 
 

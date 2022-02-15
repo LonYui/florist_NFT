@@ -8,7 +8,6 @@
       <input type="hidden" name="verify" v-model="verify">
       <input type="hidden" name="return_url" v-model="return_url">
       <input type="hidden" name="language" v-model="language">
-      <a @click="submit()">SUBMIT</a>
     </form>
   </div>
 </template>
@@ -16,12 +15,11 @@
 <script>
 export default {
   name: "open_pay_post_form",
-  props:['member_id',],
+  props:['member_id','amount'],
   data() {
     return {
       version :'2.1',
       mid :'1003',
-      amount :'1688',
       txid :'',
       language :'tchinese',
     }
@@ -64,7 +62,7 @@ export default {
     })
     const delay = ms => new Promise(res => setTimeout(res, ms));
     await delay(2000);
-    // _this.submit()
+    _this.submit()
   },
 }
 </script>
