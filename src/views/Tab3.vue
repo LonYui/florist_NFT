@@ -17,6 +17,7 @@
       <div @click="openModal('username',member['username'])">Hi! {{ member['username'] }}</div>
       <div @click="openModal('image_url',member['image_url'])"><img style="pointer-events:none"
                 v-bind:src="member['image_url']" alt="抓不到圖片" ></div>
+      ccpoint balance = {{ member_balance }}
       <IonList>
         <NFTItem v-for="NFT in NFTs" :key="NFTs.indexOf(NFT)"
                  :address="NFT['contract_address']"
@@ -53,12 +54,37 @@ export default {
           })
       return modal.present();
     },
+    fetch_delete_ccpoint_transaction_staging(txn_id){
+      var requestOptions = {
+        method: 'DELETE',
+        redirect: 'follow'
+      };
+
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/ccpoint_staging/${txn_id}/store`, requestOptions)
+    },
+    fetch_get_ccpoint_transaction(txn_id){
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+
+      return  fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/ccpoint_transaction/${txn_id}`, requestOptions)
+    },
+    fetch_member_ccpoint_balance(member_id){
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member/${member_id}/ccpoint_balance/`, requestOptions)
+    }
   },
   mixins:[use_member,use_member_NFTs],
-  props: ['member_id'],
+  props: ['member_id','txn_id',],
   data(){
     return {
-      mob:'0912345678'
+      mob:'0912345678',
+      member_balance:'168888888'
     }
   },
   setup() {
@@ -68,23 +94,45 @@ export default {
   },
   mounted() {
     const _this = this
-    this.fetch_get_member(this.member_id).then(response_a => {
-      if (response_a.status===404){
+    this.fetch_get_member(this.member_id).then(response => {
+      if (response.status===404){
         router.replace('/login_select_way').then(()=>{window.location.reload()})//push to page1
       }
-      else if (response_a.status===200){
-        response_a.json().then(json => {
+      else if (response.status===200){
+        response.json().then(json => {
           Object.keys(json).forEach(key => {
             _this.member[key]=json[key]
           })
         })
       }
     })
-    this.fetch_memeber_nft(this.member_id).then(response_b=>{
-      response_b.json().then(json=>{
+    this.fetch_memeber_nft(this.member_id).then(response=>{
+      response.json().then(json=>{
         _this['NFTs'] = json['NFTs']
       })
     })
+    if (this.txn_id) {
+      this.fetch_delete_ccpoint_transaction_staging(this.txn_id).then(response => {
+        if (response.status===200){
+          this.fetch_get_ccpoint_transaction(this.txn_id).then(response_b=>
+              response_b.json().then(json=>{
+                alert(`+${json['amount']}`)
+              })
+          )
+
+        }else{
+          response.json().then(json=>{
+            alert(json['message'])
+          })
+        }
+      })
+    }
+    this.fetch_member_ccpoint_balance(this.member_id).then(response => {
+      response.json().then( json => {
+        _this['member_balance'] = json['balance']
+      })
+    })
+
   }
 }
 </script>
