@@ -18,7 +18,7 @@
       <IonLabel>交易密碼</IonLabel>
       <IonInput type="number" v-model="purchase_password" placeholder="輸入交易密碼" />
     </IonItem>
-    <a href="http://rules.ccb.rocks/" target="_blank" rel="noopener noreferrer">服務條款</a>
+    <a href="http://terms.roarrr.io//" target="_blank" rel="noopener noreferrer">服務條款</a>
     <IonCheckbox>我已了解這次購買一但完成後即無法要求退款</IonCheckbox>
     <IonButton @click="purchase()" >交易(verify otp)</IonButton>
 
