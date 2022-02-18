@@ -3,7 +3,7 @@
     <form ref="form" method="post" action="https://www.twv.com.tw/stage/openpay/pay.php">
       <input type="hidden" name="version" v-model="version">
       <input type="hidden" name="mid" v-model="mid">
-      <input type="hidden" name="amount" v-model="amount">
+      <input type="hidden" name="amount" v-bind:value="amount">
       <input type="hidden" name="txid" v-model="txid">
       <input type="hidden" name="verify" v-model="verify">
       <input type="hidden" name="return_url" v-model="return_url">
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import router from "../../router";
 export default {
   name: "open_pay_post_form",
   props:['member_id','amount'],
@@ -40,7 +41,10 @@ export default {
       };
 
       return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/ccpoint_staging`, requestOptions)
-    }
+    },
+    push_to_home_page(){
+      router.replace('/').then(()=>{window.location.reload()})
+    },
   },
   computed:{
     verify(){
@@ -56,9 +60,17 @@ export default {
   async mounted(){
     const _this = this
     this.fetch_create_todopayment(this.member_id,this.amount).then(response => {
-      response.json().then(json => {
-        _this.txid = json['txn_id']
-      })
+      if (response.status===200){
+        response.json().then(json => {
+          _this.txid = json['txn_id']
+        })
+      }
+      else if(response.status===400){
+        response.json().then(json => {
+          _this.push_to_home_page()
+          alert(json['message'])
+        })
+      }
     })
     const delay = ms => new Promise(res => setTimeout(res, ms));
     await delay(2000);
