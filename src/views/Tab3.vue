@@ -18,6 +18,7 @@
       <div @click="openModal('image_url',member['image_url'])"><img style="pointer-events:none"
                 v-bind:src="member['image_url']" alt="抓不到圖片" ></div>
       ccpoint balance = {{ member_balance }}
+      <IonButton @click="push_open_pay()">儲值</IonButton>
       <IonList>
         <NFTItem v-for="NFT in NFTs" :key="NFTs.indexOf(NFT)"
                  :address="NFT['contract_address']"
@@ -77,7 +78,10 @@ export default {
       };
 
       return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member/${member_id}/ccpoint_balance/`, requestOptions)
-    }
+    },
+    push_open_pay(){
+      router.replace(`/spend_how_much?member_id=${this.member_id}`).then(()=>{window.location.reload()})
+    },
   },
   mixins:[use_member,use_member_NFTs],
   props: ['member_id','txn_id',],
