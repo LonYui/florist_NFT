@@ -60,17 +60,17 @@ export default {
   async mounted(){
     const _this = this
     this.fetch_create_todopayment(this.member_id,this.amount).then(response => {
-      if (response.status===200){
+      // if (response.status===200){
         response.json().then(json => {
           _this.txid = json['txn_id']
         })
-      }
-      else if(response.status===400){
-        response.json().then(json => {
-          _this.push_to_home_page()
-          alert(json['message'])
-        })
-      }
+      // }
+      // else if(response.status===400){
+      //   response.json().then(json => {
+      //     _this.push_to_home_page()
+      //     alert(json['message'])
+      //   })
+      // }
     })
     const delay = ms => new Promise(res => setTimeout(res, ms));
     await delay(2000);
