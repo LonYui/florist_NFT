@@ -54,7 +54,7 @@ export default {
         redirect: 'follow'
       };
 
-      return fetch("https://${process.env.VUE_APP_ccb_rock_backed_domain}/review/create", requestOptions)
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/review/create`, requestOptions)
     },
     create_review(){
       this.fetch_put_create_reveiw().then( response =>{

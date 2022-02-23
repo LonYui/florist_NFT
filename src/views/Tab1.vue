@@ -56,7 +56,7 @@ export default {
         redirect: 'follow'
       };
 
-      return fetch("https://${process.env.VUE_APP_ccb_rock_backed_domain}/sale", requestOptions)
+      return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/sale`, requestOptions)
     }
   },
   mounted(){
