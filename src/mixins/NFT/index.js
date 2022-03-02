@@ -76,7 +76,7 @@ export let use_NFT = {
                 redirect: 'follow'
             };
 
-            return fetch(`https://eth-mainnet.alchemyapi.io/v2/qU8XsEsGWwI4Lxt5bc_hcj0F64rB8VnD/getNFTMetadata?contractAddress=${address}&tokenId=${token_id}&tokenType=${token_type}`, requestOptions)
+            return fetch(`${process.env.VUE_APP_alchemyapi_domain}/${process.env.VUE_APP_alchemyapi_key}/getNFTMetadata?contractAddress=${address}&tokenId=${token_id}&tokenType=${token_type}`, requestOptions)
         }
     }
 }
