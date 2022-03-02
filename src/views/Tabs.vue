@@ -3,7 +3,7 @@
     <ion-tabs>
       <ion-router-outlet></ion-router-outlet>
       <ion-tab-bar slot="bottom" className="tab-bar">
-        <ion-tab-button tab="tab0" @click="push_to_tab(0)" disabled="disabled" className="tab-button">
+        <ion-tab-button tab="tab0" @click="push_to_tab(0)" className="tab-button">
           <ion-icon :icon="homeOutline"></ion-icon>
           <ion-label>Tab 0</ion-label>
         </ion-tab-button>

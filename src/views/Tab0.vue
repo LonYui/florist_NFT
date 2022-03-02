@@ -17,9 +17,9 @@ export default  {
   methods:{
 
     blindbox_purchase(){
-      this.fetch_blindbox_purchase(this.member_id,'0x3C8397EE92F164A4df0b74B1e2B2b32cde25A2B0').then(response => {
+      this.fetch_blindbox_purchase('0x3C8397EE92F164A4df0b74B1e2B2b32cde25A2B0',this.member_id).then(response => {
         if (response.status ===200){
-          null
+          alert('mint sucess')
         }else if (response.status ===400){
           response.json().then(json=>{
             alert(json['message'])
