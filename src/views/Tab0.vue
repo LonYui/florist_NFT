@@ -1,45 +1,45 @@
 <template>
   <IonPage>
-    <IonContent fullscreen className='home-page'>
-      <div className="home">
-        <div className="home-title">
-          活動頁面分頁1
-        </div>
-        <IonSlides pager={true} options={slideOpts} className='home-slides'>
-          <IonSlide className='home-slide'>
-            <IonImg className='home-img' v-bind:src="kabi" />
-            <div className='home-slide-title' >拍賣大明星</div>
-          </IonSlide>
-          <IonSlide className='home-slide'>
-            <IonImg className='home-img' v-bind:src="kabi" />
-            <div className='home-slide-title' >BACK TO SCHOOL</div>
-          </IonSlide>
-          <IonSlide className='home-slide'>
-            <IonImg className='home-img' v-bind:src="kabi" />
-            <div className='home-slide-title' >金秋獎</div>
-          </IonSlide>
-        </IonSlides>
-      </div>
+    <IonContent>
+      <IonButton @click="blindbox_purchase()">mint</IonButton>
     </IonContent>
   </IonPage>
 </template>
 
 <script>
-import { IonContent, IonPage, IonSlides, IonSlide, IonImg } from '@ionic/vue';
-import kabi from './imgs/kabi.jpg';
-import './Tab0.css';
+import { IonContent, IonPage, IonButton } from '@ionic/vue';
 
 
 export default  {
   name: 'Tab0',
-  components: { IonContent, IonPage, IonSlides, IonSlide, IonImg },
-  setup() {
-    const slideOpts = {
-      initialSlide: 0,
-      speed: 1000,
-      autoplay:true,
-    };
-    return {slideOpts,kabi}
-  },
+  components: { IonContent, IonPage, IonButton },
+  props:['member_id'],
+  methods:{
+
+    blindbox_purchase(){
+      this.fetch_blindbox_purchase(this.member_id,'0x3C8397EE92F164A4df0b74B1e2B2b32cde25A2B0').then(response => {
+        if (response.status ===200){
+          null
+        }else if (response.status ===400){
+          response.json().then(json=>{
+            alert(json['message'])
+          })
+        }
+      })
+    },
+
+    fetch_blindbox_purchase(contract_address,buyer_id){
+      var formdata = new FormData();
+      formdata.append("buyer_id", buyer_id);
+
+      var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      return fetch(`https://ccb-rock-backed-dev.herokuapp.com/blindbox/ccpoint_purchase/${contract_address}`, requestOptions)
+    },
+  }
 }
 </script>

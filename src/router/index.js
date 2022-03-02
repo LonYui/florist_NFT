@@ -18,7 +18,7 @@ const routes = [
       {
         path: 'tab0',
         component: () => import('@/views/Tab0.vue'),
-        props: route => ({ mob: route.query.mob })
+        props: route => ({ member_id: route.query.member_id })
       },
       {
         path: 'tab1',
