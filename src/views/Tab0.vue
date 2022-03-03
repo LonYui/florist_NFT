@@ -17,7 +17,7 @@ export default  {
   methods:{
 
     blindbox_purchase(){
-      this.fetch_blindbox_purchase('0x3C8397EE92F164A4df0b74B1e2B2b32cde25A2B0',this.member_id).then(response => {
+      this.fetch_blindbox_purchase(this.member_id).then(response => {
         if (response.status ===200){
           alert('mint sucess')
         }else if (response.status ===400){
@@ -28,7 +28,7 @@ export default  {
       })
     },
 
-    fetch_blindbox_purchase(contract_address,buyer_id){
+    fetch_blindbox_purchase(buyer_id){
       var formdata = new FormData();
       formdata.append("buyer_id", buyer_id);
 
@@ -38,7 +38,7 @@ export default  {
         redirect: 'follow'
       };
 
-      return fetch(`https://ccb-rock-backed-dev.herokuapp.com/blindbox/ccpoint_purchase/${contract_address}`, requestOptions)
+      return fetch(`https://ccb-rock-backed-dev.herokuapp.com/blindbox/ccpoint_purchase`, requestOptions)
     },
   }
 }
