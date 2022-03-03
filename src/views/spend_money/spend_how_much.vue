@@ -42,7 +42,7 @@ export default {
   },
   methods:{
     push_open_pay(){
-      router.replace(`/open_pay_post_form?member_id=${this.member_id}&amount=${this.amount}`).then(()=>{window.location.reload()})
+      router.replace(`/open_pay_post_form?member_id=${this.member_id}&amount=${this.amount}&caddress=消費者地址&cemail=client@test.net&cname=消費者姓名&ctel=0912345678`).then(()=>{window.location.reload()})
     }
   }
 

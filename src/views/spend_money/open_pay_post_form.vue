@@ -8,6 +8,13 @@
       <input type="hidden" name="verify" v-model="verify">
       <input type="hidden" name="return_url" v-model="return_url">
       <input type="hidden" name="language" v-model="language">
+
+      <input type="hidden" name="cname" v-bind:value="cname">
+      <input type="hidden" name="caddress" v-bind:value="caddress">
+      <input type="hidden" name="ctel" v-bind:value="ctel">
+      <input type="hidden" name="cemail" v-bind:value="cemail">
+
+      <input type="hidden" name="charset" v-bind:value="charset">
     </form>
   </div>
 </template>
@@ -16,14 +23,17 @@
 import router from "../../router";
 export default {
   name: "open_pay_post_form",
-  props:['member_id','amount'],
+  props:['member_id','amount'
+  ,'cname','caddress','ctel','cemail'],
   data() {
     return {
       version :'2.1',
       mid :process.env.VUE_APP_open_pay_mid,
       txid :'',
       language :'tchinese',
-      action_url:`https://${process.env.VUE_APP_open_pay_domain}/openpay/pay.php`
+      action_url:`https://${process.env.VUE_APP_open_pay_domain}/openpay/pay.php`,
+
+      charset:'UTF-8'
     }
   },
   methods : {
