@@ -90,11 +90,6 @@ const routes = [
     props: route => ({ mob: route.query.mob })
   },
   {
-    path:'/sale/:contract_address',
-    component: () => import('@/views/Sale_detail.vue'),
-    props: route => ({ token_id: route.query.token_id })
-  },
-  {
     path: '/spend_how_much',
     component: () => import('@/views/spend_money/spend_how_much.vue'),
     props: route => ({ member_id: route.query.member_id })
@@ -102,7 +97,15 @@ const routes = [
   {
     path: '/open_pay_post_form',
     component: () => import('@/views/spend_money/open_pay_post_form.vue'),
-    props: route => ({ member_id: route.query.member_id, amount:route.query.amount })
+    props: route => ({
+      member_id: route.query.member_id, amount:route.query.amount,
+      cname: route.query.cname, caddress:route.query.caddress, cemail: route.query.cemail, ctel:route.query.ctel,
+    })
+  },
+  {
+    path: '/pament_check',
+    component: () => import('@/views/spend_money/payment_check.vue'),
+    props: route => ({ ispayment: route.query.ispayment , txn_id: route.query.txn_id, amount: route.query.amount })
   }
 
 

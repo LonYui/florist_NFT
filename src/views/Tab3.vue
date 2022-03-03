@@ -120,7 +120,7 @@ export default {
         if (response.status===200){
           this.fetch_get_ccpoint_transaction(this.txn_id).then(response_b=>
               response_b.json().then(json=>{
-                alert(`+${json['amount']}`)
+                router.replace(`/payment_check?ispayment=${true}&amount=${json['amount']}`).then(()=>{window.location.reload()})
               })
           )
 
