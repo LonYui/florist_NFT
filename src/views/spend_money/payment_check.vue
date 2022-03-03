@@ -1,12 +1,17 @@
 <template>
-ispayment:{{ispayment}}
-amount:{{amount}}
+  <ion-page>
+    <ion-content>
+      ispayment:{{ispayment}}
+      amount:{{amount}}
+    </ion-content>
+  </ion-page>
 </template>
 
 <script>
-
+import {IonPage ,IonContent} from '@ionic/vue';
 export default {
   name: "payment_check",
+  components:{IonPage ,IonContent},
   data(){
     return {
     }

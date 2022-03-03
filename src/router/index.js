@@ -103,7 +103,7 @@ const routes = [
     })
   },
   {
-    path: '/pament_check',
+    path: '/payment_check',
     component: () => import('@/views/spend_money/payment_check.vue'),
     props: route => ({ ispayment: route.query.ispayment , txn_id: route.query.txn_id, amount: route.query.amount })
   }
