@@ -27,9 +27,13 @@ export default {
       };
 
       return  fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/ccpoint_transaction/${txn_id}`, requestOptions)
-    }
+    },
+    push_to_error(error_message){
+      router.replace(`/error?error_message=${error_message}`).then(()=>{window.location.reload()})
+    },
   },
   mounted(){
+    const _this = this
     if (this.txn_id) {
       this.fetch_delete_ccpoint_transaction_staging(this.txn_id).then(response => {
         if (response.status===200){
@@ -41,7 +45,7 @@ export default {
 
         }else{
           response.json().then(json=>{
-            alert(json['message'])
+            _this.push_to_error(json['message'])
           })
         }
       })

@@ -111,6 +111,11 @@ const routes = [
     path: '/execute_stage_ccbpoint_transaction',
     component: () => import('@/views/spend_money/execute_stage_ccbpoint_transaction.vue'),
     props: route => ({  txn_id: route.query.txn_id })
+  },
+  {
+    path: '/error',
+    component: () => import('@/views/error.vue'),
+    props: route => ({  error_message: route.query.error_message })
   }
 
 

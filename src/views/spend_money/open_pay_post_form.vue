@@ -53,8 +53,8 @@ export default {
 
       return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/ccpoint_staging`, requestOptions)
     },
-    push_to_home_page(){
-      router.replace('/').then(()=>{window.location.reload()})
+    push_to_error(error_message){
+      router.replace(`/error?error_message=${error_message}`).then(()=>{window.location.reload()})
     },
   },
   computed:{
@@ -78,8 +78,7 @@ export default {
       }
       else {
         response.json().then(json => {
-          alert(json['message'])
-          _this.push_to_home_page()
+          _this.push_to_error(json['message'])
         })
       }
     })
