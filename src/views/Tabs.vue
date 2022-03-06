@@ -104,7 +104,7 @@ export default {
     const loading = await loadingController
         .create({
           cssClass: 'my-custom-class',
-          message: '寄送簡訊到:'+this.mob,
+          message: '',
           duration: 9999*1000,
         });
 
