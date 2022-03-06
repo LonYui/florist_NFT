@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet, toastController } from '@ionic/vue';
+import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet, toastController ,loadingController} from '@ionic/vue';
 import {ellipse, homeOutline, storefrontOutline, personCircleOutline} from 'ionicons/icons';
 import './Tabs.css';
 import {facebookSDK} from "@/mixins/facebook_javascript_sdk"
@@ -42,7 +42,7 @@ export default {
       const toast = await toastController
           .create({
             message: '點選分享，加入主畫面，新增ccb.app',
-            duration: 8000
+            duration: 3000
           })
       return toast.present();
     },
@@ -101,6 +101,15 @@ export default {
   },
   async mounted() {
     //check login
+    const loading = await loadingController
+        .create({
+          cssClass: 'my-custom-class',
+          message: '寄送簡訊到:'+this.mob,
+          duration: 9999*1000,
+        });
+
+    await loading.present();
+
     const delay = ms => new Promise(res => setTimeout(res, ms));
     await delay(1300);
 
@@ -108,6 +117,7 @@ export default {
     await this.FB.getLoginStatus(function(response) {
       _this.member_id =  response.authResponse ? response.authResponse.userID : undefined
     });
+    loading.dismiss()
   }
 
 }
