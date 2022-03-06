@@ -8,6 +8,7 @@
       <input type="hidden" name="verify" v-model="verify">
       <input type="hidden" name="return_url" v-model="return_url">
       <input type="hidden" name="language" v-model="language">
+      <input type="hidden" name="description" v-model="description">
 
       <input type="hidden" name="cname" v-bind:value="cname">
       <input type="hidden" name="caddress" v-bind:value="caddress">
@@ -66,6 +67,9 @@ export default {
     },
     return_url(){
       return `${window.location.origin}/execute_stage_ccbpoint_transaction?txn_id=${this.txid}`
+    },
+    description(){
+      return `購買${this.amount}RTWD`
     }
   },
   async mounted(){
