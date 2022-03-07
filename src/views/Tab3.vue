@@ -37,7 +37,7 @@ import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon
 import {settingsOutline} from 'ionicons/icons';
 import member_update_modal from '../components/tab3/member_update_modal';
 // import NFTItem from '@/components/tab3/NFTItem';
-import NFTItem from '@/components/grid_divid3';
+import grid_divid3 from '@/module/grid_divid3';
 import {use_member} from "@/mixins/member"
 import {use_member_NFTs} from "@/mixins/member_NFTs"
 import router from "@/router";
