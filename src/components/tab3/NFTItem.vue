@@ -1,23 +1,29 @@
 <template>
-  <IonItem >
     <IonCard >
-      <IonCardTitle>
-        {{NFT['title']}}
-      </IonCardTitle>
     <IonImg style="pointer-events:none"
          :src="image_url" alt="抓不到圖片" />
     </IonCard>
-  </IonItem>
+      <IonCardHeader>
+      <IonCardTitle>
+        {{NFT['title']}}
+      </IonCardTitle>
+        <IonCardSubtitle>
+          #{{token_id}}
+        </IonCardSubtitle>
+      </IonCardHeader>
+  <IonCardContent>
+    {{NFT['description']}}
+  </IonCardContent>
 </template>
 
 <script>
 import {use_NFT} from "../../mixins/NFT"
-import {IonItem,IonImg,IonCard, IonCardTitle,} from '@ionic/vue';
+import {IonImg,IonCard, IonCardTitle,IonCardHeader, IonCardSubtitle, IonCardContent} from '@ionic/vue';
 export default {
   name: "NFTItem",
   mixins:[use_NFT],
   props:['address','token_id','token_type','key'],
-  components:{IonItem,IonImg,IonCard, IonCardTitle,},
+  components:{IonImg,IonCard, IonCardTitle,IonCardHeader,IonCardSubtitle, IonCardContent,},
   computed:{
     image_url() {
       // check is ipfs?

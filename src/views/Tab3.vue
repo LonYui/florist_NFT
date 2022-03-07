@@ -22,10 +22,6 @@
       <IonList>
         NFTs
         <br/>
-<!--        <NFTItem v-for="NFT in NFTs" :key="NFTs.indexOf(NFT)"-->
-<!--                 :address="NFT['contract_address']"-->
-<!--                 :token_id="NFT['token_id']"-->
-<!--        />-->
         <grid_divid3 v-bind:NFTs="NFTs"></grid_divid3>
       </IonList>
     </ion-content>
@@ -36,7 +32,6 @@
 import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, modalController,IonList,IonImg} from '@ionic/vue';
 import {settingsOutline} from 'ionicons/icons';
 import member_update_modal from '../components/tab3/member_update_modal';
-// import NFTItem from '@/components/tab3/NFTItem';
 import grid_divid3 from '@/module/grid_divid3';
 import {use_member} from "@/mixins/member"
 import {use_member_NFTs} from "@/mixins/member_NFTs"
