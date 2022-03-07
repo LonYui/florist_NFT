@@ -1,5 +1,7 @@
 <template>
-<IonRow v-for="key in [...Array(Math.floor(NFTs.length/3)+1).keys()]" v-bind:key="key">
+<IonRow v-for="key in [...Array(Math.floor(NFTs.length/3)+1).keys()]" v-bind:key="key"
+        v-if="key*3 < NFTs.length"
+>
   <IonCol v-if="key*3 < NFTs.length">
     <NFTItem
              :address="NFTs[key*3]['contract_address']"
