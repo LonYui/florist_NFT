@@ -8,7 +8,7 @@
         {{NFT['title']}}
       </IonCardTitle>
         <IonCardSubtitle>
-          #{{token_id}}
+          #{{token_id_ten}}
         </IonCardSubtitle>
       </IonCardHeader>
   <IonCardContent>
@@ -40,6 +40,9 @@ export default {
       } else {
         return -1
       }
+    },
+    token_id_ten(){
+      return parseInt(this.token_id, 16)
     }
   },
   watch:{
