@@ -1,45 +1,50 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar>
-        Profile
-        <ion-button slot="end">
-          <ion-icon :icon="settingsOutline"></ion-icon>
-        </ion-button>
-      </ion-toolbar>
+      <ccb_tool_bar v-bind:title="''"></ccb_tool_bar>
     </ion-header>
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Profile</ion-title>
-        </ion-toolbar>
+    <ion-content id="tabs_content">
+      <ion-header >
       </ion-header>
-      <IonAvatar>
-        <IonImg style="pointer-events:none"
-                v-bind:src="member['image_url']" alt="抓不到圖片" />
-      </IonAvatar>
-      <IonLabel>
-        <h3>{{member['username']}}</h3>
-        <p>{{member['metamask_address']}}</p>
-      </IonLabel>
+<!--      <IonItem>-->
+      <IonRow class="ion-justify-content-center">
+        <IonCol size="2" >
+          <IonAvatar >
+            <IonImg style="pointer-events:none"
+                    v-bind:src="member['image_url']" alt="抓不到圖片" />
+          </IonAvatar>
+          <IonLabel>
+            <h3>{{member['username']}}</h3>
+            <IonBadge @click="copy_metamask_address()">
+              {{hidder_metamask_address}}
+            </IonBadge>
+            <p>
+              {{ member_balance }} RTWD
+            </p>
+          </IonLabel>
+        </IonCol>
+      </IonRow>
+        <IonButton slot="end">
+          <ion-icon :icon="settingsOutline"></ion-icon>
+        </IonButton>
+<!--      </IonItem>-->
 <!--      <div @click="openModal('username',member['username'])">Hi! {{ member['username'] }}</div>-->
 <!--      <div @click="openModal('image_url',member['image_url'])"><IonImg style="pointer-events:none"-->
 <!--                v-bind:src="member['image_url']" alt="抓不到圖片" /></div>-->
-      {{ member_balance }} RTWD
-      <IonButton @click="push_open_pay()">儲值</IonButton>
-      <IonList>
+<!--      <IonButton @click="push_open_pay()">儲值</IonButton>-->
+      <h3>
         NFTs
-        <br/>
+      </h3>
         <grid_divid3 v-bind:NFTs="NFTs"></grid_divid3>
-      </IonList>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, modalController,IonList,IonImg,IonAvatar,IonLabel} from '@ionic/vue';
+import {IonPage, IonHeader,   IonContent, IonButton, IonIcon, modalController,IonImg,IonAvatar,IonLabel,IonBadge,IonRow,IonCol} from '@ionic/vue';
 import {settingsOutline} from 'ionicons/icons';
 import member_update_modal from '../components/tab3/member_update_modal';
+import ccb_tool_bar from '../components/tabs/ccb_tool_bar';
 import grid_divid3 from '@/module/grid_divid3';
 import {use_member} from "@/mixins/member"
 import {use_member_NFTs} from "@/mixins/member_NFTs"
@@ -47,8 +52,8 @@ import router from "@/router";
 
 export default {
   name: 'Tab3',
-  components: {IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButton, IonIcon,IonList,IonImg,IonAvatar,IonLabel,
-    grid_divid3,
+  components: {IonHeader,   IonContent, IonPage, IonButton, IonIcon,IonImg,IonAvatar,IonLabel,IonBadge,IonRow,IonCol
+    ,grid_divid3,ccb_tool_bar
   },
   methods: {
     async openModal(key,val) {
@@ -75,6 +80,16 @@ export default {
     push_open_pay(){
       router.replace(`/spend_how_much?member_id=${this.member_id}`).then(()=>{window.location.reload()})
     },
+    copy_metamask_address(){
+      updateClipboard(this.member['metamask_address'])
+      function updateClipboard(newClip) {
+        navigator.clipboard.writeText(newClip).then(function() {
+          /* clipboard successfully set */
+        }, function() {
+          /* clipboard write failed */
+        });
+      }
+    }
   },
   mixins:[use_member,use_member_NFTs],
   props: ['member_id','txn_id',],
@@ -88,6 +103,12 @@ export default {
     return {
       settingsOutline,
     }
+  },
+  computed:{
+    hidder_metamask_address(){
+      if(!this.member['metamask_address']) return 'null'
+      return this.member['metamask_address'].slice(0,5) + '...'+this.member['metamask_address'].slice(-3)
+    },
   },
   mounted() {
     const _this = this

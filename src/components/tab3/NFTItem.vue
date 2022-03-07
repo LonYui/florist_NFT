@@ -1,18 +1,18 @@
 <template>
-    <IonCard >
+    <IonCard button="true" >
     <IonImg style="pointer-events:none"
          :src="image_url" alt="抓不到圖片" />
-    </IonCard>
-      <IonCardHeader>
+      <IonCardHeader translucent="true">
       <IonCardTitle>
-        {{NFT['title']}}
+<!--        {{NFT['title']}}-->
       </IonCardTitle>
         <IonCardSubtitle>
           #{{token_id_ten}}
         </IonCardSubtitle>
       </IonCardHeader>
+    </IonCard>
   <IonCardContent>
-    {{NFT['description']}}
+<!--    {{NFT['description']}}-->
   </IonCardContent>
 </template>
 
