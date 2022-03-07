@@ -8,7 +8,7 @@
           <ion-label>Tab 0</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab1" @click="push_to_tab(1)" className="tab-button">
+        <ion-tab-button tab="tab1" @click="push_to_tab(1)" disabled="disabled" className="tab-button">
           <ion-icon :icon="storefrontOutline"></ion-icon>
           <ion-label>商店</ion-label>
         </ion-tab-button>

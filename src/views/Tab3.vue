@@ -15,32 +15,36 @@
         </ion-toolbar>
       </ion-header>
       <div @click="openModal('username',member['username'])">Hi! {{ member['username'] }}</div>
-      <div @click="openModal('image_url',member['image_url'])"><img style="pointer-events:none"
-                v-bind:src="member['image_url']" alt="抓不到圖片" ></div>
-      ccpoint balance = {{ member_balance }}
+      <div @click="openModal('image_url',member['image_url'])"><IonImg style="pointer-events:none"
+                v-bind:src="member['image_url']" alt="抓不到圖片" /></div>
+      {{ member_balance }} RTWD
       <IonButton @click="push_open_pay()">儲值</IonButton>
       <IonList>
-        <NFTItem v-for="NFT in NFTs" :key="NFTs.indexOf(NFT)"
-                 :address="NFT['contract_address']"
-                 :token_id="NFT['token_id']"
-        />
+        NFTs
+        <br/>
+<!--        <NFTItem v-for="NFT in NFTs" :key="NFTs.indexOf(NFT)"-->
+<!--                 :address="NFT['contract_address']"-->
+<!--                 :token_id="NFT['token_id']"-->
+<!--        />-->
+        <grid_divid3 v-bind:NFTs="NFTs"></grid_divid3>
       </IonList>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, modalController,IonList,} from '@ionic/vue';
+import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonIcon, modalController,IonList,IonImg} from '@ionic/vue';
 import {settingsOutline} from 'ionicons/icons';
 import member_update_modal from '../components/tab3/member_update_modal';
-import NFTItem from '@/components/tab3/NFTItem';
+// import NFTItem from '@/components/tab3/NFTItem';
+import NFTItem from '@/components/grid_divid3';
 import {use_member} from "@/mixins/member"
 import {use_member_NFTs} from "@/mixins/member_NFTs"
 import router from "@/router";
 
 export default {
   name: 'Tab3',
-  components: {IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButton, IonIcon,IonList,NFTItem},
+  components: {IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonButton, IonIcon,IonList,IonImg,grid_divid3},
   methods: {
     async openModal(key,val) {
       const modal = await modalController
