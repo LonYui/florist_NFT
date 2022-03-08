@@ -25,8 +25,8 @@ import './theme/variables.css';
 
 const app = createApp(App)
   .use(IonicVue,{
-    mode: 'ios',
-
+      mode: 'ios',
+      animated:true,
   })
   .use(router);
   
