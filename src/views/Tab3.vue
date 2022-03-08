@@ -41,7 +41,8 @@
 </template>
 
 <script>
-import {IonPage, IonHeader,   IonContent, IonButton, IonIcon, modalController,IonImg,IonAvatar,IonLabel,IonBadge,IonRow,IonCol} from '@ionic/vue';
+import {IonPage, IonHeader,   IonContent, IonButton, IonIcon, modalController,IonImg,IonAvatar,IonLabel,IonBadge,IonRow,IonCol
+,toastController} from '@ionic/vue';
 import {settingsOutline} from 'ionicons/icons';
 import member_update_modal from '../components/tab3/member_update_modal';
 import ccb_tool_bar from '../components/tabs/ccb_tool_bar';
@@ -82,6 +83,7 @@ export default {
     },
     copy_metamask_address(){
       updateClipboard(this.member['metamask_address'])
+      this.openToast('複製到剪貼簿',200)
       function updateClipboard(newClip) {
         navigator.clipboard.writeText(newClip).then(function() {
           /* clipboard successfully set */
@@ -89,7 +91,15 @@ export default {
           /* clipboard write failed */
         });
       }
-    }
+    },
+    async openToast(message,duration) {
+      const toast = await toastController
+          .create({
+            message: message,
+            duration: duration
+          })
+      return toast.present();
+    },
   },
   mixins:[use_member,use_member_NFTs],
   props: ['member_id','txn_id',],

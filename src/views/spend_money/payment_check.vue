@@ -3,6 +3,12 @@
     <ion-content>
       ispayment:{{ispayment}}
       amount:{{amount}}
+
+      <a href="/">
+        <h3>
+        回到 roarrr app
+        </h3>
+      </a>
     </ion-content>
   </ion-page>
 </template>

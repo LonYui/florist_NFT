@@ -1,5 +1,6 @@
 <template>
   <ion-page>
+    <ccb_menu v-bind:member_id="member_id" />
     <ion-tabs>
       <ion-router-outlet id="tabs"/>
       <ion-tab-bar slot="bottom" className="tab-bar">
@@ -15,7 +16,7 @@
           
         <ion-tab-button tab="tab2" @click="push_to_tab(2)" disabled="disabled" className="tab-button">
           <ion-icon :icon="ellipse" />
-          <ion-label>Tab 2</ion-label>
+          <ion-label>??</ion-label>
         </ion-tab-button>
         
         <ion-tab-button tab="tab3" @click="push_to_tab(3)" className="tab-button">
@@ -34,10 +35,12 @@ import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouter
 import {ellipse, homeOutline, storefrontOutline, personCircleOutline} from 'ionicons/icons';
 import {facebookSDK} from "@/mixins/facebook_javascript_sdk"
 import router from "@/router";
+import ccb_menu from '@/components/ccb_menu';
 export default {
   name: 'Tabs',
   mixins:[facebookSDK,],
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet,
+    ccb_menu,
   },
   methods: {
     async openToast() {

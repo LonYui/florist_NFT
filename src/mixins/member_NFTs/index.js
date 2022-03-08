@@ -14,7 +14,7 @@ export let use_member_NFTs = {
         }
     },
     methods:{
-        fetch_memeber_nft(member_id,limit=""){
+        fetch_memeber_nft(member_id,limit="100"){
             var requestOptions = {
                 method: 'GET',
                 redirect: 'follow'

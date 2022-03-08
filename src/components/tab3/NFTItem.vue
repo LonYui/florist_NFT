@@ -1,5 +1,5 @@
 <template>
-    <IonCard button="true" >
+    <IonCard button="true" @click="presentAlert()">
     <IonImg style="pointer-events:none"
          :src="image_url" alt="抓不到圖片" />
       <IonCardHeader translucent="true">
@@ -18,7 +18,9 @@
 
 <script>
 import {use_NFT} from "../../mixins/NFT"
-import {IonImg,IonCard, IonCardTitle,IonCardHeader, IonCardSubtitle, IonCardContent} from '@ionic/vue';
+import {IonImg,IonCard, IonCardTitle,IonCardHeader, IonCardSubtitle, IonCardContent,alertController} from '@ionic/vue';
+// import router from "@/router";
+
 export default {
   name: "NFTItem",
   mixins:[use_NFT],
@@ -54,6 +56,31 @@ export default {
         })
       })
     }
+  },
+  methods:{
+    async presentAlert() {
+      const alert = await alertController
+          .create({
+            cssClass: 'my-custom-class',
+            header: '',
+            subHeader: '',
+            message: 'go to opensea',
+            buttons: [
+              'Cancel',
+              {
+                text: 'Ok',
+                handler: () => {
+                  // router.replace(`https://testnets.opensea.io/assets/${this.address}/${this.token_id}`).then(()=>{window.location.reload()})
+                  window.open(`https://testnets.opensea.io/assets/${this.address}/${this.token_id_ten}`, '_blank').focus();
+                },
+              },
+            ],
+          });
+      await alert.present();
+
+      const { role } = await alert.onDidDismiss();
+      console.log('onDidDismiss resolved with role', role);
+    },
   },
   mounted(){
     const _this = this
