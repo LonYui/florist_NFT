@@ -2,7 +2,8 @@
   <IonPage>
     <IonContent>
       <IonButton @click="blindbox_purchase()">mint</IonButton>
-      <lottie :options="defaultOptions" :height="400" :width="400" v-on:animCreated="handleAnimation"/>
+      <lottie :options="defaultOptions" :height="400" :width="400" @animCreated="handleAnimation"  v-show="anim?!anim._idle:false"
+      />
     </IonContent>
   </IonPage>
 </template>
@@ -24,26 +25,42 @@ export default  {
   props:['member_id'],
   data(){
     return {
-      defaultOptions: {animationData: animationData.default},
+      defaultOptions: {
+        animationData: animationData.default,
+        loop:false,
+        autoplay:false,
+      },
       animationSpeed: 1,
-      anim: null
+      anim: null,
+      blind_box_prize:{
+        contract_address:null,
+        token_id:null,
+      }
     }
   },
   methods:{
 
-    blindbox_purchase(){
+    async blindbox_purchase(){
+      let response_status = null
+      let _this = this
       this.fetch_blindbox_purchase(this.member_id).then(response => {
+        response_status = response.status
         if (response.status ===200){
           response.json().then(json=>{
-            alert(`get #${json['token_id']}`)
+            _this.blind_box_prize.contract_address = json['contract_address']
+            _this.blind_box_prize.token_id = json['token_id']
           })
-          window.location.reload()
         }else if (response.status ===400){
           response.json().then(json=>{
             alert(json['message'])
           })
         }
       })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      if (response_status===200){
+        this.anim.play()
+      }
     },
 
     fetch_blindbox_purchase(buyer_id){
@@ -61,6 +78,12 @@ export default  {
 
     handleAnimation: function (anim) {
       this.anim = anim;
+      this.anim.addEventListener('complete', () => this.anim_complete_handller())
+    },
+
+    anim_complete_handller(){
+      // TODO open an modql with picture
+      alert(this.blind_box_prize.contract_address + this.blind_box_prize.token_id)
     }
   }
 }
