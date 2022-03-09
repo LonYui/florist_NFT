@@ -123,6 +123,9 @@ export default {
       _this.member_id =  response.authResponse ? response.authResponse.userID : undefined
     });
     loading.dismiss()
+    if (router.currentRoute._value.path==='/tabs/tab0' && JSON.stringify(router.currentRoute._value.params)=='{}'){
+      this.push_to_tab(0)
+    }
   }
 
 }
