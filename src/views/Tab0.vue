@@ -12,7 +12,7 @@
 import { IonContent, IonPage, IonButton
   ,modalController} from '@ionic/vue';
 import Lottie from 'vue-lottie';
-import * as animationData from '@/views/animations/98267-bicycle.json';
+import * as animationData from '@/views/animations/tmiLionMint.json';
 import nft_detail_modal from '@/components/tab0/nft_detail_modal'
 
 var publicPath = process.env.BASE_URL;
