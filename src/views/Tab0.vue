@@ -9,9 +9,11 @@
 </template>
 
 <script>
-import { IonContent, IonPage, IonButton } from '@ionic/vue';
+import { IonContent, IonPage, IonButton
+  ,modalController} from '@ionic/vue';
 import Lottie from 'vue-lottie';
 import * as animationData from '@/views/animations/98267-bicycle.json';
+import nft_detail_modal from '@/components/tab0/nft_detail_modal'
 
 var publicPath = process.env.BASE_URL;
 animationData.assets.forEach(item => { item.u = publicPath + 'animations/HomepageHeader/images/'; });
@@ -82,9 +84,21 @@ export default  {
     },
 
     anim_complete_handller(){
-      // TODO open an modql with picture
-      alert(this.blind_box_prize.contract_address + this.blind_box_prize.token_id)
-    }
-  }
+      this.openModal(this.blind_box_prize.contract_address,this.blind_box_prize.token_id)
+    },
+
+    async openModal(contract_address,token_id) {
+      const modal = await modalController
+          .create({
+            component: nft_detail_modal,
+            swipeToClose:true,
+            componentProps: {
+              address:contract_address,
+              token_id:token_id,
+            },
+          })
+      return modal.present();
+    },
+  },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <IonCard button="true" @click="presentAlert()">
+    <IonCard button="true" @click="openModal(address,token_id)">
     <IonImg style="pointer-events:none"
          :src="image_url" alt="抓不到圖片" />
       <IonCardHeader translucent="true">
@@ -18,45 +18,14 @@
 
 <script>
 import {use_NFT} from "../../mixins/NFT"
-import {IonImg,IonCard, IonCardTitle,IonCardHeader, IonCardSubtitle, IonCardContent,alertController} from '@ionic/vue';
-// import router from "@/router";
-
+import {IonImg,IonCard, IonCardTitle,IonCardHeader, IonCardSubtitle, IonCardContent,alertController
+,modalController} from '@ionic/vue';
+import nft_detail_modal from '@/components/tab0/nft_detail_modal'
 export default {
   name: "NFTItem",
   mixins:[use_NFT],
-  props:['address','token_id','token_type','key'],
+  props:['address','token_id','token_type'],
   components:{IonImg,IonCard, IonCardTitle,IonCardHeader,IonCardSubtitle, IonCardContent,},
-  computed:{
-    image_url() {
-      // check is ipfs?
-      const regex_http = /^https:\/\//
-      const regex_ifps = /^ipfs:\/\//
-      if (regex_ifps.test(this.NFT['metadata']['image'])) {
-        // is -> use hardcode source1:
-        return this.NFT['metadata']['image'].replace('ipfs://','https://cloudflare-ipfs.com/ipfs/')
-      }
-      // check is https
-      else if (regex_http.test(this.NFT['metadata']['image'])) {
-        //is return
-        return this.NFT['metadata']['image']
-      } else {
-        return -1
-      }
-    },
-    token_id_ten(){
-      return parseInt(this.token_id, 16)
-    }
-  },
-  watch:{
-    'token_id':function (){
-      const _this = this
-      this.fetch_NFT_metadata(this.address,this.token_id).then(response => {
-        response.json().then(json => {
-          _this.NFT = json
-        })
-      })
-    }
-  },
   methods:{
     async presentAlert() {
       const alert = await alertController
@@ -81,14 +50,18 @@ export default {
       const { role } = await alert.onDidDismiss();
       console.log('onDidDismiss resolved with role', role);
     },
+    async openModal(address,token_id) {
+      const modal = await modalController
+          .create({
+            component: nft_detail_modal,
+            swipeToClose:true,
+            componentProps: {
+              address:address,
+              token_id:token_id,
+            },
+          })
+      return modal.present();
+    },
   },
-  mounted(){
-    const _this = this
-    this.fetch_NFT_metadata(this.address,this.token_id).then(response => {
-      response.json().then(json => {
-        _this.NFT = json
-      })
-    })
-  }
 }
 </script>

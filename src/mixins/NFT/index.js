@@ -77,6 +77,53 @@ export let use_NFT = {
             };
 
             return fetch(`${process.env.VUE_APP_alchemyapi_domain}/${process.env.VUE_APP_alchemyapi_key}/getNFTMetadata?contractAddress=${address}&tokenId=${token_id}&tokenType=${token_type}`, requestOptions)
+        },
+        refresh(){
+            const _this = this
+            this.fetch_NFT_metadata(this.address,this.token_id).then(response => {
+                response.json().then(json => {
+                    _this.NFT = json
+                })
+            })
+        },
+    },
+    computed:{
+        image_url() {
+            // check is ipfs?
+            const regex_http = /^https:\/\//
+            const regex_ifps = /^ipfs:\/\//
+            if (regex_ifps.test(this.NFT['metadata']['image'])) {
+                // is -> use hardcode source1:
+                return this.NFT['metadata']['image'].replace('ipfs://','https://cloudflare-ipfs.com/ipfs/')
+            }
+            // check is https
+            else if (regex_http.test(this.NFT['metadata']['image'])) {
+                //is return
+                return this.NFT['metadata']['image']
+            } else {
+                return -1
+            }
+        },
+        token_id_ten(){
+            return parseInt(this.token_id, 16)
         }
-    }
+    },
+    mounted(){
+        const _this = this
+        this.fetch_NFT_metadata(this.address,this.token_id).then(response => {
+            response.json().then(json => {
+                _this.NFT = json
+            })
+        })
+    },
+    watch:{
+        'token_id':function (){
+            const _this = this
+            this.fetch_NFT_metadata(this.address,this.token_id).then(response => {
+                response.json().then(json => {
+                    _this.NFT = json
+                })
+            })
+        }
+    },
 }
