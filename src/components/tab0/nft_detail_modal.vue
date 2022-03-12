@@ -19,7 +19,7 @@
         <p>{{NFT['description']}}</p>
       </IonCol>
     </IonRow>
-    <a v-bind:href="`https://testnets.opensea.io/assets/${this.address}/${this.token_id_ten}`">https://testnets.opensea.io/assets/{{address}}/{{token_id_ten}}</a>
+    <a v-bind:href="`https://${process.env.VUE_APP_opensea_domain}/assets/${this.address}/${this.token_id_ten}`">https://{{process.env.VUE_APP_opensea_domain}}/assets/{{address}}/{{token_id_ten}}</a>
   </IonContent>
 </template>
 

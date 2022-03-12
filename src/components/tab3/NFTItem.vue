@@ -39,8 +39,7 @@ export default {
               {
                 text: 'Ok',
                 handler: () => {
-                  // router.replace(`https://testnets.opensea.io/assets/${this.address}/${this.token_id}`).then(()=>{window.location.reload()})
-                  window.open(`https://testnets.opensea.io/assets/${this.address}/${this.token_id_ten}`, '_blank').focus();
+                  window.open(`https://${process.env.VUE_APP_opensea_domain}/assets/${this.address}/${this.token_id_ten}`, '_blank').focus();
                 },
               },
             ],
