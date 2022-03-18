@@ -1,5 +1,5 @@
 <template>
-      <IonAvatar style="    width: 25vw;  height: 25vw;  " >
+      <IonAvatar style="    width: 16vw;  height: 16vw;  " >
         <IonImg style="pointer-events:none"
                 v-bind:src="img_url" alt="抓不到圖片" />
       </IonAvatar>
