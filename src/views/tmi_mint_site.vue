@@ -1,4 +1,18 @@
 <template>
+  <h1>TMI</h1>
+  <h2>too much Irene </h2>
+  <h2>gallery</h2>
+<!--  4:3-->
+  <ion-slides :options="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+    <ion-slide  style="width: 12.5%; height: 16.6%;
+    border: 2px solid #f8f8f8;
+" v-for="img in imgs" v-bind:key="imgs.indexOf(img)">
+      <ion-col>
+        <ion-label>Card #{{ imgs.indexOf(img)+2 }}</ion-label>
+        <ion-img style="pointer-events:none; border-radius: 12.5%;overflow: hidden;" :src="img"></ion-img>
+      </ion-col>
+    </ion-slide>
+  </ion-slides>
   <button @click="mint()" v-show="metamask_response.current?true:false">mint</button>
   <br/>
   <button @click="white_list_mint()" v-show="white_list.includes(metamask_response.current)">white_list_mint</button>
@@ -13,12 +27,28 @@
 </template>
 
 <script>
-import {loadingController} from '@ionic/vue';
+import {loadingController,
+IonSlides,IonSlide,IonImg,IonLabel} from '@ionic/vue';
 
 export default {
   name: "tmi_mint_site",
+  components:{IonSlides,IonSlide,IonImg,IonLabel},
   data() {
     return {
+      imgs:[
+        `https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+      ],
       metamask_response: {
         network: 'rinkeby',
         current: '',
