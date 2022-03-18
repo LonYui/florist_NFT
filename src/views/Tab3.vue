@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import {IonPage, IonHeader,   IonContent, IonButton, IonIcon, modalController,IonImg,IonAvatar,IonLabel,IonBadge,IonRow,IonCol
-,toastController} from '@ionic/vue';
+import {IonPage, IonHeader,   IonContent, IonButton, IonIcon, modalController,IonRow,IonCol
+} from '@ionic/vue';
 import {settingsOutline} from 'ionicons/icons';
 import member_update_modal from '@/components/tab3/member_update_modal';
 import metamask_avatar from '@/components/tab3/metamask_avatar';
@@ -55,7 +55,7 @@ import router from "@/router";
 
 export default {
   name: 'Tab3',
-  components: {IonHeader,   IonContent, IonPage, IonButton, IonIcon,IonImg,IonAvatar,IonLabel,IonBadge,IonRow,IonCol
+  components: {IonHeader,   IonContent, IonPage, IonButton, IonIcon,IonRow,IonCol
     ,grid_divid3,ccb_tool_bar,metamask_avatar
   },
   methods: {
@@ -94,14 +94,14 @@ export default {
     //     });
     //   }
     // },
-    async openToast(message,duration) {
-      const toast = await toastController
-          .create({
-            message: message,
-            duration: duration
-          })
-      return toast.present();
-    },
+    // async openToast(message,duration) {
+    //   const toast = await toastController
+    //       .create({
+    //         message: message,
+    //         duration: duration
+    //       })
+    //   return toast.present();
+    // },
   },
   mixins:[use_member,use_member_NFTs],
   props: ['member_id','txn_id',],

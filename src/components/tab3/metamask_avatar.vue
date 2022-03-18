@@ -1,10 +1,10 @@
 <template>
-      <IonAvatar >
+      <IonAvatar style="    width: 25vw;  height: 25vw;  " >
         <IonImg style="pointer-events:none"
                 v-bind:src="img_url" alt="抓不到圖片" />
       </IonAvatar>
       <IonLabel>
-        <h3>{{username}}</h3>
+        <h2>{{username}}</h2>
         <IonBadge @click="copy_metamask_address()">
           {{hidder_metamask_address}}
         </IonBadge>
@@ -16,7 +16,8 @@
 
 <script>
 import {
-  IonAvatar,IonImg,IonLabel,IonBadge
+  IonAvatar,IonImg,IonLabel,IonBadge,
+  toastController,
 } from '@ionic/vue';
 
 export default {
@@ -37,10 +38,19 @@ export default {
         });
       }
     },
+    async openToast(message,duration) {
+      const toast = await toastController
+          .create({
+            message: message,
+            duration: duration
+          })
+      return toast.present();
+    },
   },
   computed:{
     hidder_metamask_address(){
       if(!this.metamask_address) return 'null'
+      else if (this.metamask_address.slice(-4)==='.eth') return this.metamask_address
       return this.metamask_address.slice(0,5) + '...'+this.metamask_address.slice(-3)
     },
   },
