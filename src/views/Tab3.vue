@@ -9,19 +9,20 @@
 <!--      <IonItem>-->
       <IonRow class="ion-justify-content-center">
         <IonCol size="2" >
-          <IonAvatar >
-            <IonImg style="pointer-events:none"
-                    v-bind:src="member['image_url']" alt="抓不到圖片" />
-          </IonAvatar>
-          <IonLabel>
-            <h3>{{member['username']}}</h3>
-            <IonBadge @click="copy_metamask_address()">
-              {{hidder_metamask_address}}
-            </IonBadge>
-            <p>
-              {{ member_balance }} RTWD
-            </p>
-          </IonLabel>
+<!--          <IonAvatar >-->
+<!--            <IonImg style="pointer-events:none"-->
+<!--                    v-bind:src="member['image_url']" alt="抓不到圖片" />-->
+<!--          </IonAvatar>-->
+<!--          <IonLabel>-->
+<!--            <h3>{{member['username']}}</h3>-->
+<!--            <IonBadge @click="copy_metamask_address()">-->
+<!--              {{hidder_metamask_address}}-->
+<!--            </IonBadge>-->
+<!--            <p>-->
+<!--              {{ member_balance }} RTWD-->
+<!--            </p>-->
+<!--          </IonLabel>-->
+          <metamask_avatar :username="member['username']" :img_url="member['image_url']" :member_balance="member_balance" :metamask_address="member['metamask_address']" />
         </IonCol>
       </IonRow>
         <IonButton slot="end">
@@ -44,7 +45,8 @@
 import {IonPage, IonHeader,   IonContent, IonButton, IonIcon, modalController,IonImg,IonAvatar,IonLabel,IonBadge,IonRow,IonCol
 ,toastController} from '@ionic/vue';
 import {settingsOutline} from 'ionicons/icons';
-import member_update_modal from '../components/tab3/member_update_modal';
+import member_update_modal from '@/components/tab3/member_update_modal';
+import metamask_avatar from '@/components/tab3/metamask_avatar';
 import ccb_tool_bar from '../components/tabs/ccb_tool_bar';
 import grid_divid3 from '@/module/grid_divid3';
 import {use_member} from "@/mixins/member"
@@ -54,7 +56,7 @@ import router from "@/router";
 export default {
   name: 'Tab3',
   components: {IonHeader,   IonContent, IonPage, IonButton, IonIcon,IonImg,IonAvatar,IonLabel,IonBadge,IonRow,IonCol
-    ,grid_divid3,ccb_tool_bar
+    ,grid_divid3,ccb_tool_bar,metamask_avatar
   },
   methods: {
     async openModal(key,val) {
@@ -81,17 +83,17 @@ export default {
     push_open_pay(){
       router.replace(`/spend_how_much?member_id=${this.member_id}`).then(()=>{window.location.reload()})
     },
-    copy_metamask_address(){
-      updateClipboard(this.member['metamask_address'])
-      this.openToast('複製到剪貼簿',200)
-      function updateClipboard(newClip) {
-        navigator.clipboard.writeText(newClip).then(function() {
-          /* clipboard successfully set */
-        }, function() {
-          /* clipboard write failed */
-        });
-      }
-    },
+    // copy_metamask_address(){
+    //   updateClipboard(this.member['metamask_address'])
+    //   this.openToast('複製到剪貼簿',200)
+    //   function updateClipboard(newClip) {
+    //     navigator.clipboard.writeText(newClip).then(function() {
+    //       /* clipboard successfully set */
+    //     }, function() {
+    //       /* clipboard write failed */
+    //     });
+    //   }
+    // },
     async openToast(message,duration) {
       const toast = await toastController
           .create({
@@ -113,12 +115,6 @@ export default {
     return {
       settingsOutline,
     }
-  },
-  computed:{
-    hidder_metamask_address(){
-      if(!this.member['metamask_address']) return 'null'
-      return this.member['metamask_address'].slice(0,5) + '...'+this.member['metamask_address'].slice(-3)
-    },
   },
   mounted() {
     const _this = this
