@@ -39,8 +39,7 @@
   </IonHeader>
   <IonContent style="--ion-background-color:black; --ion-text-color: white ;
 --ion-font-family: 'Noto Sans TC';
-"
-              class="ion-text-center"
+" class="ion-text-center"
   >
     <div name="mint">
     <IonButton @click="mint()" v-show="metamask_response.current?true:false">mint</IonButton>
@@ -170,8 +169,20 @@
         </IonCol>
       </IonRow>
     </div>
+    <div name="artist" style="font-size: 300%">
+      <h2 class="ion-text-uppercase" style="font-size: 200%" >artist</h2>
+      <IonRow >
+        <IonCol size="4">
+          <img src="https://s3.us-east-2.amazonaws.com/asset.roarrr.io/MIKHAIL+ANDERSSON_lion.png"/>
+        </IonCol>
+        <IonCol>
+          MIKHAIL ANDERSSON
+        </IonCol>
+      </IonRow>
+      <IonText color="danger"><p style="text-align: end">More...</p></IonText>
+    </div>
     <div name="gallery">
-    <h2>gallery</h2>
+      <h2 class="ion-text-uppercase" style="font-size: 300%;">gallery</h2>
 <!--  4:3-->
   <ion-slides :options="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
     <ion-slide  style="width: 12.5%; height: 16.6%;
@@ -185,7 +196,7 @@
   </ion-slides>
     </div>
     <div name="team">
-  <h2>team</h2>
+      <h2 class="ion-text-uppercase" style="font-size: 300%;">team</h2>
   <IonRow class="ion-justify-content-center">
     <IonCol size="4">
       <metamask_avatar :username="teams['jeffrey']['username']"
@@ -203,18 +214,20 @@
   </IonRow>
     </div>
   </IonContent>
-
+  <IonFooter style="background-color: red;height: 10%;" class="ion-align-self-center">
+    <p>Copyright © 2022 RORAAA !!!</p>
+  </IonFooter>
 </template>
 
 <script>
 import {loadingController,
-  IonSlides,IonSlide,IonImg,IonLabel,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,} from '@ionic/vue';
+  IonSlides,IonSlide,IonImg,IonLabel,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,IonFooter} from '@ionic/vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import metamask_avatar from '@/components/tab3/metamask_avatar';
 import {logoTwitter,logoInstagram,logoDiscord} from 'ionicons/icons';
 export default {
   name: "tmi_mint_site",
-  components:{IonSlides,IonSlide,IonImg,IonLabel,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,
+  components:{IonSlides,IonSlide,IonImg,IonLabel,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,IonFooter,
     VueCountdown,metamask_avatar},
   data() {
     return {
