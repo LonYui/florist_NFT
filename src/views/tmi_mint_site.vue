@@ -138,6 +138,38 @@
 
       </IonRow>
     </div>
+    <br/>
+    <div name="partner" style="  --background: none;
+  background-image: url('https://s3.us-east-2.amazonaws.com/asset.roarrr.io/giona+pan+nft+background1.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 150%;
+" class="ion-text-left">
+      <h2 class="ion-text-uppercase" style="font-size: 300%; text-align: center">partner</h2>
+      <IonRow>
+        <IonCol size="4">
+      <img src="https://s3.us-east-2.amazonaws.com/asset.roarrr.io/2021%E6%BD%98%E6%80%A1%E8%89%AF%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%B0%A1%E4%BB%8B(1)-3+1.png"/>
+        </IonCol>
+        <IonCol size="8">
+          <p>潘怡良設計師，自2001年自創GIOIA PAN品牌，深耕高級時尚多年，屢獲時尚大獎， 高曝光</p>
+          <p>知名度也成各大國際品牌爭相邀請合作｡産品範圍跨度廣泛，獨家創意特色差異化，生産製造</p>
+          <p>資源及外貿經驗，時尚評審及教學經驗，流行趨勢權威及造型諮詢顧問｡ 各種時尚設計豐富資源的人脈平臺，結合食衣住行育樂整體生活美學的時尚概念大師｡</p>
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <IonCol size="1"/>
+        <IonCol>
+      <p>食：多年與美酒美食業者結盟合作(Beaujolais, Taittinger Champagne, Bombay Sapphire, Godiva</p>
+      <p>Chocolatier, Diamond Tony’s 101, Grand Formosa Regency, Grand Hyatt)</p>
+      <p>衣：各界時尚名人(演藝明星、世界小姐、APEC首席代表、企業團隊服制服設計)</p>
+      <p>住：裝置藝術工程、家居用品設計</p>
+      <p>行：賓士、奧迪、BMW 、大衆汽車</p>
+      <p>育：服裝設計大賽、模特大賽評審</p>
+      <p>樂：明星影視發布會(楊謹華、張震、黃曉明、胡歌、林志玲等)、演唱會、時尚活動媒體評論</p>
+        </IonCol>
+      </IonRow>
+    </div>
     <div name="gallery">
     <h2>gallery</h2>
 <!--  4:3-->
