@@ -84,6 +84,60 @@
       <br/>
       <br/>
     </div>
+    <div name="roadmap" style="  --background: none;
+  background-image: url('https://s3.us-east-2.amazonaws.com/asset.roarrr.io/mint_site%E5%A4%A7%E7%90%86%E7%9F%B3%E8%83%8C%E6%99%AF.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+">
+    <h2 class="ion-text-uppercase" style="font-size: 300%;">roadmap</h2>
+      <IonRow>
+        <IonCol>
+
+          <img src="https://s3.us-east-2.amazonaws.com/asset.roarrr.io/TMI+Lion+Logo.png">
+        </IonCol>
+
+        <IonCol size="1">
+          <img src="https://s3.us-east-2.amazonaws.com/asset.roarrr.io/text_X.png">
+
+        </IonCol>
+        <IonCol>
+          <img src="https://s3.us-east-2.amazonaws.com/asset.roarrr.io/GIOIA+PAN+%E6%BD%98%E6%80%A1%E8%89%AF-%E4%B8%AD%E8%8B%B1%E6%96%87%E6%A9%AB%E5%BC%8F-LOGO-%E7%99%BD+1.png">
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <IonCol style="  border-color: white;
+  border-width: .25em;
+  border-style:solid; margin-bottom : -1px;
+  margin: 10px; "
+        >
+          <h3>第一年規劃</h3>
+          <hr style="height:2px;border-width:0;color:white;background-color:white"/>
+          <h3>首波限量:588張</h3>
+        </IonCol>
+        <IonCol style="  border-color: white;
+  border-width: .25em;
+  border-style:solid; margin-bottom : -1px;
+  margin: 10px; "
+        >
+          <h3>第二年規劃</h3>
+          <hr style="height:2px;border-width:0;color:white;background-color:white"/>
+          <h3>今年10月公布</h3>
+          <h3>預告</h3>
+        </IonCol>
+        <IonCol style="  border-color: white;
+  border-width: .25em;
+  border-style:solid; margin-bottom : -1px;
+  margin: 10px; "
+        >
+          <h3>第三年規劃</h3>
+          <hr style="height:2px;border-width:0;color:white;background-color:white"/>
+          <h3>明年3月公布</h3>
+          <h3>預告</h3>
+        </IonCol>
+
+      </IonRow>
+    </div>
     <div name="gallery">
     <h2>gallery</h2>
 <!--  4:3-->
