@@ -30,7 +30,7 @@ export default {
   name: "nft_detail_modal",
   mixins:[use_NFT],
   components:{ IonHeader,IonToolbar,IonContent,IonImg,IonRow,IonCol,IonButton },
-  props:['address','token_id','token_type'],
+  props:['address','token_id','token_type','process'],
 
 }
 </script>

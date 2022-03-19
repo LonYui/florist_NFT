@@ -57,6 +57,7 @@ export default {
             componentProps: {
               address:address,
               token_id:token_id,
+              process:process,
             },
           })
       return modal.present();
