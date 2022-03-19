@@ -143,7 +143,6 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  font-size: 150%;
 " class="ion-text-left">
       <h2 class="ion-text-uppercase" style="font-size: 300%; text-align: center">partner</h2>
       <IonRow>
@@ -185,7 +184,7 @@
       <h2 class="ion-text-uppercase" style="font-size: 300%;">gallery</h2>
 <!--  4:3-->
   <ion-slides :options="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
-    <ion-slide  style="width: 12.5%; height: 16.6%;
+    <ion-slide  style="width: 16.6%; height: 22.1%;
     border: 2px solid #f8f8f8;
 " v-for="img in imgs" v-bind:key="imgs.indexOf(img)">
       <ion-col>
@@ -195,7 +194,7 @@
     </ion-slide>
   </ion-slides>
     </div>
-    <div name="team">
+    <div name="team" class="ion-text-left">
       <h2 class="ion-text-uppercase" style="font-size: 300%;">team</h2>
   <IonRow class="ion-justify-content-center">
     <IonCol size="4">
@@ -213,9 +212,10 @@
     </IonCol>
   </IonRow>
     </div>
+    <div style="height: 30%"></div>
   </IonContent>
-  <IonFooter style="background-color: red;height: 10%;" class="ion-align-self-center">
-    <p>Copyright © 2022 RORAAA !!!</p>
+  <IonFooter style="--min-height: 20% !important;	font-size: 80%;vertical-align: middle;"
+             class="ion-text-center">
   </IonFooter>
 </template>
 
