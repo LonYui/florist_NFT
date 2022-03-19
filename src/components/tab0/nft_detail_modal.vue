@@ -19,7 +19,7 @@
         <p>{{NFT['description']}}</p>
       </IonCol>
     </IonRow>
-    <a v-bind:href="`https://${process.env.VUE_APP_opensea_domain}/assets/${this.address}/${this.token_id_ten}`">https://{{process.env.VUE_APP_opensea_domain}}/assets/{{address}}/{{token_id_ten}}</a>
+    <a v-bind:href="`https://${this.process.env.VUE_APP_opensea_domain}/assets/${this.address}/${this.token_id}`">https://{{process.env.VUE_APP_opensea_domain}}/assets/{{address}}/{{token_id}}</a>
   </IonContent>
 </template>
 
@@ -31,6 +31,11 @@ export default {
   mixins:[use_NFT],
   components:{ IonHeader,IonToolbar,IonContent,IonImg,IonRow,IonCol,IonButton },
   props:['address','token_id','token_type','process'],
+  computed:{
+    token_id_ten(){
+      return parseInt(this.token_id, 16)
+    }
+  }
 
 }
 </script>
