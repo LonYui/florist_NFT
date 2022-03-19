@@ -95,7 +95,7 @@ export default  {
             componentProps: {
               address:contract_address,
               token_id:token_id,
-              process:process,
+              VUE_APP_opensea_domain:process.env.VUE_APP_opensea_domain,
             },
           })
       return modal.present();
