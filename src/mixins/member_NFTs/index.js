@@ -22,5 +22,8 @@ export let use_member_NFTs = {
 
             return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member/nfts?member_id=${member_id}&limit=${limit}`, requestOptions)
         },
+    },
+    created(){
+        this.NFTs=[]
     }
 }

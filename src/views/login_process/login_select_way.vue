@@ -31,16 +31,14 @@ export default {
     return {callOutline, logoFacebook}
   },
   methods: {
-    log_in_with_facebook(){
-      signInWithRedirect(this.auth, this.provider).then(()=>{
-        var user = this.auth.currentUser
-        if(user){
-          router.push('/login')
-          window.location.reload()
-        }else{
-          alert('login fial')
-        }
-      })
+    async log_in_with_facebook(){
+      await signInWithRedirect(this.auth, this.provider)
+      var user = this.auth.currentUser
+      if(user){
+        router.push('/login').then(()=>{window.location.reload()})
+      }else{
+        alert('login fial')
+      }
     },
   },
 }
