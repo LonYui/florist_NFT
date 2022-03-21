@@ -6,23 +6,28 @@
 				<img src="../imgs/fb-icon.svg" class="fb-icon" alt="FB icon"/>
 				使用Facebook登入
 			</button>
+			<button  @click="location.href='/mail_psw'">
+        <IonIcon slot="start" :icon="mailOutline"/>
+				使用eamil登入
+			</button>
       <img src="../imgs/page1_buttonbar.png" class="button-img" alt="摩天輪">
 		</div>
 </template>
 
 <script>
 import {
-   callOutline,logoFacebook
+   callOutline,logoFacebook,mailOutline
 } from "ionicons/icons";
-import router from "../../router";
+import router from "@/router";
 import "./login_select_way.css";
 import { getAuth, signInWithRedirect, FacebookAuthProvider } from "firebase/auth";
-import { loadingController} from '@ionic/vue';
+import { loadingController,IonIcon} from '@ionic/vue';
 
 
 export default {
   name: "login_select_way",
   inject:['firebase_app'],
+  components: {IonIcon},
   data(){
     return{
       provider : new FacebookAuthProvider(),
@@ -30,7 +35,7 @@ export default {
     }
   },
   setup() {
-    return {callOutline, logoFacebook}
+    return {callOutline, logoFacebook, mailOutline}
   },
   methods: {
     log_in_with_facebook(){

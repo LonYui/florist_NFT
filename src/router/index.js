@@ -120,7 +120,11 @@ const routes = [
   {
     path: '/tmi_mint_site',
     component: () => import('@/views/tmi_mint_site.vue'),
-  }
+  },
+  {
+    path: '/mail_psw',
+    component: () => import('@/views/login_process/mail_psw.vue'),
+  },
 
 ]
 
