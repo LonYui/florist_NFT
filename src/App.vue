@@ -1,6 +1,5 @@
 <template>
   <ion-app>
-<!--    <ccb_menu/>-->
     <ion-router-outlet id="main" />
   </ion-app>
 </template>
@@ -31,8 +30,10 @@ export default defineComponent({
       firebase_app:initializeApp(firebaseConfig)
     }
   },
-  provide:{
-    firebase_app:this.firebase_app
+  provide(){
+    return{
+      firebase_app:this.firebase_app
+    }
   },
 });
 </script>

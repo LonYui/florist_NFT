@@ -15,39 +15,25 @@ import {
    callOutline,logoFacebook
 } from "ionicons/icons";
 // import router from "../../router";
-// import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
 import "./login_select_way.css";
 import { getAuth, signInWithRedirect, FacebookAuthProvider } from "firebase/auth";
 
-const provider = new FacebookAuthProvider();
-const auth = getAuth();
 export default {
   name: "login_select_way",
-  // mixins:[facebookSDK,],
+  inject:['firebase_app'],
+  data(){
+    return{
+      provider : new FacebookAuthProvider(),
+      auth : getAuth()
+    }
+  },
   setup() {
     return {callOutline, logoFacebook}
   },
   methods: {
     log_in_with_facebook(){
-      signInWithRedirect(auth, provider)
+      signInWithRedirect(this.auth, this.provider)
     },
-    // log_in_with_facebook(){
-    //   //TODO what:why not _this work?
-    //   let _statusChangeCallback=this.statusChangeCallback
-    //   this.FB.login(function(response) {
-    //     _statusChangeCallback(response)
-    //   }, {scope: 'public_profile,email'});
-    //   //TODO  wait fb pass permision add email, birthday, gender
-    //
-    // },
-    // statusChangeCallback(response){
-    //   if (response.status === 'connected') {
-    //     // Logged into your webpage and Facebook.
-    //     router.replace('/login').then(()=>{window.location.reload()})
-    //   } else {
-    //     // The person is not logged into your webpage or we are unable to tell.
-    //   }
-    // }
   },
 }
 </script>
