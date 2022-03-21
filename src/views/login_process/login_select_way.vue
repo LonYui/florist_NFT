@@ -17,6 +17,8 @@ import {
 import router from "../../router";
 import "./login_select_way.css";
 import { getAuth, signInWithRedirect, FacebookAuthProvider } from "firebase/auth";
+import { loadingController} from '@ionic/vue';
+
 
 export default {
   name: "login_select_way",
@@ -35,12 +37,20 @@ export default {
       signInWithRedirect(this.auth, this.provider)
     },
   },
-  created() {
+  async created() {
+    const loading = await loadingController
+        .create({
+          cssClass: 'my-custom-class',
+          message: '',
+          duration: 9999*1000,
+        });
+    await loading.present();
     this.auth.onAuthStateChanged(
         user => {
           if (user) {
             router.push('/login').then(() => {window.location.reload()})
           }
+          loading.dismiss()
         }
     )
   }

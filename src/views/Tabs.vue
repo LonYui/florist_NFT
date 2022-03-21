@@ -33,13 +33,11 @@ import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouter
 ,
 } from '@ionic/vue';
 import {ellipse, homeOutline, storefrontOutline, personCircleOutline} from 'ionicons/icons';
-import {facebookSDK} from "@/mixins/facebook_javascript_sdk"
 import router from "@/router";
 import ccb_menu from '@/components/ccb_menu';
 import { getAuth } from "firebase/auth";
 export default {
   name: 'Tabs',
-  mixins:[facebookSDK,],
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet,
     ccb_menu,
   },
@@ -52,9 +50,6 @@ export default {
           })
       return toast.present();
     },
-    // push_to_page1(){
-    //   router.replace('/login_select_way').then(()=>{window.location.reload()})
-    // },
     push_to_tab(tab_num){
       router.push(`/tabs/tab${tab_num}?member_id=${this.member_id}`)
       },
@@ -108,6 +103,7 @@ export default {
     await loading.present();
 
     this.auth.onAuthStateChanged(
+        // TODO check regist too
         user => {
           if (!user) {
             router.push('/login_select_way').then(() => {window.location.reload()})
@@ -122,36 +118,5 @@ export default {
         }
     )
   },
-  // watch: {
-  //   'member_id': function (val) {
-  //     if (val===undefined || val === null){
-  //       this.push_to_page1()
-  //     }
-  //   }
-  // },
-  async mounted() {
-    // //check login
-    // const loading = await loadingController
-    //     .create({
-    //       cssClass: 'my-custom-class',
-    //       message: '',
-    //       duration: 9999*1000,
-    //     });
-    //
-    // await loading.present();
-
-    // const delay = ms => new Promise(res => setTimeout(res, ms));
-    // await delay(1300);
-    //
-    // const _this = this
-    // await this.FB.getLoginStatus(function(response) {
-    //   _this.member_id =  response.authResponse ? response.authResponse.userID : undefined
-    // });
-    // loading.dismiss()
-    // if (router.currentRoute._value.path==='/tabs/tab0' && JSON.stringify(router.currentRoute._value.params)=='{}'){
-    //   this.push_to_tab(0)
-    // }
-  }
-
 }
 </script>

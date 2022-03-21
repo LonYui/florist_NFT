@@ -27,19 +27,20 @@ import {
   } from '@ionic/vue';
 import router from "../../router";
 import "./login.css";
-// import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
-import { getAuth} from "firebase/auth";
+import {facebookSDK} from "@/mixins/facebook_javascript_sdk"
+import { getAuth
+  // ,getRedirectResult, FacebookAuthProvider
+} from "firebase/auth";
 import {use_member} from "../../mixins/member"
 export default {
   name: 'Login',
-  mixins:[use_member],
+  mixins:[use_member,facebookSDK],
   data(){
     return {
       otp:"",
-      // mob:"",
-      // mob_country_code:'886',
       fetch_send_otp_count:0,
       auth:getAuth(),
+      loading:null,
     }
   },
 
@@ -148,105 +149,51 @@ export default {
           alert('some error happen contack d5269357812@gmail.com')
         }
       })
-
-
-      // api a
-      // this.FB.getLoginStatus(function (response_a) {
-      //   facebook_user_id = response_a.authResponse.userID
-      //   // api b
-      //   _this.FB.api(
-      //       `/${facebook_user_id}/`,{  fields: 'name, email, picture' },
-      //       function (response_b) {
-      //         var sexuality,username,birth_datetime,email,image_url
-      //         if (response_b && !response_b.error) {
-      //           sexuality = response_b.gender //Note diff naem  in our is sexyality in fb is gender
-      //           birth_datetime = response_b.birthday
-      //           username = response_b.name
-      //           email = response_b.email
-      //           image_url = response_b.picture.data.url
-      //         }
-      //         // api c
-      //         _this.fetch_verify_OTP({
-      //           mob: _this.mob, otp: _this.otp,
-      //         }).then(response_c => {
-      //           if (response_c.status === 200) {
-      //             //check user exist if not create
-      //             _this.fetch_get_member(facebook_user_id).then(response_d=>{
-      //               if (response_d.status===404){
-      //                 _this.fetch_post_member({member_id:facebook_user_id,mob:_this.mob,
-      //                   sexuality:sexuality,username:username,birth_datetime:birth_datetime,
-      //                   mob_country_code:_this.mob_country_code,email:email,image_url:image_url
-      //                 }).then(response_e=>{
-      //                   if (response_e.status===200){
-      //                     router.replace('/').then(() => {
-      //                       //end2 the loading img
-      //                       loading.dismiss()
-      //                       window.location.reload()
-      //                     })
-      //                   }
-      //                   else {
-      //                     response_e.json().then(json => {
-      //                       //end3 the loading img
-      //                       loading.dismiss()
-      //                       alert(json.message)
-      //                     })
-      //                   }
-      //
-      //                 })
-      //               }
-      //               else if(response_d.status===200) {
-      //                 router.replace('/').then(() => {
-      //                   //end1 the loading img
-      //                   loading.dismiss()
-      //                   window.location.reload()
-      //                 })
-      //               }
-      //             })
-      //           }
-      //           else if (response_c.status === 401) {
-      //             response_c.json().then(json => {
-      //               //end4 the loading img
-      //               loading.dismiss()
-      //               alert(json.message)
-      //             })
-      //           }
-      //         })
-      //       }
-      //   )
-      // });
     },
     back_to_page1(){
       router.replace('/login_select_way').then(()=>{window.location.reload()})
     },
-    async get_fb_data(){
-      const _this=this
-      this.FB.api(
-          `/${this.auth.currentUser.uid}/`,{  fields: 'name, email, picture' },
-          function (response_b) {
-            // var sexuality,username,birth_datetime,email,image_url
-            if (response_b && !response_b.error) {
-              _this.member.sexuality = response_b.gender //Note diff naem  in our is sexyality in fb is gender
-              _this.member.birth_datetime = response_b.birthday
-              _this.member.username = response_b.name
-              _this.member.email = response_b.email
-              _this.member.image_url = response_b.picture.data.url
-            }
-          }
-      )
-
-    }
+    // TODO
+    // async get_fb_data(){
+    //   const _this=this
+    //   this.FB.api(
+    //       `/${this.auth.currentUser.uid}/`,{  fields: 'name, email, picture' },
+    //       function (response_b) {
+    //         // var sexuality,username,birth_datetime,email,image_url
+    //         if (response_b && !response_b.error) {
+    //           _this.member.sexuality = response_b.gender //Note diff naem  in our is sexyality in fb is gender
+    //           _this.member.birth_datetime = response_b.birthday
+    //           _this.member.username = response_b.name
+    //           _this.member.email = response_b.email
+    //           _this.member.image_url = response_b.picture.data.url
+    //         }
+    //       }
+    //   )
+    //
+    // }
   },
-  created() {
+  async created() {
+    const _this = this
+    const loading = await loadingController
+        .create({
+          cssClass: 'my-custom-class',
+          message: '',
+          duration: 9999*1000,
+        });
+    await loading.present();
     this.auth.onAuthStateChanged(
         user => {
           this.fetch_get_member(user.uid).then(response => {
             if (response.status === 200) {
               router.replace('/').then(() => {window.location.reload()})
             }else{
+              _this.member.member_id = user.uid
               // start otp process
-              this.get_fb_data()
+              // TODO fix thisss!!!
+              // _this.get_fbdata
             }
           })
+          loading.dismiss()
         }
     )
   }
