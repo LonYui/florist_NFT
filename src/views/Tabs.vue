@@ -36,6 +36,7 @@ import {ellipse, homeOutline, storefrontOutline, personCircleOutline} from 'ioni
 import {facebookSDK} from "@/mixins/facebook_javascript_sdk"
 import router from "@/router";
 import ccb_menu from '@/components/ccb_menu';
+import { getAuth } from "firebase/auth";
 export default {
   name: 'Tabs',
   mixins:[facebookSDK,],
@@ -51,16 +52,17 @@ export default {
           })
       return toast.present();
     },
-    push_to_page1(){
-      router.replace('/login_select_way').then(()=>{window.location.reload()})
-    },
+    // push_to_page1(){
+    //   router.replace('/login_select_way').then(()=>{window.location.reload()})
+    // },
     push_to_tab(tab_num){
       router.push(`/tabs/tab${tab_num}?member_id=${this.member_id}`)
       },
   },
-  data(){
+  data() {
     return {
-        member_id: null,
+      member_id: null,
+      auth: getAuth(),
     }
   },
   setup() {
@@ -71,41 +73,31 @@ export default {
       homeOutline,
     }
   },
-  created() {
-    // from article https://www.netguru.com/blog/pwa-ios
-    // and debug isIos()
-    // Detects if device is on iOS
-    const isIos = () => {
-      return [
-            'iPad Simulator',
-            'iPhone Simulator',
-            'iPod Simulator',
-            'iPad',
-            'iPhone',
-            'iPod'
-          ].includes(navigator.platform)
-          // iPad on iOS 13 detection
-          || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
-    }
-    // Detects if device is in standalone mode
-    const isInStandaloneMode = () => window.navigator.standalone && window.clientInformation.standalone
-
-    // Checks if should display install popup notification:
-    if (isIos() && !isInStandaloneMode()) {
-      this.openToast()
-    }
-
-
-  },
-  watch: {
-    'member_id': function (val) {
-      if (val===undefined || val === null){
-        this.push_to_page1()
-      }
-    }
-  },
-  async mounted() {
-    //check login
+  async created() {
+    /* job1 pwa allert*/
+    // // from article https://www.netguru.com/blog/pwa-ios
+    // // and debug isIos()
+    // // Detects if device is on iOS
+    // const isIos = () => {
+    //   return [
+    //         'iPad Simulator',
+    //         'iPhone Simulator',
+    //         'iPod Simulator',
+    //         'iPad',
+    //         'iPhone',
+    //         'iPod'
+    //       ].includes(navigator.platform)
+    //       // iPad on iOS 13 detection
+    //       || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+    // }
+    // // Detects if device is in standalone mode
+    // const isInStandaloneMode = () => window.navigator.standalone && window.clientInformation.standalone
+    //
+    // // Checks if should display install popup notification:
+    // if (isIos() && !isInStandaloneMode()) {
+    //   this.openToast()
+    // }
+    /* job2 login check*/
     const loading = await loadingController
         .create({
           cssClass: 'my-custom-class',
@@ -115,17 +107,50 @@ export default {
 
     await loading.present();
 
-    const delay = ms => new Promise(res => setTimeout(res, ms));
-    await delay(1300);
+    this.auth.onAuthStateChanged(
+        user => {
+          if (!user) {
+            router.push('/login_select_way').then(() => {window.location.reload()})
+          }
+          //load member_id
+          this.member_id=user.uid
+          // if (router.currentRoute._value.path==='/tabs/tab0' && JSON.stringify(router.currentRoute._value.params)=='{}'){
+          //   this.push_to_tab(0)
+          // }
 
-    const _this = this
-    await this.FB.getLoginStatus(function(response) {
-      _this.member_id =  response.authResponse ? response.authResponse.userID : undefined
-    });
-    loading.dismiss()
-    if (router.currentRoute._value.path==='/tabs/tab0' && JSON.stringify(router.currentRoute._value.params)=='{}'){
-      this.push_to_tab(0)
-    }
+          loading.dismiss()
+        }
+    )
+  },
+  // watch: {
+  //   'member_id': function (val) {
+  //     if (val===undefined || val === null){
+  //       this.push_to_page1()
+  //     }
+  //   }
+  // },
+  async mounted() {
+    // //check login
+    // const loading = await loadingController
+    //     .create({
+    //       cssClass: 'my-custom-class',
+    //       message: '',
+    //       duration: 9999*1000,
+    //     });
+    //
+    // await loading.present();
+
+    // const delay = ms => new Promise(res => setTimeout(res, ms));
+    // await delay(1300);
+    //
+    // const _this = this
+    // await this.FB.getLoginStatus(function(response) {
+    //   _this.member_id =  response.authResponse ? response.authResponse.userID : undefined
+    // });
+    // loading.dismiss()
+    // if (router.currentRoute._value.path==='/tabs/tab0' && JSON.stringify(router.currentRoute._value.params)=='{}'){
+    //   this.push_to_tab(0)
+    // }
   }
 
 }

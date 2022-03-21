@@ -217,23 +217,39 @@ export default {
     },
     back_to_page1(){
       router.replace('/login_select_way').then(()=>{window.location.reload()})
+    },
+    async get_fb_data(){
+      const _this=this
+      this.FB.api(
+          `/${this.auth.currentUser.uid}/`,{  fields: 'name, email, picture' },
+          function (response_b) {
+            // var sexuality,username,birth_datetime,email,image_url
+            if (response_b && !response_b.error) {
+              _this.member.sexuality = response_b.gender //Note diff naem  in our is sexyality in fb is gender
+              _this.member.birth_datetime = response_b.birthday
+              _this.member.username = response_b.name
+              _this.member.email = response_b.email
+              _this.member.image_url = response_b.picture.data.url
+            }
+          }
+      )
+
     }
   },
-  async mounted() {
-    // const delay = ms => new Promise(res => setTimeout(res, ms));
-    // await delay(1000);
-    // var facebook_user_id
-    // await this.FB.getLoginStatus(function(response) {
-    //   facebook_user_id = response.authResponse.userID
-    // });
-    var user = this.auth.currentUser
-    this.fetch_get_member(user.uid).then(response => {
-      if (response.status === 200) {
-        router.replace('/').then(() => {
-          window.location.reload()
-        })
-      }
-    })
-  },
+  created() {
+    this.auth.onAuthStateChanged(
+        user => {
+          this.fetch_get_member(user.uid).then(response => {
+            if (response.status === 200) {
+              router.replace('/').then(() => {window.location.reload()})
+            }else{
+              // start otp process
+              this.get_fb_data()
+            }
+          })
+        }
+    )
+  }
+
 }
 </script>
