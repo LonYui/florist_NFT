@@ -14,7 +14,7 @@
 import {
    callOutline,logoFacebook
 } from "ionicons/icons";
-// import router from "../../router";
+import router from "../../router";
 import "./login_select_way.css";
 import { getAuth, signInWithRedirect, FacebookAuthProvider } from "firebase/auth";
 
@@ -32,7 +32,15 @@ export default {
   },
   methods: {
     log_in_with_facebook(){
-      signInWithRedirect(this.auth, this.provider)
+      signInWithRedirect(this.auth, this.provider).then(()=>{
+        var user = this.auth.currentUser
+        if(user){
+          router.push('/login')
+          window.location.reload()
+        }else{
+          alert('login fial')
+        }
+      })
     },
   },
 }
