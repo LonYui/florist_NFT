@@ -4,34 +4,42 @@
   >
     <h1>TMI Lion</h1>
     <IonToolbar >
-      <IonRow class="ion-justify-content-start">
-          <IonCol size="1">
-            about
-          </IonCol>
-          <IonCol size="1">
-            roadmap
-          </IonCol>
-          <IonCol size="1">
-            partner&artist
-          </IonCol>
-          <IonCol size="1">
-            gallery
-          </IonCol>
-          <IonCol size="1">
-            team
-          </IonCol>
+      <IonRow class="ion-justify-content-end">
+<!--          <IonCol size="1">-->
+<!--            <a href="/tmi_mint_site#about">about</a>-->
+<!--          </IonCol>-->
+<!--          <IonCol size="1">-->
+<!--            <a href="/tmi_mint_site#roadmap">roadmap</a>-->
+<!--          </IonCol>-->
+<!--          <IonCol size="1">-->
+<!--            <a href="/tmi_mint_site#partner">partner</a>-->
+<!--          </IonCol>-->
+<!--          <IonCol size="1">-->
+<!--            <a href="/tmi_mint_site#gallery">gallery</a>-->
+<!--          </IonCol>-->
+<!--          <IonCol size="1">-->
+<!--            <a href="/tmi_mint_site#team">team</a>-->
+<!--          </IonCol>-->
 
         <IonCol size="1">
+          <a href="https://www.instagram.com/tmi.lion/">
       <IonIcon size="large" :icon="logoInstagram"></IonIcon>
+          </a>
         </IonCol>
         <IonCol size="1">
+          <a href="https://discord.gg/pfgwjUbd">
       <IonIcon size="large" :icon="logoDiscord"></IonIcon>
+          </a>
         </IonCol>
         <IonCol size="1">
+          <a href="https://twitter.com/tmi_lion/">
       <IonIcon size="large" :icon="logoTwitter"></IonIcon>
+          </a>
         </IonCol >
         <IonCol size="1">
+          <a href="https://testnets.opensea.io/collection/gioia-pan-x-too-much-information-lion">
       opensea
+          </a>
         </IonCol>
       </IonRow>
       <IonTitle></IonTitle>
@@ -41,7 +49,7 @@
 --ion-font-family: 'Noto Sans TC';
 " class="ion-text-center"
   >
-    <div name="mint">
+    <div id="mint">
     <IonButton @click="mint()" v-show="metamask_response.current?true:false">mint</IonButton>
     <IonButton @click="white_list_mint()" v-show="white_list.includes(metamask_response.current)">white_list_mint</IonButton>
     <div v-if="metamask_response.current?true:false">
@@ -58,7 +66,7 @@
     Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
   </vue-countdown>
     </div>
-    <div name="about" style="  --background: none;
+    <div id="about" style="  --background: none;
   background: #847E7E80;
   background-image: url('https://s3.us-east-2.amazonaws.com/asset.roarrr.io/Lion_logo2+1.png');
   background-position: center center;
@@ -83,7 +91,7 @@
       <br/>
       <br/>
     </div>
-    <div name="roadmap" style="  --background: none;
+    <div id="roadmap" style="  --background: none;
   background-image: url('https://s3.us-east-2.amazonaws.com/asset.roarrr.io/mint_site%E5%A4%A7%E7%90%86%E7%9F%B3%E8%83%8C%E6%99%AF.png');
   background-position: center center;
   background-repeat: no-repeat;
@@ -112,7 +120,14 @@
         >
           <h3>第一年規劃</h3>
           <hr style="height:2px;border-width:0;color:white;background-color:white"/>
-          <h3>首波限量:588張</h3>
+<!--          <h3>首波限量:588張</h3>-->
+          <h3>1.首波限定，往後TMI Lion</h3>
+            <h3>系列NFT的Minet PASS</h3>
+<br/>
+          <h3>2.終身不定期舉辦獅出有名會員</h3>
+          <h3>專屬線下時尚派對</h3>
+<br/>
+          <h3>3.終生不定期空投澎派禮物包</h3>
         </IonCol>
         <IonCol style="  border-color: white;
   border-width: .25em;
@@ -121,8 +136,19 @@
         >
           <h3>第二年規劃</h3>
           <hr style="height:2px;border-width:0;color:white;background-color:white"/>
-          <h3>今年10月公布</h3>
-          <h3>預告</h3>
+<!--          <h3>今年10月公布</h3>-->
+          <h3>1.終身會員VIP 5折</h3>
+          <br/>
+          <h3>2.連續3年每季空投高質感高磅數服飾</h3>
+            <h3>(隨季節不同T-SHirt或帽T</h3>
+          <br/>
+          <h3>3.連續三年台灣地區潘老師秀展(兩場)20名</h3>
+          <br/>
+          <h3>4.連續三年非台灣地區潘老師秀展(一場)10名</h3>
+          <br/>
+          <h3>5.4月抽出2022秋冬新款上衣</h3>
+          <br/>
+          <h3>6.不定期舉辦潘怡良專屬線下聚會</h3>
         </IonCol>
         <IonCol style="  border-color: white;
   border-width: .25em;
@@ -131,14 +157,14 @@
         >
           <h3>第三年規劃</h3>
           <hr style="height:2px;border-width:0;color:white;background-color:white"/>
-          <h3>明年3月公布</h3>
-          <h3>預告</h3>
+          <h1>陸續規劃中
+            敬請期待</h1>
         </IonCol>
 
       </IonRow>
     </div>
     <br/>
-    <div name="partner" style="  --background: none;
+    <div id="partner" style="  --background: none;
   background-image: url('https://s3.us-east-2.amazonaws.com/asset.roarrr.io/giona+pan+nft+background1.png');
   background-position: center center;
   background-repeat: no-repeat;
@@ -168,19 +194,26 @@
         </IonCol>
       </IonRow>
     </div>
-    <div name="artist" style="font-size: 300%">
+    <div id="artist" >
       <h2 class="ion-text-uppercase" style="font-size: 200%" >artist</h2>
       <IonRow >
         <IonCol size="4">
-          <img src="https://s3.us-east-2.amazonaws.com/asset.roarrr.io/MIKHAIL+ANDERSSON_lion.png"/>
+          <img src="https://s3.us-east-2.amazonaws.com/asset.roarrr.io/%E5%A7%8A%E5%A7%8A%E5%89%8D%E7%94%B7%E5%8F%8B%E7%B4%90%E7%B4%84%E5%88%BA%E9%9D%92%E5%B8%AB.png"/>
         </IonCol>
         <IonCol>
-          MIKHAIL ANDERSSON
+          <p>由知名紋身藝術家 : Mikhail Andersson親自操刀設計。</p>
+          <p>設計主軸“獅子頭“，代表的是TMI Lion俱樂部王者風範！</p>
+          <br/>
+        <p>⚡紋身藝術家：Mikhail Andersson</p>
+          <p>經歷：</p>
+      <p>📌 全球票選紐約第三名紋身店經營者&紋身藝術家。</p>
+      <p>📌 其經營的紋身店 Fisrt Class Tatto，服務客層皆為時尚名流。</p>
+      <p>📌 天后-Rihanna 與嘻哈天王-Snoop Dogg皆在他的客戶名單。</p>
         </IonCol>
       </IonRow>
-      <IonText color="danger"><p style="text-align: end">More...</p></IonText>
+      <IonText color="danger"><h1 style="text-align: end;font-size: 300%;">More...</h1></IonText>
     </div>
-    <div name="gallery">
+    <div id="gallery">
       <h2 class="ion-text-uppercase" style="font-size: 300%;">gallery</h2>
 <!--  4:3-->
   <ion-slides :options="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
@@ -194,23 +227,56 @@
     </ion-slide>
   </ion-slides>
     </div>
-    <div name="team" class="ion-text-left">
+    <div id="team" class="ion-text-left">
       <h2 class="ion-text-uppercase" style="font-size: 300%;">team</h2>
-  <IonRow class="ion-justify-content-center">
-    <IonCol size="4">
-      <metamask_avatar :username="teams['jeffrey']['username']"
-                       :img_url="teams['jeffrey']['image_url']"
-                       :member_balance="null"
-                       :metamask_address="teams['jeffrey']['metamask_address']"
-      />
-    </IonCol>
-    <IonCol size="4">
-      <metamask_avatar :username="teams['kevin']['username']"
-                       :img_url="teams['kevin']['image_url']"
-                       :member_balance="null"
-                       :metamask_address="teams['kevin']['metamask_address']" />
-    </IonCol>
-  </IonRow>
+      <IonRow>
+        <IonCol size="3">
+          <metamask_avatar :username="teams['Charles']['username']"
+                           :img_url="teams['Charles']['image_url']"
+                           :member_balance="null"
+                           :metamask_address="teams['Charles']['metamask_address']"
+          />
+        </IonCol>
+        <IonCol >
+<h3>創辦人：Charles</h3>
+<br>
+          <h3>世界第一廣告公司：大中華執行製作總監</h3>
+          <h3>客戶囊括NIKE、APPLE、拉菲酒、特斯拉等國際巨型IP</h3>
+          <h3>每年營收約4－5億新台幣，國際知名行銷鬼才</h3>
+        </IonCol>
+      </IonRow>
+      <IonRow>
+        <IonCol size="3">
+          <metamask_avatar :username="teams['J姊']['username']"
+                           :img_url="teams['J姊']['image_url']"
+                           :member_balance="null"
+                           :metamask_address="teams['J姊']['metamask_address']"
+          />
+        </IonCol>
+        <IonCol>
+          <h3>時尚品牌長：J姐</h3>
+<br>
+          <h3>好萊塢、兩岸三地娛樂圈公關行銷十多年經歷</h3>
+          <h3>全球改裝車市場操盤手</h3>
+          <h3>熟識全球知名現代藝術家與設計師</h3>
+          <h3>(想知道有那些大神嗎? 敬請期待~ 我們將會陸續透漏給大家)</h3>
+        </IonCol>
+      </IonRow>
+<!--  <IonRow class="ion-justify-content-center">-->
+<!--    <IonCol size="4">-->
+<!--      <metamask_avatar :username="teams['jeffrey']['username']"-->
+<!--                       :img_url="teams['jeffrey']['image_url']"-->
+<!--                       :member_balance="null"-->
+<!--                       :metamask_address="teams['jeffrey']['metamask_address']"-->
+<!--      />-->
+<!--    </IonCol>-->
+<!--    <IonCol size="4">-->
+<!--      <metamask_avatar :username="teams['kevin']['username']"-->
+<!--                       :img_url="teams['kevin']['image_url']"-->
+<!--                       :member_balance="null"-->
+<!--                       :metamask_address="teams['kevin']['metamask_address']" />-->
+<!--    </IonCol>-->
+<!--  </IonRow>-->
     </div>
     <div style="height: 30%"></div>
   </IonContent>
@@ -232,18 +298,18 @@ export default {
   data() {
     return {
       imgs:[
-        `https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/kevin_invite.gif`
+        ,`https://s3.us-east-2.amazonaws.com/asset.roarrr.io/kevin_invite.gif`
+        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
       ],
       metamask_response: {
         network: 'rinkeby',
@@ -253,8 +319,8 @@ export default {
       white_list: [],
       token_id: '123',
       teams:{
-        'kevin':{username:'kevin',image_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd0H0AOijnTE9n6eWb2Cxqm9LOMJSLpA_NHw&usqp=CAU',metamask_address:'admin.ccb.eth'},
-        'jeffrey':{username:'jeffrey',image_url:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-U1ZM7J9dnweXdxds19sBW3Vh5uTR-mt6MQ&usqp=CAU',metamask_address:'jeffrey.eth'}
+        'Charles':{username:'Charles',image_url:'https://s3.us-east-2.amazonaws.com/asset.roarrr.io/%E7%81%B0%E9%9A%8Echarles_tmi_L.png',metamask_address:'CEO.roarrr.eth'},
+        'J姊':{username:'J姊',image_url:'https://s3.us-east-2.amazonaws.com/asset.roarrr.io/originJoyce_tmi_L.png',metamask_address:'CFO.roarrr.eth'}
       }
     }
   },
