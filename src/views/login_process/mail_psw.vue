@@ -1,25 +1,25 @@
 <template>
-  <IonLabel>帳號</IonLabel>
-  <IonInput v-model="email" />
+  <IonLabel>註冊信箱</IonLabel>
+  <IonInput v-model="email" autocomplete="email" clearInput="true" type="email"/>
   <IonLabel>密碼</IonLabel>
-  <VuePassword v-model="password" />
+  <IonInput v-model="password" autocomplete="new-password" type="password"/>
   <IonButton @click="signin()">
     登入
   </IonButton>
-  <IonLabel>密碼確認</IonLabel>
-  <VuePassword v-model="password2" />
-  <IonButton :disabled="password2!=password">
+  <br/>
+  <IonLabel :color="color_of_password2" >密碼確認</IonLabel>
+  <IonInput v-model="password2" autocomplete="new-password" type="password" />
+  <IonButton :disabled="!is_password_same" @click="signup">
     註冊
   </IonButton>
 </template>
 
 <script>
-import VuePassword from 'vue-password';
 import {IonButton,IonInput, IonLabel} from '@ionic/vue';
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth";
 import router from "@/router";
 export default {
-  components: {VuePassword, IonButton,IonInput,IonLabel},
+  components: { IonButton,IonInput,IonLabel},
   name: "mail_psw",
   data(){
     return{
@@ -35,7 +35,7 @@ export default {
           .then(() => {
             // Signed in
             // const user = userCredential.user;
-            router.push('/login').then(() => {window.location.reload()})
+            router.push(`/login?email=${this.email}`).then(() => {window.location.reload()})
             // ...
           })
           .catch((error) => {
@@ -49,7 +49,7 @@ export default {
           .then(() => {
             // Signed in 
             // const user = userCredential.user;
-            router.push('/login').then(() => {window.location.reload()})
+            router.push(`/login?email=${this.email}`).then(() => {window.location.reload()})
             // ...
           })
           .catch((error) => {
@@ -60,6 +60,17 @@ export default {
           });
     }
   },
-
+  computed:{
+    color_of_password2(){
+      if(this.is_password_same && this.password!=='' ){
+        return ''
+      }else{
+        return 'danger'
+      }
+    },
+    is_password_same(){
+      return this.password===this.password2
+    }
+  }
 }
 </script>

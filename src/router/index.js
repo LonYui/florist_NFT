@@ -44,7 +44,8 @@ const routes = [
   },
   {
     path: '/login',
-    component: () => import('@/views/login_process/login.vue')
+    component: () => import('@/views/login_process/login.vue'),
+    props: route => ({  email: route.query.email })
   },
   {
     path: '/page1',

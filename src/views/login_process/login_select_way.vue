@@ -3,10 +3,11 @@
       <img src="../imgs/page1_topbar.png" class="top-img" alt="倒反摩天輪">
       <img src="../imgs/ccb_logo.png" class="logo-img" alt="mumu！汪汪!!">
 			<button class="fb-btn" @click="log_in_with_facebook()">
-				<img src="../imgs/fb-icon.svg" class="fb-icon" alt="FB icon"/>
+        <IonIcon slot="start" :icon="logoFacebook"/>
 				使用Facebook登入
 			</button>
-			<button  @click="location.href='/mail_psw'">
+    <br/>
+			<button class="fb-btn"  @click="push_to('/mail_psw')">
         <IonIcon slot="start" :icon="mailOutline"/>
 				使用eamil登入
 			</button>
@@ -41,6 +42,9 @@ export default {
     log_in_with_facebook(){
       signInWithRedirect(this.auth, this.provider)
     },
+    push_to(path){
+      router.push(path).then(() => {window.location.reload()})
+    }
   },
   async created() {
     const loading = await loadingController

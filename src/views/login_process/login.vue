@@ -43,7 +43,7 @@ export default {
       loading:null,
     }
   },
-
+  props:['email'],
   methods: {
     async changeHandler(){
       this.member.mob = this.member.mob.trim()
@@ -191,6 +191,8 @@ export default {
               // start otp process
               // TODO fix thisss!!!
               // _this.get_fbdata
+              /* mail login*/
+              _this.member.email = _this.email
             }
           })
           loading.dismiss()
