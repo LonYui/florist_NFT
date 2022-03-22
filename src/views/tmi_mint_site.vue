@@ -37,7 +37,13 @@
       <div>{{ currentStageName }}</div>
       <div>{{ totalSupply }} / {{ collectionSize }}</div>
       <div>{{ mintPrice }} ETH</div>
-      <button @click="connectMetamask()">Mint</button>
+
+      <div v-if="isLocked">
+        <button disabled>Coming Soon</button>
+      </div>
+      <div v-else>
+        <button>Mint</button>
+      </div>
     </div>
     <div v-else>
       <button @click="connectMetamask()">connet_to_metamask</button>
@@ -47,7 +53,7 @@
 </template>
 
 <script>
-import { onMounted, onUpdated, ref, watch } from "vue";
+import { computed, onMounted, onUpdated, onUnmounted, ref, watch } from "vue";
 import {
   loadingController,
   IonSlides,
@@ -55,8 +61,7 @@ import {
   IonImg,
   IonLabel,
 } from "@ionic/vue";
-import { useWallet } from "vue-dapp";
-import { useEthers } from "vue-dapp";
+import { useEthers, useWallet } from "vue-dapp";
 import { ethers, Contract } from "ethers";
 import { abi } from "../configs/contract";
 
@@ -75,7 +80,10 @@ export default {
     const totalSupply = ref(0);
     const collectionSize = ref(0);
     const currentStageName = ref("");
+    const currentStageStartTime = ref(0);
+    const currentStageEndTime = ref(0);
     const mintPrice = ref("0");
+    const isLocked = ref(true);
 
     let contract = null;
     const checkChain = async (currentChainId) => {
@@ -126,7 +134,7 @@ export default {
         startTime = saleConfig["startTime"];
         endTime = saleConfig["endTime"];
         stageName = saleStages[saleConfig["stage"]];
-        price = saleConfig["price"]
+        price = saleConfig["price"];
         const now = Math.floor(new Date().getTime() / 1000);
 
         if (parseInt(startTime) > now) {
@@ -143,11 +151,8 @@ export default {
       currentStageName.value = stageName;
       mintPrice.value = ethers.utils.formatEther(price);
 
-      console.log(contract);
-      console.log(_totalSupply);
-      console.log(_collectionSize);
-      console.log(startTime);
-      console.log(endTime);
+      currentStageStartTime.value = startTime;
+      currentStageEndTime.value = endTime;
     };
     fetchContractData();
 
@@ -163,8 +168,21 @@ export default {
       console.log(address);
     });
 
+    watch(currentStageStartTime, (startTime) => {
+      const now = new Date().getTime();
+      if (startTime > now) {
+        isLocked.value = true;
+      } else if (currentStageEndTime.value > now) {
+        isLocked.value = false;
+      }
+    });
+
+    const tId = setInterval(() => fetchContractData(), 1000);
+    onUnmounted(() => clearInterval(tId));
+
     return {
       address,
+      isLocked,
       isMetamaskInstalled,
       mintPrice,
       totalSupply,
