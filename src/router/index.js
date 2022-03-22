@@ -121,6 +121,7 @@ const routes = [
   {
     path: '/tmi_mint_site',
     component: () => import('@/views/tmi_mint_site.vue'),
+    props: route => ({  mint_psw: route.query.mint_psw,display_nft_token_id: route.query.display_nft_token_id })
   },
   {
     path: '/mail_psw',

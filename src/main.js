@@ -22,14 +22,15 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-
+import VueConfetti from 'vue-confetti'
 const app = createApp(App)
   .use(IonicVue,{
       mode: 'ios',
       animated:true,
   })
-  .use(router);
-  
+  .use(router)
+  .use(VueConfetti);
+
 router.isReady().then(() => {
   app.mount('#app');
 });

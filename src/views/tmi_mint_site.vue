@@ -2,8 +2,7 @@
   <IonHeader style="--min-height: 20% !important;	font-size: 80%;vertical-align: middle;"
              class="ion-text-center"
   >
-    <h1>TMI Lion</h1>
-    <IonToolbar >
+    <IonToolbar color="dark">
       <IonRow class="ion-justify-content-end">
 <!--          <IonCol size="1">-->
 <!--            <a href="/tmi_mint_site#about">about</a>-->
@@ -38,7 +37,7 @@
         </IonCol >
         <IonCol size="1">
           <a href="https://testnets.opensea.io/collection/gioia-pan-x-too-much-information-lion">
-      opensea
+            <p>opensea</p>
           </a>
         </IonCol>
       </IonRow>
@@ -49,7 +48,8 @@
 --ion-font-family: 'Noto Sans TC';
 " class="ion-text-center"
   >
-    <div id="mint">
+        <h1 style="font-size: 300%;">TMI Lion</h1>
+    <div id="mint" v-if="false">
     <IonButton @click="mint()" v-show="metamask_response.current?true:false">mint</IonButton>
     <IonButton @click="white_list_mint()" v-show="white_list.includes(metamask_response.current)">white_list_mint</IonButton>
     <div v-if="metamask_response.current?true:false">
@@ -65,6 +65,15 @@
     mint date：{{'4/5/2022'}}
     Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
   </vue-countdown>
+    </div>
+    <div id="mint325" v-if="this.mint_psw==='90818910'">
+          <Lottie :options="defaultOptions" style="width: 20%;height: 30%;" @animCreated="handleAnimation" v-show="anim?!anim._idle:false"/>
+          <IonButton @click="mint325()" v-show="is_mint325_show" color="dark">mint</IonButton>
+      <IonRow class="ion-justify-content-center" v-show="is_nft_show">
+        <IonCol size="6">
+          <IonImg :src="`https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${display_nft_token_id}.png`" ></IonImg>
+        </IonCol>
+      </IonRow>
     </div>
     <div id="about" style="  --background: none;
   background: #847E7E80;
@@ -121,8 +130,8 @@
           <h3>第一年規劃</h3>
           <hr style="height:2px;border-width:0;color:white;background-color:white"/>
 <!--          <h3>首波限量:588張</h3>-->
-          <h3>1.首波限定，往後TMI Lion</h3>
-            <h3>系列NFT的Minet PASS</h3>
+          <h3>1.首波限定，往後 TMI Lion</h3>
+            <h3>系列 NFT 的 Mint PASS</h3>
 <br/>
           <h3>2.終身不定期舉辦獅出有名會員</h3>
           <h3>專屬線下時尚派對</h3>
@@ -140,13 +149,13 @@
           <h3>1.終身會員VIP 5折</h3>
           <br/>
           <h3>2.連續3年每季空投高質感高磅數服飾</h3>
-            <h3>(隨季節不同T-SHirt或帽T</h3>
+            <h3>(隨季節不同 T-Shirt或帽T</h3>
           <br/>
           <h3>3.連續三年台灣地區潘老師秀展(兩場)20名</h3>
           <br/>
           <h3>4.連續三年非台灣地區潘老師秀展(一場)10名</h3>
           <br/>
-          <h3>5.4月抽出2022秋冬新款上衣</h3>
+          <h3>5.四月抽出 2022 秋冬新款上衣</h3>
           <br/>
           <h3>6.不定期舉辦潘怡良專屬線下聚會</h3>
         </IonCol>
@@ -157,8 +166,8 @@
         >
           <h3>第三年規劃</h3>
           <hr style="height:2px;border-width:0;color:white;background-color:white"/>
-          <h1>陸續規劃中
-            敬請期待</h1>
+          <h3>陸續規劃中
+            敬請期待</h3>
         </IonCol>
 
       </IonRow>
@@ -291,10 +300,18 @@ import {loadingController,
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import metamask_avatar from '@/components/tab3/metamask_avatar';
 import {logoTwitter,logoInstagram,logoDiscord} from 'ionicons/icons';
+import Lottie from 'vue-lottie';
+import * as animationData from '@/views/animations/tmiLionMint.json';
+
+var publicPath = process.env.BASE_URL;
+animationData.assets.forEach(item => { item.u = publicPath + 'animations/HomepageHeader/images/'; });
+// Had to store my animation Json and images inside of the "public" folder
+// Images weren't loading for me, so I'm using the below method to update their location or 'u' value correctly
+
 export default {
   name: "tmi_mint_site",
   components:{IonSlides,IonSlide,IonImg,IonLabel,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,IonFooter,
-    VueCountdown,metamask_avatar},
+    VueCountdown,metamask_avatar,Lottie},
   data() {
     return {
       imgs:[
@@ -321,7 +338,16 @@ export default {
       teams:{
         'Charles':{username:'Charles',image_url:'https://s3.us-east-2.amazonaws.com/asset.roarrr.io/%E7%81%B0%E9%9A%8Echarles_tmi_L.png',metamask_address:'CEO.roarrr.eth'},
         'J姊':{username:'J姊',image_url:'https://s3.us-east-2.amazonaws.com/asset.roarrr.io/originJoyce_tmi_L.png',metamask_address:'CFO.roarrr.eth'}
-      }
+      },
+      defaultOptions: {
+        animationData: animationData.default,
+        loop:false,
+        autoplay:false,
+      },
+      animationSpeed: 1,
+      anim: null,
+      is_mint325_show:true,
+      is_nft_show:false,
     }
   },
   methods: {
@@ -382,6 +408,54 @@ export default {
     },
     abi_get_contract_whitelist() {
       return ['david.eth', '0x24f40E6c01E8f5A33cf003Ba666D78dcE1577A42']
+    },
+    async start_1() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'pink',
+          'DarkSlateBlue',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+
+    },
+    async start_2() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'green',
+          'brown',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+
+    },
+    stop() {
+      this.$confetti.stop();
+    },
+    mint325(){
+      this.is_mint325_show=false
+      this.anim.play()
+    },
+    handleAnimation: function (anim) {
+      this.anim = anim;
+      this.anim.addEventListener('complete', () => this.anim_complete_handller())
+    },
+    anim_complete_handller(){
+      // TODO open an modql with picture
+      if(this.display_nft_token_id==='1') {this.start_1()}
+      if(this.display_nft_token_id==='2') {this.start_2()}
     }
   },
   mounted() {
@@ -392,6 +466,7 @@ export default {
       logoTwitter,logoInstagram,logoDiscord
     }
   },
+  props:['mint_psw','display_nft_token_id']
 }
 </script>
 
