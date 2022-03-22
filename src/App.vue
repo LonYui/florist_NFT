@@ -1,21 +1,22 @@
 <template>
   <ion-app>
-<!--    <ccb_menu/>-->
+    <!--    <ccb_menu/>-->
+    <vdapp-board />
     <ion-router-outlet id="main" />
   </ion-app>
 </template>
 
 <script>
-import { IonApp, IonRouterOutlet } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import { IonApp, IonRouterOutlet } from "@ionic/vue";
+import { defineComponent } from "vue";
 // import ccb_menu from '@/components/ccb_menu';
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
     IonApp,
     IonRouterOutlet,
     // ccb_menu
-  }
+  },
 });
 </script>
