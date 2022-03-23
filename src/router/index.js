@@ -44,7 +44,8 @@ const routes = [
   },
   {
     path: '/login',
-    component: () => import('@/views/login_process/login.vue')
+    component: () => import('@/views/login_process/login.vue'),
+    props: route => ({  email: route.query.email })
   },
   {
     path: '/page1',
@@ -120,7 +121,12 @@ const routes = [
   {
     path: '/tmi_mint_site',
     component: () => import('@/views/tmi_mint_site.vue'),
-  }
+    props: route => ({  mint_psw: route.query.mint_psw,display_nft_token_id: route.query.display_nft_token_id })
+  },
+  {
+    path: '/mail_psw',
+    component: () => import('@/views/login_process/mail_psw.vue'),
+  },
 
 ]
 

@@ -54,5 +54,8 @@ export let use_member = {
 
             return fetch(`https://${process.env.VUE_APP_ccb_rock_backed_domain}/member/create`, requestOptions)
         },
+    },
+    created(){
+        this.member={}
     }
 }

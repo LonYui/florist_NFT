@@ -3,47 +3,65 @@
       <img src="../imgs/page1_topbar.png" class="top-img" alt="倒反摩天輪">
       <img src="../imgs/ccb_logo.png" class="logo-img" alt="mumu！汪汪!!">
 			<button class="fb-btn" @click="log_in_with_facebook()">
-				<img src="../imgs/fb-icon.svg" class="fb-icon" alt="FB icon"/>
+        <IonIcon slot="start" :icon="logoFacebook"/>
 				使用Facebook登入
+			</button>
+    <br/>
+			<button class="fb-btn"  @click="push_to('/mail_psw')">
+        <IonIcon slot="start" :icon="mailOutline"/>
+				使用eamil登入
 			</button>
       <img src="../imgs/page1_buttonbar.png" class="button-img" alt="摩天輪">
 		</div>
 </template>
 
 <script>
-// import { IonContent,  IonPage, IonButton, IonImg, IonIcon } from '@ionic/vue';
 import {
-   callOutline,logoFacebook
+   callOutline,logoFacebook,mailOutline
 } from "ionicons/icons";
-import router from "../../router";
-import {facebookSDK} from "../../mixins/facebook_javascript_sdk"
+import router from "@/router";
 import "./login_select_way.css";
+import { getAuth, signInWithRedirect, FacebookAuthProvider } from "firebase/auth";
+import { loadingController,IonIcon} from '@ionic/vue';
+
 
 export default {
   name: "login_select_way",
-  // components: {IonContent, IonPage, IonButton, IonImg, IonIcon},
-  mixins:[facebookSDK,],
+  inject:['firebase_app'],
+  components: {IonIcon},
+  data(){
+    return{
+      provider : new FacebookAuthProvider(),
+      auth : getAuth()
+    }
+  },
   setup() {
-    return {callOutline, logoFacebook}
+    return {callOutline, logoFacebook, mailOutline}
   },
   methods: {
     log_in_with_facebook(){
-      //TODO what:why not _this work?
-      let _statusChangeCallback=this.statusChangeCallback
-      this.FB.login(function(response) {
-        _statusChangeCallback(response)
-      }, {scope: 'public_profile,email'});
-      //TODO  wait fb pass permision add email, birthday, gender
-
+      signInWithRedirect(this.auth, this.provider)
     },
-    statusChangeCallback(response){
-      if (response.status === 'connected') {
-        // Logged into your webpage and Facebook.
-        router.replace('/login').then(()=>{window.location.reload()})
-      } else {
-        // The person is not logged into your webpage or we are unable to tell.
-      }
+    push_to(path){
+      router.push(path).then(() => {window.location.reload()})
     }
   },
+  async created() {
+    const loading = await loadingController
+        .create({
+          cssClass: 'my-custom-class',
+          message: '',
+          duration: 9999*1000,
+        });
+    await loading.present();
+    this.auth.onAuthStateChanged(
+        user => {
+          if (user) {
+            router.push('/login').then(() => {window.location.reload()})
+          }
+          loading.dismiss()
+        }
+    )
+  }
 }
 </script>

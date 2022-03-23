@@ -57,6 +57,7 @@ export default {
             componentProps: {
               address:address,
               token_id:token_id,
+              VUE_APP_opensea_domain:process.env.VUE_APP_opensea_domain,
             },
           })
       return modal.present();

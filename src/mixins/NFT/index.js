@@ -126,4 +126,7 @@ export let use_NFT = {
             })
         }
     },
+    created(){
+        this.NFT={}
+    }
 }
