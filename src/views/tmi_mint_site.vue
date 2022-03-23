@@ -123,51 +123,51 @@
       </IonRow>
       <IonRow>
         <IonCol style="  border-color: white;
-  border-width: .25em;
+  border-width: .125em;
   border-style:solid; margin-bottom : -1px;
   margin: 10px; "
         >
           <h3>第一年規劃</h3>
           <hr style="height:2px;border-width:0;color:white;background-color:white"/>
 <!--          <h3>首波限量:588張</h3>-->
-          <h3>1.首波限定，往後 TMI Lion</h3>
-            <h3>系列 NFT 的 Mint PASS</h3>
+          <p>1.首波限定，往後 TMI Lion</p>
+          <p>系列 NFT 的 Mint PASS</p>
 <br/>
-          <h3>2.終身不定期舉辦獅出有名會員</h3>
-          <h3>專屬線下時尚派對</h3>
+          <p>2.終身不定期舉辦獅出有名會員</p>
+          <p>專屬線下時尚派對</p>
 <br/>
-          <h3>3.終生不定期空投澎派禮物包</h3>
+          <p>3.終生不定期空投澎派禮物包</p>
         </IonCol>
         <IonCol style="  border-color: white;
-  border-width: .25em;
+  border-width: .125em;
   border-style:solid; margin-bottom : -1px;
   margin: 10px; "
         >
           <h3>第二年規劃</h3>
           <hr style="height:2px;border-width:0;color:white;background-color:white"/>
 <!--          <h3>今年10月公布</h3>-->
-          <h3>1.終身會員VIP 5折</h3>
+          <p>1.終身會員VIP 5折</p>
           <br/>
-          <h3>2.連續3年每季空投高質感高磅數服飾</h3>
-            <h3>(隨季節不同 T-Shirt或帽T</h3>
+          <p>2.連續3年每季空投高質感高磅數服飾</p>
+          <p>(隨季節不同 T-Shirt或帽T</p>
           <br/>
-          <h3>3.連續三年台灣地區潘老師秀展(兩場)20名</h3>
+          <p>3.連續三年台灣地區潘老師秀展(兩場)20名</p>
           <br/>
-          <h3>4.連續三年非台灣地區潘老師秀展(一場)10名</h3>
+          <p>4.連續三年非台灣地區潘老師秀展(一場)10名</p>
           <br/>
-          <h3>5.四月抽出 2022 秋冬新款上衣</h3>
+          <p>5.四月抽出 2022 秋冬新款上衣</p>
           <br/>
-          <h3>6.不定期舉辦潘怡良專屬線下聚會</h3>
+          <p>6.不定期舉辦潘怡良專屬線下聚會</p>
         </IonCol>
         <IonCol style="  border-color: white;
-  border-width: .25em;
+  border-width: .125em;
   border-style:solid; margin-bottom : -1px;
   margin: 10px; "
         >
           <h3>第三年規劃</h3>
           <hr style="height:2px;border-width:0;color:white;background-color:white"/>
-          <h3>陸續規劃中
-            敬請期待</h3>
+          <p>陸續規劃中
+            敬請期待</p>
         </IonCol>
 
       </IonRow>
@@ -178,28 +178,31 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-" class="ion-text-left">
-      <h2 class="ion-text-uppercase" style="font-size: 300%; text-align: center">partner</h2>
+" >
+      <h2 class="ion-text-uppercase" style="font-size: 200%; text-align: center">partner</h2>
       <IonRow>
         <IonCol size="4">
       <img src="https://s3.us-east-2.amazonaws.com/asset.roarrr.io/2021%E6%BD%98%E6%80%A1%E8%89%AF%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%B0%A1%E4%BB%8B(1)-3+1.png"/>
         </IonCol>
-        <IonCol size="8">
+        <IonCol >
+          <br/>
           <p>潘怡良設計師，自2001年自創GIOIA PAN品牌，深耕高級時尚多年，屢獲時尚大獎， 高曝光</p>
+          <br/>
           <p>知名度也成各大國際品牌爭相邀請合作｡産品範圍跨度廣泛，獨家創意特色差異化，生産製造</p>
+          <br/>
           <p>資源及外貿經驗，時尚評審及教學經驗，流行趨勢權威及造型諮詢顧問｡ 各種時尚設計豐富資源的人脈平臺，結合食衣住行育樂整體生活美學的時尚概念大師｡</p>
         </IonCol>
       </IonRow>
-      <IonRow>
+      <IonRow class="ion-text-left">
         <IonCol size="1"/>
         <IonCol>
-      <p>食：多年與美酒美食業者結盟合作(Beaujolais, Taittinger Champagne, Bombay Sapphire, Godiva</p>
+      <p>食🍚：多年與美酒美食業者結盟合作(Beaujolais, Taittinger Champagne, Bombay Sapphire, Godiva</p>
       <p>Chocolatier, Diamond Tony’s 101, Grand Formosa Regency, Grand Hyatt)</p>
-      <p>衣：各界時尚名人(演藝明星、世界小姐、APEC首席代表、企業團隊服制服設計)</p>
-      <p>住：裝置藝術工程、家居用品設計</p>
-      <p>行：賓士、奧迪、BMW 、大衆汽車</p>
-      <p>育：服裝設計大賽、模特大賽評審</p>
-      <p>樂：明星影視發布會(楊謹華、張震、黃曉明、胡歌、林志玲等)、演唱會、時尚活動媒體評論</p>
+      <p>衣👕：各界時尚名人(演藝明星、世界小姐、APEC首席代表、企業團隊服制服設計)</p>
+      <p>住🏠：裝置藝術工程、家居用品設計</p>
+      <p>行🚘：賓士、奧迪、BMW 、大衆汽車</p>
+      <p>育👩🏻‍🏫：服裝設計大賽、模特大賽評審</p>
+      <p>樂🍾：明星影視發布會(楊謹華、張震、黃曉明、胡歌、林志玲等)、演唱會、時尚活動媒體評論</p>
         </IonCol>
       </IonRow>
     </div>
@@ -226,11 +229,11 @@
       <h2 class="ion-text-uppercase" style="font-size: 300%;">gallery</h2>
 <!--  4:3-->
   <ion-slides :options="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
-    <ion-slide  style="width: 16.6%; height: 22.1%;
+    <ion-slide  style="width: 50%; height: 66%;
     border: 2px solid #f8f8f8;
 " v-for="img in imgs" v-bind:key="imgs.indexOf(img)">
       <ion-col>
-        <ion-label>Card #{{ imgs.indexOf(img)+2 }}</ion-label>
+<!--        <ion-label>Card #{{ imgs.indexOf(img)+2 }}</ion-label>-->
         <ion-img style="pointer-events:none; border-radius: 12.5%;overflow: hidden;" :src="img"></ion-img>
       </ion-col>
     </ion-slide>
@@ -249,9 +252,9 @@
         <IonCol >
 <h3>創辦人：Charles</h3>
 <br>
-          <h3>世界第一廣告公司：大中華執行製作總監</h3>
-          <h3>客戶囊括NIKE、APPLE、拉菲酒、特斯拉等國際巨型IP</h3>
-          <h3>每年營收約4－5億新台幣，國際知名行銷鬼才</h3>
+          <p>世界第一廣告公司：大中華執行製作總監</p>
+          <p>客戶囊括NIKE、APPLE、拉菲酒、特斯拉等國際巨型IP</p>
+          <p>每年營收約4－5億新台幣，國際知名行銷鬼才</p>
         </IonCol>
       </IonRow>
       <IonRow>
@@ -265,10 +268,10 @@
         <IonCol>
           <h3>時尚品牌長：J姐</h3>
 <br>
-          <h3>好萊塢、兩岸三地娛樂圈公關行銷十多年經歷</h3>
-          <h3>全球改裝車市場操盤手</h3>
-          <h3>熟識全球知名現代藝術家與設計師</h3>
-          <h3>(想知道有那些大神嗎? 敬請期待~ 我們將會陸續透漏給大家)</h3>
+          <p>好萊塢、兩岸三地娛樂圈公關行銷十多年經歷</p>
+          <p>全球改裝車市場操盤手</p>
+          <p>熟識全球知名現代藝術家與設計師</p>
+          <p>(想知道有那些大神嗎? 敬請期待~ 我們將會陸續透漏給大家)</p>
         </IonCol>
       </IonRow>
 <!--  <IonRow class="ion-justify-content-center">-->
@@ -296,7 +299,7 @@
 
 <script>
 import {loadingController,
-  IonSlides,IonSlide,IonImg,IonLabel,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,IonFooter} from '@ionic/vue';
+  IonSlides,IonSlide,IonImg,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,IonFooter} from '@ionic/vue';
 import VueCountdown from '@chenfengyuan/vue-countdown';
 import metamask_avatar from '@/components/tab3/metamask_avatar';
 import {logoTwitter,logoInstagram,logoDiscord} from 'ionicons/icons';
@@ -310,15 +313,15 @@ animationData.assets.forEach(item => { item.u = publicPath + 'animations/Homepag
 
 export default {
   name: "tmi_mint_site",
-  components:{IonSlides,IonSlide,IonImg,IonLabel,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,IonFooter,
+  components:{IonSlides,IonSlide,IonImg,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,IonFooter,
     VueCountdown,metamask_avatar,Lottie},
   data() {
     return {
       imgs:[
-        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.floor(Math.random() *  10)}.png`,
-        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.floor(Math.random() *  10)}.png`,
-        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.floor(Math.random() *  10)}.png`,
-        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.floor(Math.random() *  10)}.png`,
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  10)}.png`,
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  10)}.png`,
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  10)}.png`,
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  10)}.png`,
       ],
       metamask_response: {
         network: 'rinkeby',
