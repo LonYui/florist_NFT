@@ -36,7 +36,7 @@
           </a>
         </IonCol >
         <IonCol size="1">
-          <a href="https://testnets.opensea.io/collection/gioia-pan-x-too-much-information-lion">
+          <a href="https://opensea.io/collection/gioia-pan-x-too-much-information-lion">
             <p>opensea</p>
           </a>
         </IonCol>
@@ -315,18 +315,10 @@ export default {
   data() {
     return {
       imgs:[
-        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/kevin_invite.gif`
-        ,`https://s3.us-east-2.amazonaws.com/asset.roarrr.io/kevin_invite.gif`
-        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
-        // ,`https://ipfs.io/ipfs/QmW9xCDXnZFS1eZJj2VkBb5amCXcMcfcttXLo9SddAwzZc/${Math.floor(Math.random() *  588)}.png`
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.floor(Math.random() *  10)}.png`,
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.floor(Math.random() *  10)}.png`,
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.floor(Math.random() *  10)}.png`,
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.floor(Math.random() *  10)}.png`,
       ],
       metamask_response: {
         network: 'rinkeby',
