@@ -318,10 +318,10 @@ export default {
   data() {
     return {
       imgs:[
-        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  10)}.png`,
-        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  10)}.png`,
-        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  10)}.png`,
-        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  10)}.png`,
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  9)}.png`,
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  9)}.png`,
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  9)}.png`,
+        `https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${Math.ceil(Math.random() *  9)}.png`,
       ],
       metamask_response: {
         network: 'rinkeby',
