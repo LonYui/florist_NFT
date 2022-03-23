@@ -21,17 +21,6 @@
         </ion-col>
       </ion-slide>
     </ion-slides>
-    <button @click="mint()" v-show="metamask_response.current ? true : false">
-      mint
-    </button>
-    <br />
-    <button
-      @click="white_list_mint()"
-      v-show="white_list.includes(metamask_response.current)"
-    >
-      white_list_mint
-    </button>
-    <br />
 
     <div v-if="isMetamaskInstalled">
       <div v-if="address">
@@ -42,8 +31,18 @@
         <div v-if="isLocked">
           <button disabled>Coming Soon</button>
         </div>
+        <div v-else-if="!isInWhitelist">
+          <button disabled>Not in Whitelist</button>
+        </div>
         <div v-else>
-          <button>Mint</button>
+          <button @click="mint()">Mint</button>
+        </div>
+
+        <div v-if="transactionTxHash">
+          <span>Mint successfully, please check </span>
+          <a :href="`${etherscanUrl}tx/${transactionTxHash}`" target="_blank"
+            >Etherscan</a
+          >
         </div>
       </div>
       <div v-else>
@@ -55,7 +54,7 @@
 </template>
 
 <script>
-import { computed, onMounted, onUpdated, onUnmounted, ref, watch } from "vue";
+import { onUnmounted, ref, watch } from "vue";
 import {
   loadingController,
   IonSlides,
@@ -65,14 +64,19 @@ import {
 } from "@ionic/vue";
 import { useEthers, useWallet } from "vue-dapp";
 import { ethers } from "ethers";
-import { initialContract } from "../helpers";
+import {
+  initialContract,
+  checkAndSwitchChain,
+  fetchWhitelistTicket,
+  etherscanUrl,
+} from "../helpers";
 
-const networkId = Number(process.env.VUE_APP_NETWORK_ID || "1");
-
-const { connect, onAccountsChanged } = useWallet();
-const { address } = useEthers();
+const { connect } = useWallet();
+const { address, signer } = useEthers();
 
 const saleStages = ["Whitelist", "Public Sale"];
+const gasLimit = 285000;
+const mintAmount = 1;
 
 export default {
   name: "tmi_mint_site",
@@ -85,21 +89,10 @@ export default {
     const currentStageEndTime = ref(0);
     const mintPrice = ref("0");
     const isLocked = ref(true);
+    const isInWhitelist = ref(false);
+    const transactionTxHash = ref("");
 
-    const checkChain = async (currentChainId) => {
-      if (currentChainId !== networkId) {
-        try {
-          window.ethereum.request({
-            method: "wallet_switchEthereumChain",
-            params: [{ chainId: `0x${networkId.toString(16)}` }],
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    };
-
-    const contract = initialContract(checkChain);
+    const contract = initialContract(checkAndSwitchChain);
     const isMetamaskInstalled = Boolean(contract);
 
     if (isMetamaskInstalled) {
@@ -148,40 +141,113 @@ export default {
       };
       fetchContractData();
 
-      onAccountsChanged((accounts) => {
-        console.log(accounts);
-      });
+      watch([address, currentStageName], async ([address, stageName]) => {
+        const loading = await loadingController.create({
+          message: "Loading",
+          duration: 9999 * 1000,
+        });
+        await loading.present();
 
-      watch(address, (address) => {
-        console.log(address);
-      });
+        if (address) {
+          if (stageName === "Whitelist") {
+            const { signature, ticket } = await fetchWhitelistTicket(address);
+            if (signature) {
+              const isTicketAvailable = await contract.isTicketAvailable(
+                ticket,
+                signature,
+                { from: address }
+              );
 
-      watch(currentStageStartTime, (startTime) => {
-        const now = new Date().getTime();
-        if (startTime > now) {
-          isLocked.value = true;
-        } else if (currentStageEndTime.value > now) {
-          isLocked.value = false;
+              isInWhitelist.value = isTicketAvailable;
+            } else {
+              isInWhitelist.value = false;
+            }
+          } else if (stageName) {
+            isInWhitelist.value = true;
+          }
         }
+
+        await loading.dismiss();
       });
+
+      watch(
+        [currentStageStartTime, currentStageEndTime],
+        ([startTime, endTime]) => {
+          const now = new Date().getTime();
+          if (startTime > now) {
+            isLocked.value = true;
+          } else if (endTime > now) {
+            isLocked.value = false;
+          }
+        }
+      );
 
       const tId = setInterval(() => fetchContractData(), 1000);
       onUnmounted(() => clearInterval(tId));
     }
 
     const connectMetamask = async () => {
-      connect("metamask");
+      const loading = await loadingController.create({
+        message: "Connecting Metamask",
+        duration: 9999 * 1000,
+      });
+      await loading.present();
+      await connect("metamask");
+
+      loading.dismiss();
+    };
+
+    const mint = async () => {
+      const loading = await loadingController.create({
+        message: "等待交易",
+        duration: 9999 * 1000,
+      });
+      await loading.present();
+
+      let totalGasLimit = String(gasLimit * mintAmount);
+      const etherValue = ethers.utils.parseEther(mintPrice.value);
+
+      try {
+        let receipt;
+        if (currentStageName.value === "Whitelist") {
+          const { signature, ticket } = await fetchWhitelistTicket(
+            address.value
+          );
+          receipt = await contract
+            .connect(signer.value)
+            .whitelistMint(mintAmount, ticket, signature, {
+              from: address.value,
+              gasLimit: totalGasLimit,
+              value: etherValue.toString(),
+            });
+        } else {
+          receipt = await contract.connect(signer.value).mint(mintAmount, {
+            from: address.value,
+            gasLimit: totalGasLimit,
+            value: etherValue.toString(),
+          });
+        }
+        transactionTxHash.value = receipt.hash;
+      } catch (err) {
+        console.log(err);
+      }
+
+      await loading.dismiss();
     };
 
     return {
       address,
       isLocked,
+      isInWhitelist,
       isMetamaskInstalled,
       mintPrice,
       totalSupply,
       collectionSize,
       currentStageName,
+      etherscanUrl,
+      transactionTxHash,
       connectMetamask,
+      mint,
     };
   },
   data() {
@@ -232,65 +298,6 @@ export default {
       white_list: [],
       token_id: "123",
     };
-  },
-  methods: {
-    async mint() {
-      if (!this.metamask_response.current) {
-        alert("plz conn to web3");
-        return;
-      }
-      const loading = await loadingController.create({
-        message: "等待交易",
-        duration: 9999 * 1000,
-      });
-      await loading.present();
-
-      // TODO execute abi - mint  return contract_address and token_id
-      const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-      await delay(4000);
-      // TODO end
-
-      loading.dismiss();
-      alert(`get ${this.contract_address}#${this.token_id}`);
-    },
-    async white_list_mint() {
-      if (!this.metamask_response.current) {
-        alert("plz conn to web3");
-        return;
-      }
-      if (!this.white_list.includes(this.metamask_response.current)) {
-        alert("ur not in whitelist");
-        return;
-      }
-      const loading = await loadingController.create({
-        message: "等待交易",
-        duration: 9999 * 1000,
-      });
-      await loading.present();
-
-      // TODO execute abi - white_list_mint  return contract_address and token_id
-      const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-      await delay(4000);
-      // TODO end
-
-      loading.dismiss();
-      alert(`get ${this.contract_address}#${this.token_id}`);
-    },
-    connet_to_metamask() {
-      // TODO metamask login
-      // metamask login end
-      this.metamask_response = {
-        network: "rinkeby",
-        current: "david.eth",
-      };
-      alert(`connect to ${this.metamask_response.current}`);
-    },
-    abi_get_contract_whitelist() {
-      return ["david.eth", "0x24f40E6c01E8f5A33cf003Ba666D78dcE1577A42"];
-    },
-  },
-  mounted() {
-    this.white_list = this.abi_get_contract_whitelist();
   },
 };
 </script>
