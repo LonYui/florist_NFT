@@ -173,7 +173,7 @@ export default {
       watch(
         [currentStageStartTime, currentStageEndTime],
         ([startTime, endTime]) => {
-          const now = new Date().getTime();
+          const now = Math.floor(new Date().getTime() / 1000);
           if (startTime > now) {
             isLocked.value = true;
           } else if (endTime > now) {
