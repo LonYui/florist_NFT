@@ -71,7 +71,7 @@
           <IonButton @click="mint325()" v-show="is_mint325_show" color="dark">mint</IonButton>
       <IonRow class="ion-justify-content-center" v-show="is_nft_show">
         <IonCol size="6">
-          <IonImg :src="`https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_00${display_nft_token_id}.png`" ></IonImg>
+          <IonImg :src="`https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_${display_nft_token_id}.png`" ></IonImg>
         </IonCol>
       </IonRow>
     </div>
@@ -409,6 +409,7 @@ export default {
     abi_get_contract_whitelist() {
       return ['david.eth', '0x24f40E6c01E8f5A33cf003Ba666D78dcE1577A42']
     },
+    // show_lion vioce https://www.youtube.com/watch?v=quPX6PAVWTs
     async start_1() {
       this.is_nft_show=true
       this.$confetti.start()
@@ -439,7 +440,125 @@ export default {
       const delay = ms => new Promise(res => setTimeout(res, ms));
       await delay(2000);
       this.stop()
-
+    },
+    async start_3() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'green',
+          'orange',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+    },
+    async start_4() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'purple',
+          'orange',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+    },
+    async start_5() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'green',
+          'DarkGreen'
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+    },
+    async start_6() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'green',
+          'blue',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+    },
+    async start_7() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'wheat',
+          'blue',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+    },
+    async start_8() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'pink',
+          'white',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+    },
+    async start_9() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'blue',
+          'purple',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+    },
+    async start_10() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'brown',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
     },
     stop() {
       this.$confetti.stop();
@@ -454,8 +573,16 @@ export default {
     },
     anim_complete_handller(){
       // TODO open an modql with picture
-      if(this.display_nft_token_id==='1') {this.start_1()}
-      if(this.display_nft_token_id==='2') {this.start_2()}
+      if(this.display_nft_token_id==='001') {this.start_1()}
+      if(this.display_nft_token_id==='002') {this.start_2()}
+      if(this.display_nft_token_id==='003') {this.start_3()}
+      if(this.display_nft_token_id==='004') {this.start_4()}
+      if(this.display_nft_token_id==='005') {this.start_5()}
+      if(this.display_nft_token_id==='006') {this.start_6()}
+      if(this.display_nft_token_id==='007') {this.start_7()}
+      if(this.display_nft_token_id==='008') {this.start_8()}
+      if(this.display_nft_token_id==='009') {this.start_9()}
+      if(this.display_nft_token_id==='010') {this.start_10()}
     }
   },
   mounted() {
