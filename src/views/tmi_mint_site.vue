@@ -557,6 +557,66 @@ export default {
       await delay(2000);
       this.stop()
     },
+    async start_11() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'pink',
+          'purple',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+    },
+    async start_53() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'yellow',
+          'green',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+    },
+    async start_89() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'blue',
+          'purple',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+    },
+    async start_100() {
+      this.is_nft_show=true
+      this.$confetti.start()
+      this.$confetti.update({
+        defaultColors: [
+          'black',
+          'gray',
+          'wheat',
+          'blue',
+        ],
+      })
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(2000);
+      this.stop()
+    },
     stop() {
       this.$confetti.stop();
     },
@@ -580,6 +640,10 @@ export default {
       if(this.display_nft_token_id==='008') {this.start_8()}
       if(this.display_nft_token_id==='009') {this.start_9()}
       if(this.display_nft_token_id==='010') {this.start_10()}
+      if(this.display_nft_token_id==='011') {this.start_11()}
+      if(this.display_nft_token_id==='053') {this.start_53()}
+      if(this.display_nft_token_id==='089') {this.start_89()}
+      if(this.display_nft_token_id==='100') {this.start_100()}
     }
   },
   mounted() {
