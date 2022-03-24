@@ -68,7 +68,9 @@
     </div>
     <div id="mint325" v-if="this.mint_psw==='90818910'">
           <Lottie :options="defaultOptions" style="width: 20%;height: 30%;" @animCreated="handleAnimation" v-show="anim?!anim._idle:false"/>
-          <IonButton @click="mint325()" v-show="is_mint325_show" color="dark">mint</IonButton>
+          <IonButton tabindex="0" @click="mint325()" v-show="is_mint325_show" color="dark" @keyup.enter="mint325()" @keyup.space="mint325()">
+            mint
+          </IonButton>
       <IonRow class="ion-justify-content-center" v-show="is_nft_show">
         <IonCol size="6">
           <IonImg :src="`https://s3.us-east-2.amazonaws.com/asset.roarrr.io/0322_GP_1600X900_${display_nft_token_id}.png`" ></IonImg>
