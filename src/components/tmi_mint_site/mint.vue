@@ -1,9 +1,23 @@
 <template>
+<!--  <div v-if="connect?true:false">-->
+<!--    <IonText color="danger">-->
+<!--      <h1 v-if="metamask_response.network!=='mainnet'"> warn:this is testnet{{ metamask_response.network }}</h1>-->
+<!--    </IonText>-->
+<!--    <p>current connect to :{{ address }} signer={{signer}}</p>-->
+<!--  </div>-->
+
+  <VueCountdown :time="Math.abs(new Date('4/5/2022') - Date.now())" v-slot="{ days, hours, minutes, seconds }">
+    {{currentStageName}} mint datetime：{{currentStageStartTime}} ~ {{currentStageEndTime}}
+    Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
+  </VueCountdown>
+
   <div v-if="isMetamaskInstalled">
     <div v-if="address">
       <div>{{ currentStageName }}</div>
       <div>{{ totalSupply }} / {{ collectionSize }}</div>
       <div>{{ mintPrice }} ETH</div>
+
+      <p>current connect to :{{ address }} signer={{signer}}</p>
 
       <div v-if="isLocked">
         <button disabled>Coming Soon</button>
@@ -41,6 +55,7 @@ import {
   etherscanUrl,
 } from "@/helpers";
 import {loadingController} from "@ionic/vue";
+import VueCountdown from '@chenfengyuan/vue-countdown';
 
 const { connect } = useWallet();
 const { address, signer } = useEthers();
@@ -52,6 +67,7 @@ const mintAmount = 1;
 
 export default {
   name: "mint",
+  components:['VueCountdown'],
   setup() {
     const totalSupply = ref(0);
     const collectionSize = ref(0);
@@ -219,6 +235,8 @@ export default {
       transactionTxHash,
       connectMetamask,
       mint,
+      currentStageStartTime,
+      currentStageEndTime,
     };
   },
 }

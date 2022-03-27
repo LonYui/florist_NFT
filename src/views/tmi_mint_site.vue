@@ -50,21 +50,22 @@
   >
         <h1 style="font-size: 300%;">TMI Lion</h1>
     <div id="mint" v-if="false">
-    <IonButton @click="mint()" v-show="metamask_response.current?true:false">mint</IonButton>
-    <IonButton @click="white_list_mint()" v-show="white_list.includes(metamask_response.current)">white_list_mint</IonButton>
-    <div v-if="metamask_response.current?true:false">
-      <IonText color="danger">
-      <h1 v-if="metamask_response.network!=='mainnet'"> warn:this is testnet{{ metamask_response.network }}</h1>
-      </IonText>
-      <p>current connect to :{{ metamask_response.current }}</p>
-    </div>
-    <div v-else>
-      <IonButton @click="connet_to_metamask()">connet_to_metamask</IonButton>
-    </div>
-  <vue-countdown :time="Math.abs(new Date('4/5/2022') - Date.now())" v-slot="{ days, hours, minutes, seconds }">
-    mint date：{{'4/5/2022'}}
-    Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
-  </vue-countdown>
+      <mint/>
+<!--    <IonButton @click="mint()" v-show="metamask_response.current?true:false">mint</IonButton>-->
+<!--    <IonButton @click="white_list_mint()" v-show="white_list.includes(metamask_response.current)">white_list_mint</IonButton>-->
+<!--    <div v-if="metamask_response.current?true:false">-->
+<!--      <IonText color="danger">-->
+<!--      <h1 v-if="metamask_response.network!=='mainnet'"> warn:this is testnet{{ metamask_response.network }}</h1>-->
+<!--      </IonText>-->
+<!--      <p>current connect to :{{ metamask_response.current }}</p>-->
+<!--    </div>-->
+<!--    <div v-else>-->
+<!--      <IonButton @click="connet_to_metamask()">connet_to_metamask</IonButton>-->
+<!--    </div>-->
+<!--  <vue-countdown :time="Math.abs(new Date('4/5/2022') - Date.now())" v-slot="{ days, hours, minutes, seconds }">-->
+<!--    mint date：{{'4/5/2022'}}-->
+<!--    Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.-->
+<!--  </vue-countdown>-->
     </div>
     <div id="mint325" v-if="this.mint_psw==='90818910'">
           <Lottie :options="defaultOptions" style="width: 20%;height: 30%;" @animCreated="handleAnimation" v-show="anim?!anim._idle:false"/>
@@ -302,11 +303,12 @@
 <script>
 import {loadingController,
   IonSlides,IonSlide,IonImg,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,IonFooter} from '@ionic/vue';
-import VueCountdown from '@chenfengyuan/vue-countdown';
+// import VueCountdown from '@chenfengyuan/vue-countdown';
 import metamask_avatar from '@/components/tab3/metamask_avatar';
 import {logoTwitter,logoInstagram,logoDiscord} from 'ionicons/icons';
 import Lottie from 'vue-lottie';
 import * as animationData from '@/views/animations/tmiLionMint.json';
+import mint from '@/components/tmi_mint_site/mint';
 
 var publicPath = process.env.BASE_URL;
 animationData.assets.forEach(item => { item.u = publicPath + 'animations/HomepageHeader/images/'; });
@@ -316,7 +318,8 @@ animationData.assets.forEach(item => { item.u = publicPath + 'animations/Homepag
 export default {
   name: "tmi_mint_site",
   components:{IonSlides,IonSlide,IonImg,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,IonFooter,
-    VueCountdown,metamask_avatar,Lottie},
+    // VueCountdown,
+    metamask_avatar,Lottie,mint},
   data() {
     return {
       imgs:[
