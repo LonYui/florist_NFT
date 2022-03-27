@@ -1,31 +1,33 @@
 <template>
-<!--  <div v-if="connect?true:false">-->
-<!--    <IonText color="danger">-->
-<!--      <h1 v-if="metamask_response.network!=='mainnet'"> warn:this is testnet{{ metamask_response.network }}</h1>-->
-<!--    </IonText>-->
-<!--    <p>current connect to :{{ address }} signer={{signer}}</p>-->
-<!--  </div>-->
 
-  <VueCountdown :time="Math.abs(new Date('4/5/2022') - Date.now())" v-slot="{ days, hours, minutes, seconds }">
-    {{currentStageName}} mint datetime：{{currentStageStartTime}} ~ {{currentStageEndTime}}
-    Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
-  </VueCountdown>
 
   <div v-if="isMetamaskInstalled">
     <div v-if="address">
+      <IonText color="danger">
+        <h1 v-if="ethereum_network!=='Mainnet'"> warn:this is testnet {{ethereum_network}}</h1>
+      </IonText>
       <div>{{ currentStageName }}</div>
+      <div>{{new Date(currentStageStartTime * 1000)}}</div>
+      <div>~</div>
+      <div>{{new Date(currentStageEndTime * 1000)}}</div>
       <div>{{ totalSupply }} / {{ collectionSize }}</div>
       <div>{{ mintPrice }} ETH</div>
 
-      <p>current connect to :{{ address }} signer={{signer}}</p>
+      <p>current connect to :{{ address }}</p>
 
       <div v-if="isLocked">
         <button disabled>Coming Soon</button>
+        <VueCountdown  :time="Math.abs(new Date(currentStageStartTime * 1000) - Date.now())" v-slot="{ days, hours, minutes, seconds }">
+          Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
+        </VueCountdown>
+
       </div>
       <div v-else-if="!isInWhitelist">
+        mint is on!
         <button disabled>Not in Whitelist</button>
       </div>
       <div v-else>
+        mint is on!
         <button @click="mint()">Mint</button>
       </div>
 
@@ -67,7 +69,7 @@ const mintAmount = 1;
 
 export default {
   name: "mint",
-  components:['VueCountdown'],
+  components: {VueCountdown,},
   setup() {
     const totalSupply = ref(0);
     const collectionSize = ref(0);
@@ -137,12 +139,12 @@ export default {
 
         if (address) {
           if (stageName === "Whitelist") {
-            const { signature, ticket } = await fetchWhitelistTicket(address);
+            const {signature, ticket} = await fetchWhitelistTicket(address);
             if (signature) {
               const isTicketAvailable = await contract.isTicketAvailable(
                   ticket,
                   signature,
-                  { from: address }
+                  {from: address}
               );
 
               isInWhitelist.value = isTicketAvailable;
@@ -197,7 +199,7 @@ export default {
       try {
         let receipt;
         if (currentStageName.value === "Whitelist") {
-          const { signature, ticket } = await fetchWhitelistTicket(
+          const {signature, ticket} = await fetchWhitelistTicket(
               address.value
           );
           receipt = await contract
@@ -238,6 +240,16 @@ export default {
       currentStageStartTime,
       currentStageEndTime,
     };
+  },
+  computed: {
+    ethereum_network(){
+      if (window.ethereum.networkVersion === '1') return 'Mainnet'
+      if (window.ethereum.networkVersion === '42') return 'Kovan'
+      if (window.ethereum.networkVersion === '3') return 'Ropsten'
+      if (window.ethereum.networkVersion === '4') return 'Rinkeby'
+      if (window.ethereum.networkVersion === '5') return 'Goerli'
+      return ''
+    }
   },
 }
 </script>

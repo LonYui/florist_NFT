@@ -44,12 +44,10 @@
       <IonTitle></IonTitle>
     </IonToolbar>
   </IonHeader>
-  <IonContent style="--ion-background-color:black; --ion-text-color: white ;
---ion-font-family: 'Noto Sans TC';
-" class="ion-text-center"
-  >
+  <IonContent
+      style="--ion-font-family: 'Noto Sans TC';" class="ion-text-center">
         <h1 style="font-size: 300%;">TMI Lion</h1>
-    <div id="mint" v-if="false">
+    <div id="mint" >
       <mint/>
 <!--    <IonButton @click="mint()" v-show="metamask_response.current?true:false">mint</IonButton>-->
 <!--    <IonButton @click="white_list_mint()" v-show="white_list.includes(metamask_response.current)">white_list_mint</IonButton>-->
@@ -318,7 +316,6 @@ animationData.assets.forEach(item => { item.u = publicPath + 'animations/Homepag
 export default {
   name: "tmi_mint_site",
   components:{IonSlides,IonSlide,IonImg,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,IonFooter,
-    // VueCountdown,
     metamask_avatar,Lottie,mint},
   data() {
     return {
