@@ -222,6 +222,7 @@ export default {
       }
 
       await loading.dismiss();
+      window.location.reload()
     };
 
     return {
