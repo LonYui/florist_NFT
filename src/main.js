@@ -2,7 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
 
-import { IonicVue } from '@ionic/vue';
+import { IonicVue } from "@ionic/vue";
+import { VueDapp } from "vue-dapp";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -29,7 +30,8 @@ const app = createApp(App)
       animated:true,
   })
   .use(router)
-  .use(VueConfetti);
+  .use(VueConfetti)
+  .use(VueDapp)
 
 router.isReady().then(() => {
   app.mount('#app');

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint no-use-before-define: 0 */  // --> OFF
 // from https://gist.github.com/wdmtech/c77ae1b30767e275240545f319871cb2
 export let facebookSDK = {
