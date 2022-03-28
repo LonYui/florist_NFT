@@ -23,7 +23,6 @@ export default defineComponent({
   components: {
     IonApp,
     IonRouterOutlet,
-    // ccb_menu
   },
   data(){
     return {

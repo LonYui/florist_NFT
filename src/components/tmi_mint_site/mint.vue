@@ -56,7 +56,7 @@ import {
   fetchWhitelistTicket,
   etherscanUrl,
 } from "@/helpers";
-import {loadingController} from "@ionic/vue";
+import {loadingController,IonText} from "@ionic/vue";
 import VueCountdown from '@chenfengyuan/vue-countdown';
 
 const { connect } = useWallet();
@@ -69,7 +69,7 @@ const mintAmount = 1;
 
 export default {
   name: "mint",
-  components: {VueCountdown,},
+  components: {VueCountdown,IonText},
   setup() {
     const totalSupply = ref(0);
     const collectionSize = ref(0);
@@ -222,7 +222,6 @@ export default {
       }
 
       await loading.dismiss();
-      window.location.reload()
     };
 
     return {

@@ -1,8 +1,8 @@
 {
-  "name": "ccb-rock-pwa",
+  "name": "tmi_lion",
   "version": "1.0.0",
   "private": true,
-  "description": "An Ionic project",
+  "description": "too much information lion",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
