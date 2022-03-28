@@ -24,7 +24,7 @@
       </div>
       <div v-else-if="!isInWhitelist">
         mint is on!
-        <button disabled>Not in Whitelist</button>
+        <button disabled>Not in Whitelist (or exceed max mint)</button>
       </div>
       <div v-else>
         mint is on!
