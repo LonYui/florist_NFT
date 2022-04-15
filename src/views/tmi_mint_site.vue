@@ -66,7 +66,6 @@
 <!--  </vue-countdown>-->
     </div>
     <div id="mint325" v-if="this.mint_psw==='90818910'">
-          <Lottie :options="defaultOptions" style="width: 20%;height: 30%;" @animCreated="handleAnimation" v-show="anim?!anim._idle:false"/>
           <IonButton tabindex="0" @click="mint325()" v-show="is_mint325_show" color="dark" @keyup.enter="mint325()" @keyup.space="mint325()">
             mint
           </IonButton>
@@ -304,19 +303,13 @@ import {loadingController,
 // import VueCountdown from '@chenfengyuan/vue-countdown';
 import metamask_avatar from '@/components/tab3/metamask_avatar';
 import {logoTwitter,logoInstagram,logoDiscord} from 'ionicons/icons';
-import Lottie from 'vue-lottie';
-import * as animationData from '@/views/animations/tmiLionMint.json';
 import mint from '@/components/tmi_mint_site/mint';
 
-var publicPath = process.env.BASE_URL;
-animationData.assets.forEach(item => { item.u = publicPath + 'animations/HomepageHeader/images/'; });
-// Had to store my animation Json and images inside of the "public" folder
-// Images weren't loading for me, so I'm using the below method to update their location or 'u' value correctly
 
 export default {
   name: "tmi_mint_site",
   components:{IonSlides,IonSlide,IonImg,IonRow,IonCol,IonHeader,IonContent,IonToolbar, IonTitle,IonIcon,IonButton,IonText,IonFooter,
-    metamask_avatar,Lottie,mint},
+    metamask_avatar,mint},
   data() {
     return {
       imgs:[
@@ -335,11 +328,6 @@ export default {
       teams:{
         'Charles':{username:'Charles',image_url:'https://s3.us-east-2.amazonaws.com/asset.roarrr.io/%E7%81%B0%E9%9A%8Echarles_tmi_L.png',metamask_address:'CEO.roarrr.eth'},
         'J姊':{username:'J姊',image_url:'https://s3.us-east-2.amazonaws.com/asset.roarrr.io/originJoyce_tmi_L.png',metamask_address:'CFO.roarrr.eth'}
-      },
-      defaultOptions: {
-        animationData: animationData.default,
-        loop:false,
-        autoplay:false,
       },
       animationSpeed: 1,
       anim: null,
