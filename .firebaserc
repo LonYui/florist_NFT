@@ -1,7 +1,7 @@
 {
   "projects": {
-    "dev": "ccb-pwa-dev",
-    "prod": "ccb-pwa-prod"
+    "dev": "dev-florist-nft",
+    "prod": "florist-nft"
   },
   "targets": {}
 }
