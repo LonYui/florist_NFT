@@ -43,7 +43,7 @@ export default {
       let resolution = 30;
 
       p.setup = () => {
-        p.createCanvas(
+        let canvas = p.createCanvas(
             document.querySelector("body").clientWidth,
             document.querySelector("body").clientHeight
         );
@@ -53,7 +53,7 @@ export default {
         p.background(0);
         for (let i = 0; i < gird.length; i++) {
           for (let j = 0; j < gird[0].length; j++) {
-            let x = j * resolution;
+            let x = (document.querySelector("body").clientWidth - resolution*18) / 2 + j * resolution;
             let y = i * resolution;
 
             p.fill(color_stard_for[gird[i][j]])
@@ -73,4 +73,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

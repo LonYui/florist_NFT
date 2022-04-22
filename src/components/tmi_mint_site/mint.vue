@@ -1,19 +1,17 @@
 <template>
 
 
-  <div v-if="isMetamaskInstalled">
+  <div v-if="isMetamaskInstalled" class="ion-text-center">
     <div v-if="address">
-      <IonText color="danger">
-        <h1 v-if="ethereum_network!=='Mainnet'"> warn:this is testnet {{ethereum_network}}</h1>
-      </IonText>
-      <div>{{ currentStageName }}</div>
-      <div>{{new Date(currentStageStartTime * 1000)}}</div>
-      <div>~</div>
-      <div>{{new Date(currentStageEndTime * 1000)}}</div>
-      <div>{{ totalSupply }} / {{ collectionSize }}</div>
-      <div>{{ mintPrice }} ETH</div>
+      <IonText color="danger"><h1 v-if="ethereum_network!=='Mainnet'"> warn:this is testnet {{ethereum_network}}</h1></IonText>
+      <IonText color="dark"><p>{{ currentStageName }}</p></IonText>
+      <IonText color="dark"><p>{{new Date(currentStageStartTime * 1000)}}</p></IonText>
+      <IonText color="dark"><p>~</p></IonText>
+      <IonText color="dark"><p>{{new Date(currentStageEndTime * 1000)}}</p></IonText>
+      <IonText color="dark"><p>{{ totalSupply }} / {{ collectionSize }}</p></IonText>
+      <IonText color="dark"><p>{{ mintPrice }} ETH</p></IonText>
 
-      <p>current connect to :{{ address }}</p>
+      <IonText color="dark">current connect to :{{ address }}</IonText>
 
       <div v-if="isLocked">
         <button disabled>Coming Soon</button>
@@ -27,7 +25,7 @@
         <button disabled>Not in Whitelist (or exceed max mint)</button>
       </div>
       <div v-else>
-        mint is on!
+        <IonText color="dark"><p>mint is on!</p>></IonText>
         <button @click="mint()">Mint</button>
       </div>
 
@@ -253,3 +251,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+IonText {
+  white-space: pre-line;
+}
+</style>
