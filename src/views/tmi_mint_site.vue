@@ -1,5 +1,5 @@
 <template>
-      <div id="mint" >
+  <div id="mint" >
     <mint/>
   </div>
 </template>
@@ -7,105 +7,61 @@
 <script>
 import mint from '@/components/tmi_mint_site/mint';
 
-
+const [pi,c,s,l,t] = ['pillar','cloud','sun','leaf','tree']
+const color_stard_for = { 1:"#FFD2D2",0:"#C8FBFE",
+  pillar: "#FFA800", cloud: "#FFFFFF", sun: "#FDC840",
+  leaf:"#90C86D", tree:"#9F6E52"
+}
 export default {
   name: "tmi_mint_site",
   components:{mint},
   mounted(){
     const sketch = p => {
-      let gird;
-      let cols;
-      let rows;
-      let resolution = 10;
+      let gird = [
+          [pi,1,1,1,1   ,1,1,1,1,1   ,1,1,1,1,1   ,1,1,pi],
+          [1,0,0,s,0   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
+          [1,c,c,s,s   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
+          [1,c,c,c,0   ,0,0,0,0,0   ,0,0,0,0,0   ,c,c,1],
+          [1,c,0,0,0   ,0,0,0,0,0   ,0,0,0,0,c   ,c,c,1],
 
-      const make2DArray = (cols, rows) => {
-        let arr = new Array(cols);
-        for (let x = 0; x < arr.length; x++) {
-          arr[x] = new Array(rows);
-        }
-        return arr;
-      };
+          [1,0,0,0,0   ,0,0,0,0,0   ,0,0,0,0,0   ,0,c,1],
+          [1,0,0,0,0   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
+          [1,0,0,0,0   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
+          [1,0,0,0,0   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
+          [1,0,0,0,0   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
 
-      const setValue = grid => {
-        for (let x = 0; x < cols; x++) {
-          for (let y = 0; y < rows; y++) {
-            grid[x][y] = p.floor(p.random(2));
-          }
-        }
-        return grid;
-      };
+          [1,0,0,0,0   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
+          [1,0,0,0,0   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
+          [1,0,0,l,0   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
+          [1,0,l,l,l   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
+          [1,l,l,l,l   ,l,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
 
-      const rule = (self, neighbor) => {
-        let flag = self;
-        const SUM = neighbor.reduce((acc, cur) => (acc += cur));
-        if (self === 0 && SUM === 3) {
-          flag = 1;
-        } else if (self === 1 && (SUM < 2 || SUM > 3)) {
-          flag = 0;
-        }
-        return flag;
-      };
-
-      const getNeighbor = (grid, x, y, direction) => {
-        if (!direction) direction = 4;
-        let result = [];
-        const MAXX = grid.length - 1;
-        const MAXY = grid[0].length - 1;
-
-        let dirX = [-1, 1, 0, 0, -1, 1, -1, 1];
-        let dirY = [0, 0, -1, 1, -1, -1, 1, 1];
-
-        if (x === 0) dirX = dirX.map(dx => (dx === -1 ? MAXX : dx));
-        if (y === 0) dirY = dirY.map(dy => (dy === -1 ? MAXY : dy));
-        if (x === MAXX) dirX = dirX.map(dx => (dx === 1 ? -MAXX : dx));
-        if (y === MAXY) dirY = dirY.map(dy => (dy === 1 ? -MAXY : dy));
-
-        const STEP = Array.from(Array(direction).keys());
-
-        STEP.forEach(function(i) {
-          result.push(grid[x + dirX[i]][y + dirY[i]]);
-        });
-
-        return result;
-      };
-
-      const update = () => {
-        let next = make2DArray(cols, rows);
-        for (let x = 0; x < cols; x++) {
-          for (let y = 0; y < rows; y++) {
-            next[x][y] = rule(gird[x][y], getNeighbor(gird, x, y, 8));
-          }
-        }
-        gird = next;
-      };
+          [1,0,0,t,0   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
+          [1,0,0,t,0   ,0,0,0,0,0   ,0,0,0,0,0   ,0,0,1],
+          [pi,1,1,1,1   ,1,1,1,1,1   ,1,1,1,1,1   ,1,1,pi],
+      ];
+      let resolution = 30;
 
       p.setup = () => {
         p.createCanvas(
             document.querySelector("body").clientWidth,
             document.querySelector("body").clientHeight
         );
-        cols = ~~(p.width / resolution);
-        rows = ~~(p.height / resolution);
-        gird = setValue(make2DArray(cols, rows));
       };
 
       p.draw = () => {
         p.background(0);
+        for (let i = 0; i < gird.length; i++) {
+          for (let j = 0; j < gird[0].length; j++) {
+            let x = j * resolution;
+            let y = i * resolution;
 
-        for (let i = 0; i < cols; i++) {
-          for (let j = 0; j < rows; j++) {
-            let x = i * resolution;
-            let y = j * resolution;
-            if (gird[i][j] === 1) {
-              p.fill(144, 255, 59);
-              p.rect(x, y, resolution, resolution);
-            }
+            p.fill(color_stard_for[gird[i][j]])
+            p.rect(x, y, resolution, resolution,resolution/10);
           }
         }
-        update();
       };
 
-      //クリックで再度実行
       document.querySelector("body").addEventListener("click", () => {
         p.setup();
       });
