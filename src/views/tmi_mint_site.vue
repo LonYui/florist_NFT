@@ -57,7 +57,7 @@ export default {
             let y = i * resolution;
 
             p.fill(color_stard_for[gird[i][j]])
-            p.rect(x, y, resolution, resolution,resolution/10);
+            p.rect(x, y, resolution, resolution,resolution/8);
           }
         }
       };

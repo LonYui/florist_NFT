@@ -4,15 +4,15 @@
   <div v-if="isMetamaskInstalled" class="ion-text-center">
     <div v-if="address">
       <IonText color="danger"><h1 v-if="ethereum_network!=='Mainnet'"> warn:this is testnet {{ethereum_network}}</h1></IonText>
-      <IonText color="dark"><p>{{ currentStageName }}</p></IonText>
-      <IonText color="dark"><p>{{new Date(currentStageStartTime * 1000)}}</p></IonText>
-      <IonText color="dark"><p>~</p></IonText>
-      <IonText color="dark"><p>{{new Date(currentStageEndTime * 1000)}}</p></IonText>
-      <IonText color="dark"><p>{{ totalSupply }} / {{ collectionSize }}</p></IonText>
-      <IonText color="dark"><p>{{ mintPrice }} ETH</p></IonText>
+      <IonText color="light"><p><br/>{{ currentStageName }}</p></IonText>
+      <IonText color="light"><p><br/>{{new Date(currentStageStartTime * 1000)}}</p></IonText>
+      <IonText color="light"><p><br/>~</p></IonText>
+      <IonText color="light"><p><br/>{{new Date(currentStageEndTime * 1000)}}</p></IonText>
+      <IonText color="light"><p><br/>{{ totalSupply }} / {{ collectionSize }}</p></IonText>
+      <IonText color="light"><p><br/>{{ mintPrice }} ETH</p></IonText>
 
-      <IonText color="dark">current connect to :{{ address }}</IonText>
-
+      <IonText color="light"><p><br/>current connect to :{{ address }}</p></IonText>
+      <br/>
       <div v-if="isLocked">
         <button disabled>Coming Soon</button>
         <VueCountdown  :time="Math.abs(new Date(currentStageStartTime * 1000) - Date.now())" v-slot="{ days, hours, minutes, seconds }">
@@ -25,8 +25,8 @@
         <button disabled>Not in Whitelist (or exceed max mint)</button>
       </div>
       <div v-else>
-        <IonText color="dark"><p>mint is on!</p>></IonText>
-        <button @click="mint()">Mint</button>
+        <IonText color="light"><p>mint is on!</p></IonText>
+        <br/>><button @click="mint()">Mint</button>
       </div>
 
       <div v-if="transactionTxHash">
@@ -255,4 +255,9 @@ export default {
 IonText {
   white-space: pre-line;
 }
+p{
+ background-color: rgba(0,31,220,0.87) ;
+  display: inline;
+}
+
 </style>
