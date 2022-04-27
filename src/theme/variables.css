@@ -76,13 +76,20 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-tint: #f5f6f9;
 
   /* Set the font family of the entire app */
-  --ion-font-family: 'pixel google';
+  --ion-font-family: 'pixel eng';
 }
 @font-face {
-  font-family: 'pixel google';
+  font-family: 'pixel eng';
   font-style: normal;
   font-weight: normal;
   src: url('VT323-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'pixel ch';
+  font-style: normal;
+  font-weight: normal;
+  src: url('Cubic_11_1.010_R.ttf');
 }
 
 /*@media (prefers-color-scheme: dark) {*/
