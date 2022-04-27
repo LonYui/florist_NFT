@@ -3,13 +3,17 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 const routes = [
   {
     path: '/',
-    redirect: '/tmi_mint_site'
+    redirect: '/mint'
   },
   {
-    path: '/tmi_mint_site',
-    component: () => import('@/views/tmi_mint_site.vue'),
-    props: route => ({  mint_psw: route.query.mint_psw,display_nft_token_id: route.query.display_nft_token_id })
+    path: '/mint',
+    component: () => import('@/views/mint.vue'),
   },
+  {
+    path: '/roadmap',
+    component: () => import('@/views/roadmap.vue'),
+  },
+
 ]
 
 const router = createRouter({

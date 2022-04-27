@@ -51,13 +51,14 @@ export default {
 
       p.draw = () => {
         p.background(0);
+        p.noStroke();
         for (let i = 0; i < gird.length; i++) {
           for (let j = 0; j < gird[0].length; j++) {
             let x = (document.querySelector("body").clientWidth - resolution*18) / 2 + j * resolution;
             let y = i * resolution;
 
             p.fill(color_stard_for[gird[i][j]])
-            p.rect(x, y, resolution, resolution,resolution/8);
+            p.rect(x, y, resolution, resolution,resolution/16);
           }
         }
       };
