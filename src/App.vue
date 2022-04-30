@@ -1,6 +1,6 @@
 <template>
-  <ion-app>
-    <ion-router-outlet id="main" :key="$route.fullPath" />
+  <ion-app id="app">
+    <ion-router-outlet id="main" :key="$route.fullPath"  />
   </ion-app>
 </template>
 
@@ -16,7 +16,6 @@ export default defineComponent({
     IonRouterOutlet,
   },
   data(){
-    const [pi,c,s,l,t] = ['pillar','cloud','sun','leaf','tree']
     return {
       grid:[],
       color_stard_for :{},
@@ -32,9 +31,10 @@ export default defineComponent({
 
       p.setup = () => {
         let canvas = p.createCanvas(
-            document.querySelector("body").clientWidth,
-            document.querySelector("body").clientHeight
+            540,540
         );
+        canvas.position((window.screen.width -540)/2, 0)
+        window.document.getElementsByTagName('canvas')[0].style.zIndex=-3
       }
 
       p.draw = () => {
@@ -42,7 +42,7 @@ export default defineComponent({
         p.noStroke();
         for (let i = 0; i < grid.length; i++) {
           for (let j = 0; j < grid[0].length; j++) {
-            let x = (document.querySelector("body").clientWidth - resolution*grid.length) / 2 + j * resolution
+            let x = j * resolution
             let y = i * resolution
 
             p.fill(_this.color_stard_for[grid[i][j]])
@@ -149,7 +149,7 @@ export default defineComponent({
         earth_dry: "#6D6452", earth_moist: "#635846", earth_wet: "#585149"
       }
     }
-    this.P5_obj = new P5(this.sketch)
+    this.P5_obj = new P5(this.sketch,'app')
   },
   watch: {
     '$route'(to) {
@@ -254,7 +254,10 @@ export default defineComponent({
       }catch (e){
         console.log(e)
       }
-      this.P5_obj = new P5(this.sketch)
+      this.P5_obj = new P5(this.sketch,'app')
     }
   },    });
 </script>
+
+<style scoped>
+</style>

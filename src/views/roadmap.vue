@@ -1,5 +1,5 @@
 <template>
-  <div id="roadmap" class="ion-text-center">
+  <div id="roadmap" class="ion-text-center" >
     <IonText color="light"><h3><br/>Vision & Mission</h3></IonText>
     <IonText color="light"><p style="font-family: 'pixel ch'"> <br/>花花讓世界更可愛</p></IonText>
     <IonText color="light"><p style="font-family: 'pixel ch'"> <br/>情人節多一點浪漫，母親節多一點溫馨，聖誕節多一點喜氣</p></IonText>
