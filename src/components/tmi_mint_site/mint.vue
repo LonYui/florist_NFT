@@ -11,7 +11,7 @@
       <IonText color="light"><p><br/>{{ totalSupply }} / {{ collectionSize }}</p></IonText>
       <IonText color="light"><p><br/>{{ mintPrice }} ETH</p></IonText>
 
-      <IonText color="light"><p><br/>current connect to :{{ address }} (amiInWhitelist:{{amiInWhitelist}})</p></IonText>
+      <IonText color="light"><p><br/>current connect to :{{ address }} (isInWhitelist:{{amiInWhitelist}})</p></IonText>
       <br/>
       <div v-if="isLocked">
         <button disabled>Coming Soon</button>
@@ -254,7 +254,7 @@ export default {
     }
   },
   created(){
-    document.title = document.title.substr(0,document.title.indexOf("|")+1)+ "鑄造"
+    document.title = "鑄造" + document.title.substr(document.title.indexOf("｜"),999)
   },
 }
 </script>

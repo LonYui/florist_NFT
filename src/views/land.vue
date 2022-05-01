@@ -20,7 +20,7 @@ export default {
     }
   },
   created(){
-    document.title = document.title.substr(0,document.title.indexOf("|")+1)+ "歡迎"
+    document.title = "歡迎" + document.title.substr(document.title.indexOf("｜"),999)
   },
 }
 </script>
