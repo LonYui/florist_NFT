@@ -85,7 +85,7 @@ export default defineComponent({
         leaf: "#90C86D", tree: "#9F6E52"
       }
     }
-    else if (this.$route.path==='/roadmap'){
+    else if (this.$route.path==='/land'){
       const [s1, s2, cl,
         g1, g2, g3,
         r1, r2, r3,
@@ -185,7 +185,7 @@ export default defineComponent({
           leaf: "#90C86D", tree: "#9F6E52"
         }
       }
-      else if (to.path === '/roadmap') {
+      else if (to.path === '/land') {
         const [s1, s2, cl,
           g1, g2, g3,
           r1, r2, r3,
@@ -256,7 +256,11 @@ export default defineComponent({
       }
       this.P5_obj = new P5(this.sketch,'app')
     }
-  },    });
+  },
+  created(){
+    document.title = "賣花少年|";
+  },
+})
 </script>
 
 <style scoped>

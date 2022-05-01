@@ -17,8 +17,10 @@ export default {
   methods:{
     push_to(path){
       this.$router.push(path)
-          // .then(() => {window.location.reload()})
     }
+  },
+  created(){
+    document.title = document.title.substr(0,document.title.indexOf("|")+1)+ "歡迎"
   },
 }
 </script>

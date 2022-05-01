@@ -3,15 +3,15 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 const routes = [
   {
     path: '/',
-    redirect: '/roadmap'
+    redirect: '/land'
   },
   {
     path: '/mint',
     component: () => import('@/views/mint.vue'),
   },
   {
-    path: '/roadmap',
-    component: () => import('@/views/roadmap.vue'),
+    path: '/land',
+    component: () => import('@/views/land.vue'),
   },
 
 ]

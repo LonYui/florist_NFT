@@ -4,25 +4,25 @@
   <div v-if="isMetamaskInstalled" class="ion-text-center">
     <div v-if="address">
       <IonText color="danger"><h1 v-if="ethereum_network!=='Mainnet'"> warn:this is testnet {{ethereum_network}}</h1></IonText>
-      <IonText color="light"><p><br/>{{ currentStageName }}</p></IonText>
+      <IonText color="light"><h1><br/>{{ currentStageName }}</h1></IonText>
       <IonText color="light"><p><br/>{{new Date(currentStageStartTime * 1000)}}</p></IonText>
       <IonText color="light"><p><br/>~</p></IonText>
       <IonText color="light"><p><br/>{{new Date(currentStageEndTime * 1000)}}</p></IonText>
       <IonText color="light"><p><br/>{{ totalSupply }} / {{ collectionSize }}</p></IonText>
       <IonText color="light"><p><br/>{{ mintPrice }} ETH</p></IonText>
 
-      <IonText color="light"><p><br/>current connect to :{{ address }}</p></IonText>
+      <IonText color="light"><p><br/>current connect to :{{ address }} (amiInWhitelist:{{amiInWhitelist}})</p></IonText>
       <br/>
       <div v-if="isLocked">
         <button disabled>Coming Soon</button>
-        <VueCountdown  :time="Math.abs(new Date(currentStageStartTime * 1000) - Date.now())" v-slot="{ days, hours, minutes, seconds }">
-          Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.
+        <br/><VueCountdown  :time="Math.abs(new Date(currentStageStartTime * 1000) - Date.now())" v-slot="{ days, hours, minutes, seconds }">
+        <IonText color="light"><p>Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.</p></IonText>
         </VueCountdown>
 
       </div>
       <div v-else-if="!isInWhitelist">
-        mint is on!
-        <button disabled>Not in Whitelist (or exceed max mint)</button>
+        <IonText color="light"><p>mint is on!</p></IonText>
+        <br/>><button disabled>Not in Whitelist (or exceed max mint)</button>
       </div>
       <div v-else>
         <IonText color="light"><p>mint is on!</p></IonText>
@@ -40,7 +40,9 @@
       <button @click="connectMetamask()">connet_to_metamask</button>
     </div>
   </div>
-  <div v-else>Please install MetaMask</div>
+  <div v-else>
+    <IonText color="light"><h1>Please install MetaMask</h1></IonText>
+  </div>
 
 </template>
 
@@ -60,7 +62,7 @@ import VueCountdown from '@chenfengyuan/vue-countdown';
 const { connect } = useWallet();
 const { address, signer } = useEthers();
 
-const saleStages = ["Whitelist", "Public Sale"];
+const saleStages = ["Whitelist Mint", "Public Mint"];
 const gasLimit = 285000;
 const mintAmount = 1;
 
@@ -78,6 +80,7 @@ export default {
     const isLocked = ref(true);
     const isInWhitelist = ref(false);
     const transactionTxHash = ref("");
+    const amiInWhitelist = ref(false);
 
     const contract = initialContract(checkAndSwitchChain);
     const isMetamaskInstalled = Boolean(contract);
@@ -136,7 +139,7 @@ export default {
         await loading.present();
 
         if (address) {
-          if (stageName === "Whitelist") {
+          if (stageName === saleStages[0]) {
             const {signature, ticket} = await fetchWhitelistTicket(address);
             if (signature) {
               const isTicketAvailable = await contract.isTicketAvailable(
@@ -144,8 +147,8 @@ export default {
                   signature,
                   {from: address}
               );
-
               isInWhitelist.value = isTicketAvailable;
+              amiInWhitelist.value = true;
             } else {
               isInWhitelist.value = false;
             }
@@ -196,7 +199,7 @@ export default {
 
       try {
         let receipt;
-        if (currentStageName.value === "Whitelist") {
+        if (currentStageName.value === saleStages[0]) {
           const {signature, ticket} = await fetchWhitelistTicket(
               address.value
           );
@@ -237,6 +240,7 @@ export default {
       mint,
       currentStageStartTime,
       currentStageEndTime,
+      amiInWhitelist,
     };
   },
   computed: {
@@ -249,6 +253,9 @@ export default {
       return ''
     }
   },
+  created(){
+    document.title = document.title.substr(0,document.title.indexOf("|")+1)+ "鑄造"
+  },
 }
 </script>
 <style scoped>
@@ -257,6 +264,10 @@ IonText {
 }
 p{
  background-color: rgba(0,31,220,0.87) ;
+  display: inline;
+}
+h1{
+  background-color: rgba(0,31,220,0.87) ;
   display: inline;
 }
 
