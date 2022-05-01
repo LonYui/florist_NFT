@@ -13,6 +13,15 @@ const routes = [
     path: '/land',
     component: () => import('@/views/land.vue'),
   },
+  {
+    path: '/roadmap',
+    component: () => import('@/views/roadmap.vue'),
+  },
+  {
+    path: '/whitepaper',
+    component: () => import('@/views/whitepaper.vue'),
+  },
+
 
 ]
 

@@ -1,11 +1,13 @@
 <template>
   <div id="roadmap" class="ion-text-center" >
+    <br/><button @click="push_to('/whitepaper')">go to whitepaper</button>
     <IonText color="light"><h3><br/>Vision & Mission</h3></IonText>
     <IonText color="light"><p style="font-family: 'pixel ch'"> <br/>花花讓世界更可愛</p></IonText>
     <IonText color="light"><p style="font-family: 'pixel ch'"> <br/>情人節多一點浪漫，母親節多一點溫馨，聖誕節多一點喜氣</p></IonText>
     <IonText color="light"><p style="font-family: 'pixel ch'"> <br/>Flower is best gift</p></IonText>
     <IonText color="light"><p style="font-family: 'pixel ch'"> <br/>瞭解植物知識、種植到開花、花語。</p></IonText>
     <br/><button @click="push_to('/mint')">go to mine</button>
+    <br/><button @click="push_to('/roadmap')">go to roadmap</button>
   </div>
 </template>
 

@@ -154,6 +154,23 @@ export default defineComponent({
         earth_dry: "#6D6452", earth_moist: "#635846", earth_wet: "#585149"
       }
     }
+    else if (this.$route.path==='/roadmap'){
+      const [e2,] = ['earth_moist',]
+      this.resolution = this.square_length
+      this.grid = [[e2,],]
+      this.color_stard_for = {
+        earth_moist: "#635846",
+      }
+    }
+    else if (this.$route.path==='/whitepaper'){
+      const [s1,] = ['sky_up',]
+      this.resolution = this.square_length
+      this.grid = [[s1,],]
+      this.color_stard_for = {
+        sky_up: "#ABDBE8",
+      }
+    }
+
     this.P5_obj = new P5(this.sketch,'app')
   },
   watch: {
@@ -255,6 +272,23 @@ export default defineComponent({
           earth_dry: "#6D6452", earth_moist: "#635846", earth_wet: "#585149"
         }
       }
+      else if (to.path === '/roadmap') {
+        const [e2,] = ['earth_moist',]
+        this.resolution = this.square_length
+        this.grid = [[e2,],]
+        this.color_stard_for = {
+          earth_moist: "#635846",
+        }
+      }
+      else if (to.path === '/whitepaper') {
+        const [s1,] = ['sky_up',]
+        this.resolution = this.square_length
+        this.grid = [[s1,],]
+        this.color_stard_for = {
+          sky_up: "#ABDBE8",
+        }
+      }
+
       try {
         this.P5_obj.remove()
       }catch (e){

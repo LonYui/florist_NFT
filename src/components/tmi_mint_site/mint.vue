@@ -18,7 +18,6 @@
         <br/><VueCountdown  :time="Math.abs(new Date(currentStageStartTime * 1000) - Date.now())" v-slot="{ days, hours, minutes, seconds }">
         <IonText color="light"><p>Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.</p></IonText>
         </VueCountdown>
-
       </div>
       <div v-else-if="!isInWhitelist">
         <IonText color="light"><p>mint is on!</p></IonText>
@@ -27,6 +26,10 @@
       <div v-else>
         <IonText color="light"><p>mint is on!</p></IonText>
         <br/>><button @click="mint()">Mint</button>
+        <br/><VueCountdown  :time="Math.abs(new Date(currentStageEndTime * 1000) - Date.now())" v-slot="{ days, hours, minutes, seconds }">
+        <IonText color="light"><p>Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.</p></IonText>
+      </VueCountdown>
+
       </div>
 
       <div v-if="transactionTxHash">
