@@ -1,18 +1,16 @@
 <template>
-  <ion-app id="app">
-    <ion-router-outlet id="main" :key="$route.fullPath"  />
-  </ion-app>
+    <ion-router-outlet :key="$route.fullPath" style="overflow-y: scroll" />
 </template>
 
 <script>
-import { IonApp, IonRouterOutlet } from '@ionic/vue';
+import {
+  IonRouterOutlet } from '@ionic/vue';
 import { defineComponent } from 'vue';
 const P5 = require('p5')
 
 export default defineComponent({
   name: 'App',
   components: {
-    IonApp,
     IonRouterOutlet,
   },
   data(){
@@ -171,7 +169,7 @@ export default defineComponent({
       }
     }
 
-    this.P5_obj = new P5(this.sketch,'app')
+    this.P5_obj = new P5(this.sketch,this.$route.path.substr(1))
   },
   watch: {
     '$route'(to) {
@@ -294,7 +292,7 @@ export default defineComponent({
       }catch (e){
         console.log(e)
       }
-      this.P5_obj = new P5(this.sketch,'app')
+      this.P5_obj = new P5(this.sketch,to.path.toString().substr(1))
     }
   },
   created(){

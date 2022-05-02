@@ -28,7 +28,6 @@
 <!--    <IonText color="light"><p style="font-family: 'pixel ch'"> <br/>瞭解植物知識、種植到開花、花語。</p></IonText>-->
   </div>
 </template>
-
 <script>
 import {IonText} from "@ionic/vue"
 export default {

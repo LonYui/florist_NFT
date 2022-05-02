@@ -1,5 +1,5 @@
 <template>
-  <div id="roadmap" class="ion-text-center" >
+  <div id="whitepaper" class="ion-text-center" >
     <IonText color="light"><br/><h1>Whitepaper</h1></IonText>
     <IonText color="light"><h3 style="font-family: 'pixel ch'"> <br/>202205 母親節康乃馨</h3></IonText>
 
