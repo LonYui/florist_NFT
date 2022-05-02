@@ -38,6 +38,14 @@
         >Etherscan</a
         >
       </div>
+      <div style="width: 100px;height: 5000px"/>
+      <button @click="找到寶藏()">
+      <img src="https://cdn-icons.flaticon.com/png/128/3943/premium/3943721.png?token=exp=1651497040~hmac=8b4e117c5e782eb1305f030bb49c5490">
+      </button>
+      <a v-if="抽獎顯示" class="e-widget no-button" :href="slice.primary.gleam_embed" rel="nofollow" >
+        {{ slice.primary.gleam_title }}
+      </a>
+
     </div>
     <div v-else>
       <button @click="connectMetamask()">connet_to_metamask</button>
@@ -254,11 +262,36 @@ export default {
       if (window.ethereum.networkVersion === '4') return 'Rinkeby'
       if (window.ethereum.networkVersion === '5') return 'Goerli'
       return ''
+    },
+    "screen_length"(){
+      return window.screen.width
     }
   },
   created(){
     document.title = "鑄造" + document.title.substr(document.title.indexOf("｜"),999)
   },
+  mounted() {
+    let gleam = document.createElement('script')
+    gleam.setAttribute('src', 'https://js.gleam.io/e.js')
+    document.head.appendChild(gleam)
+  },
+  data(){
+    return {
+      slice:{
+        primary:{
+          gleam_embed:'https://gleam.io/YfFj7/-nft-',
+          gleam_title:'找到寶藏！留下地址加入白單'
+        }
+      },
+      抽獎顯示:false
+    }
+  },
+  methods:{
+    找到寶藏(){
+      this.抽獎顯示=true
+    }
+  }
+
 }
 </script>
 <style scoped>
