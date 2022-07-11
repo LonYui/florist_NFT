@@ -1,7 +1,8 @@
 {
   "projects": {
     "dev": "dev-florist-nft",
-    "prod": "florist-nft"
+    "prod": "florist-nft",
+    "default": "florist-nft"
   },
   "targets": {}
 }
