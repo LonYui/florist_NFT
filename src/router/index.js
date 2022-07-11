@@ -21,6 +21,14 @@ const routes = [
     path: '/whitepaper',
     component: () => import('@/views/whitepaper.vue'),
   },
+  {
+    path: '/privacy_policy',
+    component: () => import('@/views/privacy_policy.vue'),
+  },
+  {
+    path: '/terms_of_service',
+    component: () => import('@/views/terms_of_service.vue'),
+  },
 
 
 ]
